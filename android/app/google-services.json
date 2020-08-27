@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "458843186275",
+    "firebase_url": "https://diet-and-teeth-app.firebaseio.com",
+    "project_id": "diet-and-teeth-app",
+    "storage_bucket": "diet-and-teeth-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458843186275:android:85c414090ba38066b38456",
+        "android_client_info": {
+          "package_name": "com.example.diet_and_teeth_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458843186275-spjhoq86qrqn4aeiflk4vc7i04tfpib1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASknEf9DRbyHxm67SDYCwDxEtsMFCAdiQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458843186275-spjhoq86qrqn4aeiflk4vc7i04tfpib1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
