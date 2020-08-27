@@ -20,6 +20,7 @@ class ItemSelectionScreen extends StatelessWidget {
         myAppBar.preferredSize.height;
     return Scaffold(
       appBar: myAppBar,
+      backgroundColor: Theme.of(context).backgroundColor,
       body: Container(
         height: availableSize,
         child: Column(

@@ -1,5 +1,7 @@
-import 'package:diet_and_teeth_app/screens/medicine_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../screens/medicine_screen.dart';
+import '../screens/info_screen.dart';
 
 import 'drawer_header_content.dart';
 
@@ -36,7 +38,9 @@ class _MainDrawerState extends State<MainDrawer> {
               'Informações',
               style: TextStyle(fontSize: 18),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed(InfoScreen.routeName);
+            },
           ),
           ListTile(
             leading: Icon(Icons.assignment),
