@@ -23,8 +23,13 @@ class ItemSelectionScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       body: Container(
         height: availableSize,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: GridView(
+          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 3 / 2.5,
+          ),
           children: mealCategory.foodList.map(
             (foodElement) {
               return Container(

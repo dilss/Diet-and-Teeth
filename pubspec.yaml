@@ -31,6 +31,10 @@ dependencies:
   firebase_core: ^0.5.0
   cloud_firestore: ^0.14.0+2
   firebase_auth: ^0.18.0+1
+  image_picker: ^0.6.7+7
+  firebase_storage: ^4.0.0
+  provider: ^4.3.2+1
+  intl: ^0.16.1
 
 dev_dependencies:
   flutter_test:
@@ -63,7 +67,6 @@ flutter:
     - assets/icons/cereals.png
     - assets/icons/coffeeCup.png
     - assets/icons/cookie.png
-    - assets/icons/dessert.png
     - assets/icons/eggs.png
     - assets/icons/fruit.png
     - assets/icons/meat.png
@@ -73,7 +76,27 @@ flutter:
     - assets/icons/juice.png
     - assets/icons/cheese.png
     - assets/icons/bread.png
-
+    - assets/icons/biscuits.png
+    - assets/icons/cheeseSandwich.png
+    - assets/icons/chicken.png
+    - assets/icons/chickenLeg.png
+    - assets/icons/chocolateMilk.png
+    - assets/icons/coffeeMilk.png
+    - assets/icons/donut.png
+    - assets/icons/fish.png
+    - assets/icons/fries.png
+    - assets/icons/icecream.png
+    - assets/icons/jam.png
+    - assets/icons/juiceBox.png
+    - assets/icons/milkBox.png
+    - assets/icons/pieceOfCake.png
+    - assets/icons/pudding.png
+    - assets/icons/salad.png
+    - assets/icons/soda.png
+    - assets/icons/soup.png
+    - assets/icons/spaghetti.png
+    - assets/icons/lasagna.png
+    - assets/icons/teaCup.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

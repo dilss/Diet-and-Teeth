@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'screens/home_screen.dart';
 import 'screens/diet_settings_screen.dart';
 import 'screens/item_selection_screen.dart';
 import 'screens/medicine_screen.dart';
-import 'widgets/main_drawer.dart';
 import 'screens/info_screen.dart';
 import 'screens/auth_screen.dart';
 
@@ -50,63 +50,6 @@ class MyApp extends StatelessWidget {
         MedicineScreen.routeName: (context) => MedicineScreen(),
         InfoScreen.routeName: (context) => InfoScreen(),
       },
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  final myAppBar = AppBar(
-    title: Text('Página Inicial'),
-    actions: [
-      DropdownButton(
-          items: [
-            DropdownMenuItem(
-              child: Container(
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.exit_to_app,
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Text('Sair'),
-                  ],
-                ),
-              ),
-              value: 'logout',
-            ),
-          ],
-          icon: Icon(
-            Icons.more_vert,
-            color: Colors.black,
-          ),
-          onChanged: (itemIdentifier) {
-            if (itemIdentifier == 'logout') {
-              FirebaseAuth.instance.signOut();
-            }
-          })
-    ],
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: myAppBar,
-      drawer: MainDrawer(),
-      body: Container(
-        height: MediaQuery.of(context).size.height -
-            MediaQuery.of(context).padding.top -
-            myAppBar.preferredSize.height,
-        child: Center(
-          child: RaisedButton(
-            child: Text('Prencher refeiçao do dia'),
-            onPressed: () {
-              Navigator.pushNamed(context, DietSettingsScreen.routeName);
-            },
-          ),
-        ),
-      ),
     );
   }
 }

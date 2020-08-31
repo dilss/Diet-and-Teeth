@@ -20,8 +20,8 @@ class MealCategory {
   MealCategory({
     @required this.category,
     @required this.title,
-    @required this.imageUri,
+    this.imageUri,
     @required this.foodList,
-    @required this.color,
+    this.color,
   });
 }

@@ -10,15 +10,12 @@ class DrawerHeaderContent extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           CircleAvatar(
+            backgroundImage: null, // NetworkImage(),
             radius: availableSize * 0.07,
-            child: FittedBox(
-              fit: BoxFit.contain,
-              child: Text('User photo'),
-            ),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Text('user@dummy.com'),
+            child: Text('test'),
           )
         ],
       ),
