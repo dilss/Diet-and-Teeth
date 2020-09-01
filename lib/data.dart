@@ -13,28 +13,68 @@ class GeneralData {
       foodList: [
         FoodType(
           type: FoodTypeEnum.drinks,
-          title: 'Bebidas',
+          title: 'Café',
           imageUri: 'assets/icons/coffeeCup.png',
         ),
         FoodType(
+          type: FoodTypeEnum.drinks,
+          title: 'Chá',
+          imageUri: 'assets/icons/teaCup.png',
+        ),
+        FoodType(
+          type: FoodTypeEnum.drinks,
+          title: 'Café com Leite',
+          imageUri: 'assets/icons/coffeeMilk.png',
+        ),
+        FoodType(
+          type: FoodTypeEnum.drinks,
+          title: 'Achocolatado',
+          imageUri: 'assets/icons/chocolateMilk.png',
+        ),
+        FoodType(
           type: FoodTypeEnum.cereals,
-          title: 'Cereais',
+          title: 'Cereal',
           imageUri: 'assets/icons/cereals.png',
         ),
         FoodType(
           type: FoodTypeEnum.bread,
-          title: 'Pães',
+          title: 'Pão',
           imageUri: 'assets/icons/bread.png',
         ),
         FoodType(
+          type: FoodTypeEnum.eggsAndCheese,
+          title: 'Geléia',
+          imageUri: 'assets/icons/jam.png',
+        ),
+        FoodType(
+          type: FoodTypeEnum.bread,
+          title: 'Misto',
+          imageUri: 'assets/icons/cheeseSandwich.png',
+        ),
+        FoodType(
           type: FoodTypeEnum.cakeAndCookies,
-          title: 'Bolos e Biscoitos',
+          title: 'Bolo',
+          imageUri: 'assets/icons/pieceOfCake.png',
+        ),
+        FoodType(
+          type: FoodTypeEnum.cakeAndCookies,
+          title: 'Biscoito',
           imageUri: 'assets/icons/cookie.png',
         ),
         FoodType(
+          type: FoodTypeEnum.cakeAndCookies,
+          title: 'Rosquinha',
+          imageUri: 'assets/icons/donut.png',
+        ),
+        FoodType(
           type: FoodTypeEnum.eggsAndCheese,
-          title: 'Ovos, Queijo e Requeijão',
+          title: 'Ovos',
           imageUri: 'assets/icons/eggs.png',
+        ),
+        FoodType(
+          type: FoodTypeEnum.eggsAndCheese,
+          title: 'Queijo',
+          imageUri: 'assets/icons/cheese.png',
         ),
         FoodType(
           type: FoodTypeEnum.fruit,
@@ -51,28 +91,53 @@ class GeneralData {
       foodList: [
         FoodType(
           type: FoodTypeEnum.drinks,
-          title: 'Bebidas',
+          title: 'Suco',
           imageUri: 'assets/icons/juice.png',
         ),
         FoodType(
-          type: FoodTypeEnum.beansAndSoup,
-          title: 'Feijão, Caldos e Sopas',
-          imageUri: 'assets/icons/beans.png',
-        ),
-        FoodType(
           type: FoodTypeEnum.riceMassAndPotatos,
-          title: 'Arroz, Massas e Batata',
+          title: 'Arroz',
           imageUri: 'assets/icons/rice.png',
         ),
         FoodType(
+          type: FoodTypeEnum.beansAndSoup,
+          title: 'Feijão',
+          imageUri: 'assets/icons/beans.png',
+        ),
+        FoodType(
+          type: FoodTypeEnum.beansAndSoup,
+          title: 'Sopa',
+          imageUri: 'assets/icons/soup.png',
+        ),
+        FoodType(
+          type: FoodTypeEnum.riceMassAndPotatos,
+          title: 'Macarrão',
+          imageUri: 'assets/icons/spaghetti.png',
+        ),
+        FoodType(
+          type: FoodTypeEnum.riceMassAndPotatos,
+          title: 'Lasanha',
+          imageUri: 'assets/icons/lasagna.png',
+        ),
+        FoodType(
+          type: FoodTypeEnum.riceMassAndPotatos,
+          title: 'Batata',
+          imageUri: 'assets/icons/fries.png',
+        ),
+        FoodType(
           type: FoodTypeEnum.meat,
-          title: 'Carnes e Ovos',
+          title: 'Carne',
           imageUri: 'assets/icons/meat.png',
         ),
         FoodType(
+          type: FoodTypeEnum.meat,
+          title: 'Ovos',
+          imageUri: 'assets/icons/eggs.png',
+        ),
+        FoodType(
           type: FoodTypeEnum.vegetables,
-          title: 'Legumes e Verduras',
-          imageUri: 'assets/icons/vegetables.png',
+          title: 'Salada',
+          imageUri: 'assets/icons/salad.png',
         ),
         FoodType(
           type: FoodTypeEnum.dessert,
