@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../widgets/main_drawer.dart';
-import './diet_settings_screen.dart';
+import './tabs_screen.dart';
 
 class HomePage extends StatelessWidget {
   final myAppBar = AppBar(
@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.pushNamed(context, DietSettingsScreen.routeName);
+          Navigator.pushNamed(context, TabsScreen.routeName);
         },
       ),
       body: Container(

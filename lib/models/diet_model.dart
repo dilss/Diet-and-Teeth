@@ -1,4 +1,6 @@
-enum FoodItemCategory {
+import 'package:uuid/uuid.dart';
+
+enum FoodItemCategoryEnum {
   harmlessFood,
   drinksWithSugar,
   breadCookieWithoutSugar,
@@ -8,7 +10,7 @@ enum FoodItemCategory {
   stickyCandies,
 }
 
-enum MealCategory {
+enum MealCategoryEnum {
   breakfast,
   lunch,
   afternoonSnack,
@@ -17,52 +19,46 @@ enum MealCategory {
 }
 
 class FoodItem {
-  String _name;
-  String _description;
-  FoodItemCategory foodItemCategory;
-  MealCategory mealCategory;
+  String uuid;
+  String title;
+  String description;
+  String iconPath;
+  FoodItemCategoryEnum foodItemCategory;
+  MealCategoryEnum mealCategory;
 
+  var isSelected = false;
   var _harmfullPotential = 0;
 
-  FoodItem({this.foodItemCategory, this.mealCategory});
-
-  String get name {
-    return _name;
-  }
-
-  set setName(String name) {
-    _name = name;
-  }
-
-  String get description {
-    return _description;
-  }
-
-  set setDescription(String description) {
-    _description = description;
+  FoodItem({
+    this.mealCategory,
+    this.foodItemCategory,
+    this.iconPath,
+    this.title,
+  }) {
+    uuid = Uuid().v1();
   }
 
   int get howMuchHarmful {
     switch (foodItemCategory) {
-      case FoodItemCategory.harmlessFood:
+      case FoodItemCategoryEnum.harmlessFood:
         _harmfullPotential = 0;
         break;
-      case FoodItemCategory.drinksWithSugar:
+      case FoodItemCategoryEnum.drinksWithSugar:
         _harmfullPotential = 1;
         break;
-      case FoodItemCategory.breadCookieWithoutSugar:
+      case FoodItemCategoryEnum.breadCookieWithoutSugar:
         _harmfullPotential = 2;
         break;
-      case FoodItemCategory.ricePastaAndPotato:
+      case FoodItemCategoryEnum.ricePastaAndPotato:
         _harmfullPotential = 2;
         break;
-      case FoodItemCategory.dessertWithSugar:
+      case FoodItemCategoryEnum.dessertWithSugar:
         _harmfullPotential = 3;
         break;
-      case FoodItemCategory.cakeCookieWithSugar:
+      case FoodItemCategoryEnum.cakeCookieWithSugar:
         _harmfullPotential = 4;
         break;
-      case FoodItemCategory.stickyCandies:
+      case FoodItemCategoryEnum.stickyCandies:
         _harmfullPotential = 5;
         break;
     }
