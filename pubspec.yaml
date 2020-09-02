@@ -35,6 +35,8 @@ dependencies:
   firebase_storage: ^4.0.0
   provider: ^4.3.2+1
   intl: ^0.16.1
+  flutter_svg: ^0.18.1
+  uuid: ^2.2.2
 
 dev_dependencies:
   flutter_test:
@@ -53,11 +55,6 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/breakfast.jpg
-    - assets/images/lunch.jpg
-    - assets/images/snack.jpg
-    - assets/images/dinner.jpg
-    - assets/images/unhealthyFood.jpg
     - assets/images/foodPyramid.png
     - assets/icons/beans.png
     - assets/icons/bigMouth.png
@@ -88,7 +85,6 @@ flutter:
     - assets/icons/icecream.png
     - assets/icons/jam.png
     - assets/icons/juiceBox.png
-    - assets/icons/milkBox.png
     - assets/icons/pieceOfCake.png
     - assets/icons/pudding.png
     - assets/icons/salad.png
@@ -97,6 +93,12 @@ flutter:
     - assets/icons/spaghetti.png
     - assets/icons/lasagna.png
     - assets/icons/teaCup.png
+    - assets/svg/afternoonSnack.svg
+    - assets/svg/coffee.svg
+    - assets/svg/dinner.svg
+    - assets/svg/icecream.svg
+    - assets/svg/candy.svg
+    - assets/svg/lunch.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

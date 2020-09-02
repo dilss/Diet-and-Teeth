@@ -3,11 +3,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'screens/home_screen.dart';
-import 'screens/diet_settings_screen.dart';
-import 'screens/item_selection_screen.dart';
 import 'screens/medicine_screen.dart';
 import 'screens/info_screen.dart';
 import 'screens/auth_screen.dart';
+import 'screens/tabs_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Diet and Teeth',
       theme: ThemeData(
         primarySwatch: Colors.cyan,
+        primaryColor: Colors.cyan,
         backgroundColor: Colors.white,
         accentColor: Colors.cyan,
         accentColorBrightness: Brightness.dark,
@@ -45,10 +45,9 @@ class MyApp extends StatelessWidget {
         },
       ),
       routes: {
-        DietSettingsScreen.routeName: (context) => DietSettingsScreen(),
-        ItemSelectionScreen.routeName: (context) => ItemSelectionScreen(),
         MedicineScreen.routeName: (context) => MedicineScreen(),
         InfoScreen.routeName: (context) => InfoScreen(),
+        TabsScreen.routeName: (context) => TabsScreen(),
       },
     );
   }
