@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../models/diet_model.dart';
+import '../models/widgets_models/food_item_widget_model.dart';
 
 class FoodItemWidget extends StatefulWidget {
-  final FoodItem _foodItem;
+  final FoodItemWidgetModel _foodItem;
 
   FoodItemWidget(this._foodItem);
 
@@ -20,19 +20,9 @@ class _FoodItemWidgetState extends State<FoodItemWidget> {
     return LayoutBuilder(
       builder: (ctx, constraint) {
         return GestureDetector(
-          onDoubleTap: () {
-            setState(() {
-              widget._foodItem.isSelected = true;
-            });
-          },
-          onLongPress: () {
-            setState(() {
-              widget._foodItem.isSelected = true;
-            });
-          },
           onTap: () {
             setState(() {
-              widget._foodItem.isSelected = false;
+              widget._foodItem.isSelected = !widget._foodItem.isSelected;
             });
           },
           child: Container(

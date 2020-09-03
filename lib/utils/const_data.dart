@@ -1,4 +1,6 @@
-import '../models/diet_model.dart';
+import '../models/widgets_models/food_item_widget_model.dart';
+import '../models/types/meal_category_enum.dart';
+import '../models/types/food_item_category_enum.dart';
 
 class IconsPath {
   static const beans = 'assets/icons/beans.png';
@@ -38,466 +40,466 @@ class IconsPath {
 }
 
 class ConstData {
-  List<FoodItem> foodItemsBreakfast = [
-    FoodItem(
+  List<FoodItemWidgetModel> foodItemsBreakfast = [
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.breakfast,
       foodItemCategory: FoodItemCategoryEnum.drinksWithSugar,
       iconPath: IconsPath.coffeeCup,
       title: 'Café',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.breakfast,
       foodItemCategory: FoodItemCategoryEnum.drinksWithSugar,
       iconPath: IconsPath.teaCup,
       title: 'Chá',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.breakfast,
       foodItemCategory: FoodItemCategoryEnum.drinksWithSugar,
       iconPath: IconsPath.chocolateMilk,
       title: 'Achocolatado',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.breakfast,
       foodItemCategory: FoodItemCategoryEnum.drinksWithSugar,
       iconPath: IconsPath.juice,
       title: 'Suco',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.breakfast,
       foodItemCategory: FoodItemCategoryEnum.breadCookieWithoutSugar,
       iconPath: IconsPath.bread,
       title: 'Pão',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.breakfast,
       foodItemCategory: FoodItemCategoryEnum.cakeCookieWithSugar,
       iconPath: IconsPath.cookie,
       title: 'Biscoito',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.breakfast,
       foodItemCategory: FoodItemCategoryEnum.cakeCookieWithSugar,
       iconPath: IconsPath.pieceOfCake,
       title: 'Bolo',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.breakfast,
       foodItemCategory: FoodItemCategoryEnum.drinksWithSugar,
       iconPath: IconsPath.donut,
       title: 'Rosquinha',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.breakfast,
       foodItemCategory: FoodItemCategoryEnum.cakeCookieWithSugar,
       iconPath: IconsPath.cereals,
       title: 'Cereal',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.breakfast,
       foodItemCategory: FoodItemCategoryEnum.breadCookieWithoutSugar,
       iconPath: IconsPath.cheeseSandwich,
       title: 'Misto',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.breakfast,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.cheese,
       title: 'Queijo',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.breakfast,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.eggs,
       title: 'Ovos',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.breakfast,
       foodItemCategory: FoodItemCategoryEnum.stickyCandies,
       iconPath: IconsPath.jam,
       title: 'Geléia',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.breakfast,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.fruit,
       title: 'Frutas',
     ),
   ];
-  List<FoodItem> foodItemsLunch = [
-    FoodItem(
+  List<FoodItemWidgetModel> foodItemsLunch = [
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.lunch,
       foodItemCategory: FoodItemCategoryEnum.drinksWithSugar,
       iconPath: IconsPath.juiceBox,
       title: 'Suco',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.lunch,
       foodItemCategory: FoodItemCategoryEnum.drinksWithSugar,
       iconPath: IconsPath.soda,
       title: 'Refrigerante',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.lunch,
       foodItemCategory: FoodItemCategoryEnum.ricePastaAndPotato,
       iconPath: IconsPath.rice,
       title: 'Arroz',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.lunch,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.beans,
       title: 'Fejão',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.lunch,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.soup,
       title: 'Sopa',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.lunch,
       foodItemCategory: FoodItemCategoryEnum.ricePastaAndPotato,
       iconPath: IconsPath.fries,
       title: 'Batatas',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.lunch,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.chickenLeg,
       title: 'Frango',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.lunch,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.meat,
       title: 'Carne vermelha',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.lunch,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.fish,
       title: 'Peixe',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.lunch,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.eggs,
       title: 'Ovos',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.lunch,
       foodItemCategory: FoodItemCategoryEnum.ricePastaAndPotato,
       iconPath: IconsPath.lasagna,
       title: 'Lasanha',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.lunch,
       foodItemCategory: FoodItemCategoryEnum.ricePastaAndPotato,
       iconPath: IconsPath.spaghetti,
       title: 'Macarrão',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.lunch,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.salad,
       title: 'Salada',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.lunch,
       foodItemCategory: FoodItemCategoryEnum.cakeCookieWithSugar,
       iconPath: IconsPath.pieceOfCake,
       title: 'Sobremesa bolo',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.lunch,
       foodItemCategory: FoodItemCategoryEnum.dessertWithSugar,
       iconPath: IconsPath.pudding,
       title: 'Sobremesa pudim',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.lunch,
       foodItemCategory: FoodItemCategoryEnum.dessertWithSugar,
       iconPath: IconsPath.icecream,
       title: 'Sobremesa sorvete',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.lunch,
       foodItemCategory: FoodItemCategoryEnum.dessertWithSugar,
       iconPath: IconsPath.biscuits,
       title: 'Sobremesa Biscoito recheado',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.lunch,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.fruit,
       title: 'Sobremesa Frutas',
     ),
   ];
-  List<FoodItem> foodItemsAfternoonSnack = [
-    FoodItem(
+  List<FoodItemWidgetModel> foodItemsAfternoonSnack = [
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.afternoonSnack,
       foodItemCategory: FoodItemCategoryEnum.drinksWithSugar,
       iconPath: IconsPath.coffeeCup,
       title: 'Café',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.afternoonSnack,
       foodItemCategory: FoodItemCategoryEnum.drinksWithSugar,
       iconPath: IconsPath.teaCup,
       title: 'Chá',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.afternoonSnack,
       foodItemCategory: FoodItemCategoryEnum.drinksWithSugar,
       iconPath: IconsPath.chocolateMilk,
       title: 'Achocolatado',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.afternoonSnack,
       foodItemCategory: FoodItemCategoryEnum.drinksWithSugar,
       iconPath: IconsPath.juice,
       title: 'Suco',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.afternoonSnack,
       foodItemCategory: FoodItemCategoryEnum.breadCookieWithoutSugar,
       iconPath: IconsPath.bread,
       title: 'Pão',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.afternoonSnack,
       foodItemCategory: FoodItemCategoryEnum.cakeCookieWithSugar,
       iconPath: IconsPath.cookie,
       title: 'Biscoito',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.afternoonSnack,
       foodItemCategory: FoodItemCategoryEnum.cakeCookieWithSugar,
       iconPath: IconsPath.pieceOfCake,
       title: 'Bolo',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.afternoonSnack,
       foodItemCategory: FoodItemCategoryEnum.drinksWithSugar,
       iconPath: IconsPath.donut,
       title: 'Rosquinha',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.afternoonSnack,
       foodItemCategory: FoodItemCategoryEnum.cakeCookieWithSugar,
       iconPath: IconsPath.cereals,
       title: 'Cereal',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.afternoonSnack,
       foodItemCategory: FoodItemCategoryEnum.breadCookieWithoutSugar,
       iconPath: IconsPath.cheeseSandwich,
       title: 'Misto',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.afternoonSnack,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.cheese,
       title: 'Queijo',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.afternoonSnack,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.eggs,
       title: 'Ovos',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.afternoonSnack,
       foodItemCategory: FoodItemCategoryEnum.stickyCandies,
       iconPath: IconsPath.jam,
       title: 'Geléia',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.afternoonSnack,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.fruit,
       title: 'Frutas',
     ),
   ];
-  List<FoodItem> foodItemsDinner = [
-    FoodItem(
+  List<FoodItemWidgetModel> foodItemsDinner = [
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.dinner,
       foodItemCategory: FoodItemCategoryEnum.drinksWithSugar,
       iconPath: IconsPath.juiceBox,
       title: 'Suco',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.dinner,
       foodItemCategory: FoodItemCategoryEnum.drinksWithSugar,
       iconPath: IconsPath.soda,
       title: 'Refrigerante',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.dinner,
       foodItemCategory: FoodItemCategoryEnum.ricePastaAndPotato,
       iconPath: IconsPath.rice,
       title: 'Arroz',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.dinner,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.beans,
       title: 'Fejão',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.dinner,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.soup,
       title: 'Sopa',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.dinner,
       foodItemCategory: FoodItemCategoryEnum.ricePastaAndPotato,
       iconPath: IconsPath.fries,
       title: 'Batatas',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.dinner,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.chickenLeg,
       title: 'Frango',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.dinner,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.meat,
       title: 'Carne vermelha',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.dinner,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.fish,
       title: 'Peixe',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.dinner,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.eggs,
       title: 'Ovos',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.dinner,
       foodItemCategory: FoodItemCategoryEnum.ricePastaAndPotato,
       iconPath: IconsPath.lasagna,
       title: 'Lasanha',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.dinner,
       foodItemCategory: FoodItemCategoryEnum.ricePastaAndPotato,
       iconPath: IconsPath.spaghetti,
       title: 'Macarrão',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.dinner,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.salad,
       title: 'Salada',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.dinner,
       foodItemCategory: FoodItemCategoryEnum.cakeCookieWithSugar,
       iconPath: IconsPath.pieceOfCake,
       title: 'Sobremesa bolo',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.dinner,
       foodItemCategory: FoodItemCategoryEnum.dessertWithSugar,
       iconPath: IconsPath.pudding,
       title: 'Sobremesa pudim',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.dinner,
       foodItemCategory: FoodItemCategoryEnum.dessertWithSugar,
       iconPath: IconsPath.icecream,
       title: 'Sobremesa sorvete',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.dinner,
       foodItemCategory: FoodItemCategoryEnum.dessertWithSugar,
       iconPath: IconsPath.biscuits,
       title: 'Sobremesa Biscoito recheado',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.dinner,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.fruit,
       title: 'Sobremesa Frutas',
     ),
   ];
-  List<FoodItem> foodItemsExtras = [
-    FoodItem(
+  List<FoodItemWidgetModel> foodItemsExtras = [
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.extras,
       foodItemCategory: FoodItemCategoryEnum.breadCookieWithoutSugar,
       iconPath: IconsPath.burguer,
       title: 'Hamburguer',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.extras,
       foodItemCategory: FoodItemCategoryEnum.ricePastaAndPotato,
       iconPath: IconsPath.fries,
       title: 'Batata',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.extras,
       foodItemCategory: FoodItemCategoryEnum.drinksWithSugar,
       iconPath: IconsPath.soda,
       title: 'Refrigerante',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.extras,
       foodItemCategory: FoodItemCategoryEnum.drinksWithSugar,
       iconPath: IconsPath.juiceBox,
       title: 'Suco',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.extras,
       foodItemCategory: FoodItemCategoryEnum.stickyCandies,
       iconPath: IconsPath.candy,
       title: 'Balas e doces',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.extras,
       foodItemCategory: FoodItemCategoryEnum.cakeCookieWithSugar,
       iconPath: IconsPath.pieceOfCake,
       title: 'Bolo',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.extras,
       foodItemCategory: FoodItemCategoryEnum.cakeCookieWithSugar,
       iconPath: IconsPath.pudding,
       title: 'Pudim',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.extras,
       foodItemCategory: FoodItemCategoryEnum.cakeCookieWithSugar,
       iconPath: IconsPath.donut,
       title: 'Rosquinha',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.extras,
       foodItemCategory: FoodItemCategoryEnum.cakeCookieWithSugar,
       iconPath: IconsPath.cookie,
       title: 'Biscoito',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.extras,
       foodItemCategory: FoodItemCategoryEnum.cakeCookieWithSugar,
       iconPath: IconsPath.biscuits,
       title: 'Biscoito recheado',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.extras,
       foodItemCategory: FoodItemCategoryEnum.stickyCandies,
       iconPath: IconsPath.candy,
       title: 'Balas e doces',
     ),
-    FoodItem(
+    FoodItemWidgetModel(
       mealCategory: MealCategoryEnum.extras,
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.fruit,

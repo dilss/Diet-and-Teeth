@@ -1,39 +1,20 @@
 import 'package:uuid/uuid.dart';
 
-enum FoodItemCategoryEnum {
-  harmlessFood,
-  drinksWithSugar,
-  breadCookieWithoutSugar,
-  ricePastaAndPotato,
-  cakeCookieWithSugar,
-  dessertWithSugar,
-  stickyCandies,
-}
+import '../types/food_item_category_enum.dart';
+import '../types/meal_category_enum.dart';
 
-enum MealCategoryEnum {
-  breakfast,
-  lunch,
-  afternoonSnack,
-  dinner,
-  extras,
-}
-
-class FoodItem {
+class FoodItemDataModel {
   String uuid;
-  String title;
   String description;
-  String iconPath;
   FoodItemCategoryEnum foodItemCategory;
   MealCategoryEnum mealCategory;
 
-  var isSelected = false;
   var _harmfullPotential = 0;
+  var title = 'untitled';
 
-  FoodItem({
+  FoodItemDataModel({
     this.mealCategory,
     this.foodItemCategory,
-    this.iconPath,
-    this.title,
   }) {
     uuid = Uuid().v1();
   }
@@ -63,29 +44,5 @@ class FoodItem {
         break;
     }
     return _harmfullPotential;
-  }
-}
-
-class DaylyDiet {
-  DateTime date;
-  List<FoodItem> _foodList;
-
-  DaylyDiet({this.date});
-
-  var _harmfulPotential = 0;
-
-  void addItem(FoodItem item) {
-    _foodList.add(item);
-  }
-
-  bool removeItem(FoodItem item) {
-    return _foodList.remove(item);
-  }
-
-  int get harmfulPotential {
-    _foodList.forEach((element) {
-      _harmfulPotential += element.howMuchHarmful;
-    });
-    return _harmfulPotential;
   }
 }
