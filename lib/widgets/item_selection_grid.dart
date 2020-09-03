@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import '../models/diet_model.dart';
+import '../models/widgets_models/food_item_widget_model.dart';
+import '../models/types/meal_category_enum.dart';
 
 import 'food_item_widget.dart';
 
 class ItemSelectionGrid extends StatelessWidget {
   final MealCategoryEnum mealCategory;
-  final List<FoodItem> foodItemList;
+  final List<FoodItemWidgetModel> foodItemList;
 
   ItemSelectionGrid(this.mealCategory, this.foodItemList);
 

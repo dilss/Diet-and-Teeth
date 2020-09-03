@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/item_selection_grid.dart';
 
-import '../models/diet_model.dart';
+import '../models/types/meal_category_enum.dart';
 import '../utils/const_data.dart';
 
 class TabsScreen extends StatefulWidget {
@@ -15,7 +15,6 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreenState extends State<TabsScreen> {
   var _selectedPageIndex = 0;
   var title = 'Café da Manhã';
-  DaylyDiet _diet;
 
   final _pages = [
     ItemSelectionGrid(
@@ -46,8 +45,6 @@ class _TabsScreenState extends State<TabsScreen> {
         break;
     }
   }
-
-  void _saveData() {}
 
   void _selectPage(int index) {
     setState(() {
