@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../models/widgets_models/food_item_widget_model.dart';
+import '../models/data_models/food_item_data_model.dart';
 
 class FoodItemWidget extends StatefulWidget {
   final FoodItemWidgetModel _foodItem;
@@ -14,15 +14,29 @@ class FoodItemWidget extends StatefulWidget {
 class _FoodItemWidgetState extends State<FoodItemWidget> {
   final itemIcon = Icons.favorite_border;
 
+  FoodItemDataModel mapFoodItemWidgetToModel(FoodItemWidgetModel item) {
+    FoodItemDataModel data = FoodItemDataModel(
+      title: item.title,
+      foodItemCategory: item.foodItemCategory,
+      mealCategory: item.mealCategory,
+    );
+    return data;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final colorTheme = Theme.of(context).primaryColor;
+    final mainTheme = Theme.of(context);
+    final colorTheme = mainTheme.primaryColor;
+    final backgroundColor = mainTheme.backgroundColor;
     return LayoutBuilder(
       builder: (ctx, constraint) {
         return GestureDetector(
           onTap: () {
             setState(() {
               widget._foodItem.isSelected = !widget._foodItem.isSelected;
+              //Add or remove foodItemWidgetModel from the list that will
+              //be mapped to foodItemDataModel that will be saved
+              if (widget._foodItem.isSelected) {}
             });
           },
           child: Container(
@@ -35,21 +49,21 @@ class _FoodItemWidgetState extends State<FoodItemWidget> {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   border: widget._foodItem.isSelected
-                      ? Border.all(color: Colors.green, width: 5)
-                      : Border.all(color: colorTheme, width: 5),
+                      ? Border.all(color: colorTheme, width: 2)
+                      : Border.all(color: Colors.grey[350], width: 2),
                   gradient: widget._foodItem.isSelected
                       ? LinearGradient(
                           colors: [
-                            Colors.green.withOpacity(0.1),
-                            Colors.green.withOpacity(0.8),
+                            colorTheme.withOpacity(0.0),
+                            colorTheme.withOpacity(0.6),
                           ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         )
                       : LinearGradient(
                           colors: [
-                            colorTheme.withOpacity(0.1),
-                            colorTheme.withOpacity(0.8),
+                            backgroundColor.withOpacity(0.0),
+                            backgroundColor.withOpacity(0.4),
                           ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
@@ -69,6 +83,8 @@ class _FoodItemWidgetState extends State<FoodItemWidget> {
                       alignment: Alignment.center,
                       child: Text(
                         widget._foodItem.title,
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],

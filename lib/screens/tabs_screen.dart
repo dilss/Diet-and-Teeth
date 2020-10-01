@@ -1,5 +1,10 @@
+import 'package:diet_and_teeth_app/providers/dayly_diet_data_provider.dart';
+import 'package:diet_and_teeth_app/providers/diets_list_provider.dart';
+import 'package:diet_and_teeth_app/widgets/dayly_diet_list_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+
 import '../widgets/item_selection_grid.dart';
 
 import '../models/types/meal_category_enum.dart';
@@ -13,8 +18,12 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  var _selectedPageIndex = 0;
+  var _bottomSelectedPageIndex = 0;
   var title = 'Café da Manhã';
+  final PageController _pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
 
   final _pages = [
     ItemSelectionGrid(
@@ -26,8 +35,14 @@ class _TabsScreenState extends State<TabsScreen> {
     ItemSelectionGrid(MealCategoryEnum.extras, ConstData().foodItemsExtras),
   ];
 
+  void _pageChanged(int index) {
+    setState(() {
+      _bottomSelectedPageIndex = index;
+    });
+  }
+
   void _setTitle() {
-    switch (_pages[_selectedPageIndex].mealCategory) {
+    switch (_pages[_bottomSelectedPageIndex].mealCategory) {
       case MealCategoryEnum.breakfast:
         title = 'Café da Manhã';
         break;
@@ -46,18 +61,37 @@ class _TabsScreenState extends State<TabsScreen> {
     }
   }
 
-  void _selectPage(int index) {
+  void _bottomTaped(int index) {
     setState(() {
-      _selectedPageIndex = index;
+      _bottomSelectedPageIndex = index;
+      _pageController.animateToPage(index,
+          duration: Duration(milliseconds: 500), curve: Curves.decelerate);
       _setTitle();
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final routeArgs = ModalRoute.of(context).settings.arguments;
+    DietsListProvider _list = Provider.of<DietsListProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(
+          routeArgs.toString(),
+        ),
+        bottom: PreferredSize(
+          child: Text(
+            title,
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+          preferredSize: Size.fromHeight(16),
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(10),
+            bottomRight: Radius.circular(10),
+          ),
+        ),
         actions: [
           Row(
             children: [
@@ -65,16 +99,11 @@ class _TabsScreenState extends State<TabsScreen> {
                 icon: Icon(Icons.save),
                 tooltip: 'Salvar',
                 onPressed: () {
-                  setState(() {
-                    if (_selectedPageIndex == 4) {
-                      // if (_pages[_selectedPageIndex].mealCategory ==
-                      //     MealCategoryEnum.extras) {
-                      _selectedPageIndex = 0;
-                    } else {
-                      _selectedPageIndex++;
-                    }
-                    _setTitle();
-                  });
+                  _list.addDaylyDiet(
+                    DaylyDietProvider(
+                      date: DateTime.now(),
+                    ),
+                  );
                 },
               ),
               Text('Salvar'),
@@ -82,15 +111,24 @@ class _TabsScreenState extends State<TabsScreen> {
           ),
         ],
       ),
-      body: _pages[_selectedPageIndex],
+      body: PageView(
+        controller: _pageController,
+        children: [..._pages],
+        onPageChanged: (value) {
+          _pageChanged(value);
+          _setTitle();
+        },
+      ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).primaryColorLight,
         fixedColor: Colors.black,
         selectedLabelStyle:
             TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-        currentIndex: _selectedPageIndex,
+        currentIndex: _bottomSelectedPageIndex,
         type: BottomNavigationBarType.fixed,
-        onTap: _selectPage,
+        onTap: (value) {
+          _bottomTaped(value);
+        },
         items: [
           BottomNavigationBarItem(
             icon: Container(

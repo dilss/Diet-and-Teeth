@@ -1,10 +1,16 @@
-import 'food_item_data_model.dart';
+import 'package:flutter/widgets.dart';
+import 'package:uuid/uuid.dart';
 
-class DaylyDiet {
+import '../models/data_models/food_item_data_model.dart';
+
+class DaylyDietProvider with ChangeNotifier {
   DateTime date;
   List<FoodItemDataModel> _foodList;
+  String uuid;
 
-  DaylyDiet({this.date});
+  DaylyDietProvider({this.date}) {
+    uuid = Uuid().v1();
+  }
 
   var _harmfulPotential = 0;
 

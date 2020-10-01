@@ -1,23 +1,22 @@
-import 'package:uuid/uuid.dart';
-
 import '../types/food_item_category_enum.dart';
 import '../types/meal_category_enum.dart';
 
 class FoodItemDataModel {
-  String uuid;
-  String description;
-  FoodItemCategoryEnum foodItemCategory;
-  MealCategoryEnum mealCategory;
+  final String id;
+  final String description;
+  final String title;
+  final FoodItemCategoryEnum foodItemCategory;
+  final MealCategoryEnum mealCategory;
 
   var _harmfullPotential = 0;
-  var title = 'untitled';
 
   FoodItemDataModel({
+    this.id,
     this.mealCategory,
     this.foodItemCategory,
-  }) {
-    uuid = Uuid().v1();
-  }
+    this.title,
+    this.description,
+  });
 
   int get howMuchHarmful {
     switch (foodItemCategory) {

@@ -92,7 +92,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.cyan[200], //Theme.of(context).primaryColor,
+      backgroundColor: Theme.of(context).backgroundColor,
       body: AuthForm(_submitAuthForm, _isLoading),
     );
   }
