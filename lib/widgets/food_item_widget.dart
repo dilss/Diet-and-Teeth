@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import '../models/widgets_models/food_item_widget_model.dart';
 import '../models/data_models/food_item_data_model.dart';
+import '../models/data_models/dayly_diet_data.dart';
+import '../providers/diets_list_provider.dart';
 
 class FoodItemWidget extends StatefulWidget {
   final FoodItemWidgetModel _foodItem;
@@ -28,16 +32,30 @@ class _FoodItemWidgetState extends State<FoodItemWidget> {
     final mainTheme = Theme.of(context);
     final colorTheme = mainTheme.primaryColor;
     final backgroundColor = mainTheme.backgroundColor;
+    DaylyDiet diet = Provider.of<DaylyDiet>(context, listen: false);
     return LayoutBuilder(
       builder: (ctx, constraint) {
         return GestureDetector(
           onTap: () {
             setState(() {
               widget._foodItem.isSelected = !widget._foodItem.isSelected;
-              //Add or remove foodItemWidgetModel from the list that will
-              //be mapped to foodItemDataModel that will be saved
-              if (widget._foodItem.isSelected) {}
             });
+            FoodItemDataModel foodItem;
+            if (widget._foodItem.isSelected) {
+              foodItem = FoodItemDataModel(
+                description: 'someDescription',
+                id: 'someId',
+                foodItemCategory: widget._foodItem.foodItemCategory,
+                mealCategory: widget._foodItem.mealCategory,
+                title: widget._foodItem.title,
+              );
+              diet.addItem(foodItem);
+              print(diet.items.length);
+            } else {
+              diet.removeItem(widget._foodItem.mealCategory,
+                  widget._foodItem.foodItemCategory);
+              print(diet.items.length);
+            }
           },
           child: Container(
             child: Card(

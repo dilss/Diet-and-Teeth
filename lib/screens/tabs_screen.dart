@@ -1,13 +1,14 @@
-import 'package:diet_and_teeth_app/providers/dayly_diet_data_provider.dart';
-import 'package:diet_and_teeth_app/providers/diets_list_provider.dart';
-import 'package:diet_and_teeth_app/widgets/dayly_diet_list_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
+import '../models/data_models/dayly_diet_data.dart';
+import '../providers/diets_list_provider.dart';
+
 import '../widgets/item_selection_grid.dart';
 
 import '../models/types/meal_category_enum.dart';
+import '../widgets/success_check.dart';
 import '../utils/const_data.dart';
 
 class TabsScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> {
   var _bottomSelectedPageIndex = 0;
-  var title = 'Café da Manhã';
+  var label = 'Café da Manhã';
   final PageController _pageController = PageController(
     initialPage: 0,
     keepPage: true,
@@ -44,19 +45,19 @@ class _TabsScreenState extends State<TabsScreen> {
   void _setTitle() {
     switch (_pages[_bottomSelectedPageIndex].mealCategory) {
       case MealCategoryEnum.breakfast:
-        title = 'Café da Manhã';
+        label = 'Café da Manhã';
         break;
       case MealCategoryEnum.lunch:
-        title = 'Almoço';
+        label = 'Almoço';
         break;
       case MealCategoryEnum.afternoonSnack:
-        title = 'Lanche da Tarde';
+        label = 'Lanche da Tarde';
         break;
       case MealCategoryEnum.dinner:
-        title = 'Jantar';
+        label = 'Jantar';
         break;
       case MealCategoryEnum.extras:
-        title = 'Fora das Refeições';
+        label = 'Fora das Refeições';
         break;
     }
   }
@@ -70,10 +71,31 @@ class _TabsScreenState extends State<TabsScreen> {
     });
   }
 
+  void _showCheckSuccessAndReturnToInicialScreen(BuildContext ctx) {
+    showDialog(
+      context: ctx,
+      barrierDismissible: false,
+      builder: (context) => SimpleDialog(
+        children: [
+          SuccessCheckMark(),
+        ],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        title: Text(
+          'Salvo com sucesso!',
+          style: TextStyle(fontSize: 22),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final routeArgs = ModalRoute.of(context).settings.arguments;
-    DietsListProvider _list = Provider.of<DietsListProvider>(context);
+    DietsList _list = Provider.of<DietsList>(context);
+    DaylyDiet diet = Provider.of<DaylyDiet>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -81,7 +103,7 @@ class _TabsScreenState extends State<TabsScreen> {
         ),
         bottom: PreferredSize(
           child: Text(
-            title,
+            label,
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
           preferredSize: Size.fromHeight(16),
@@ -99,11 +121,14 @@ class _TabsScreenState extends State<TabsScreen> {
                 icon: Icon(Icons.save),
                 tooltip: 'Salvar',
                 onPressed: () {
-                  _list.addDaylyDiet(
-                    DaylyDietProvider(
-                      date: DateTime.now(),
-                    ),
-                  );
+                  DaylyDiet daylyDiet = DaylyDiet(date: diet.date);
+                  diet.items.forEach((element) {
+                    daylyDiet.addItem(element);
+                  });
+                  print(daylyDiet.date);
+                  _list.addDaylyDiet(daylyDiet);
+                  diet.clearData();
+                  _showCheckSuccessAndReturnToInicialScreen(context);
                 },
               ),
               Text('Salvar'),
@@ -135,35 +160,35 @@ class _TabsScreenState extends State<TabsScreen> {
               height: 40,
               child: SvgPicture.asset('assets/svg/coffee.svg'),
             ),
-            title: Text('Café'),
+            label: 'Café',
           ),
           BottomNavigationBarItem(
             icon: Container(
               height: 40,
               child: SvgPicture.asset('assets/svg/lunch.svg'),
             ),
-            title: Text('Almoço'),
+            label: 'Almoço',
           ),
           BottomNavigationBarItem(
             icon: Container(
               height: 40,
               child: SvgPicture.asset('assets/svg/afternoonSnack.svg'),
             ),
-            title: Text('Lanche'),
+            label: 'Lanche',
           ),
           BottomNavigationBarItem(
             icon: Container(
               height: 40,
               child: SvgPicture.asset('assets/svg/dinner.svg'),
             ),
-            title: Text('Jantar'),
+            label: 'Jantar',
           ),
           BottomNavigationBarItem(
             icon: Container(
               height: 40,
               child: SvgPicture.asset('assets/svg/candy.svg'),
             ),
-            title: Text('Extras'),
+            label: 'Extras',
           ),
         ],
       ),

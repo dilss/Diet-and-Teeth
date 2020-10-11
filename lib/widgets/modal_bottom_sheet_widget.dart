@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_rounded_date_picker/rounded_picker.dart';
 
-import '../providers/dayly_diet_data_provider.dart';
+import '../models/data_models/dayly_diet_data.dart';
+
+import '../providers/diets_list_provider.dart';
 
 import '../screens/tabs_screen.dart';
+
+import '../utils/utils.dart';
 
 class ModalBottomSheetWidget extends StatefulWidget {
   @override
@@ -16,7 +20,8 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
   String _weekDayFollowedByDate;
   @override
   Widget build(BuildContext context) {
-    final _daylyDiet = Provider.of<DaylyDietProvider>(context, listen: false);
+    final _daylyDiet = Provider.of<DaylyDiet>(context, listen: false);
+    final _daylyDietList = Provider.of<DietsList>(context, listen: false);
     return Container(
       height: 150,
       child: Column(
@@ -34,7 +39,7 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                 Text(
                   _selectedDate == null
                       ? 'Nenhuma data selecionada!'
-                      : DateFormat('dd/MM/yyyy').format(_selectedDate),
+                      : DevUtils.getFormatedDate(_selectedDate),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 FlatButton(
@@ -47,19 +52,43 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                     ),
                   ),
                   onPressed: () {
-                    showDatePicker(
+                    showRoundedDatePicker(
                       context: context,
                       initialDate: DateTime.now(),
                       firstDate: DateTime(2020),
                       lastDate: DateTime.now(),
+                      borderRadius: 20,
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      theme: ThemeData(
+                        primaryColor: Theme.of(context).primaryColor,
+                        accentColor: Theme.of(context).accentColor,
+                        accentTextTheme: Theme.of(context).accentTextTheme,
+                        textButtonTheme: Theme.of(context).textButtonTheme,
+                        colorScheme: ColorScheme.light(
+                          primary: Theme.of(context).primaryColor,
+                        ),
+                      ),
                     ).then((value) {
                       if (value == null) {
                         return;
                       }
+                      _daylyDietList.items.forEach((element) {
+                        if (element.date == _selectedDate) {
+                          final response = showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text(
+                                'Já exite uma dieta salva para o dia selecionado! Deseja sobrescrever-la?',
+                              ),
+                              actions: [],
+                            ),
+                          );
+                        }
+                      });
                       setState(() {
                         _selectedDate = value;
-                        _daylyDiet.date = _selectedDate;
                       });
+                      _daylyDiet.date = _selectedDate;
                     });
                   },
                 ),
@@ -92,40 +121,16 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                           child: Text('OK'),
                         ),
                       ],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                     );
                   },
                 );
               } else {
                 Navigator.pop(context); //Dismiss bottom sheet
-                String weekDay;
-                switch (DateFormat(DateFormat.WEEKDAY).format(_selectedDate)) {
-                  case 'Sunday':
-                    weekDay = 'Dom';
-                    break;
-                  case 'Monday':
-                    weekDay = 'Seg';
-                    break;
-                  case 'Tuesday':
-                    weekDay = 'Ter';
-                    break;
-                  case 'Wednesday':
-                    weekDay = 'Qua';
-                    break;
-                  case 'Thursday':
-                    weekDay = 'Qui';
-                    break;
-                  case 'Friday':
-                    weekDay = 'Sex';
-                    break;
-                  case 'Saturday':
-                    weekDay = 'Sáb';
-                    break;
-                  default:
-                    weekDay = 'Hoje';
-                }
-                _weekDayFollowedByDate = weekDay +
-                    '   ' +
-                    DateFormat('dd/MM/yyyy').format(_selectedDate);
+                _weekDayFollowedByDate =
+                    DevUtils.getFormatedDate(_selectedDate);
                 Navigator.pushNamed(context, TabsScreen.routeName,
                     arguments: _weekDayFollowedByDate);
               }

@@ -7,7 +7,8 @@ import '../widgets/modal_bottom_sheet_widget.dart';
 import '../widgets/dayly_diet_list_widget.dart';
 import '../widgets/cario_chart_widget.dart';
 
-class HomePage extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
+  static const routeName = '/home-screen';
   void _startAddingNewDaylyDiet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -18,7 +19,13 @@ class HomePage extends StatelessWidget {
   }
 
   final myAppBar = AppBar(
-    title: Text('Página Inicial'),
+    title: Text(
+      'Suas Dietas',
+      style: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
     actions: [
       DropdownButton(
           items: [
@@ -59,14 +66,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: myAppBar,
       drawer: MainDrawer(),
-      floatingActionButton: Container(
-        alignment: Alignment.bottomCenter,
-        child: FloatingActionButton(
-          child: Icon(Icons.restaurant),
-          onPressed: () {
-            _startAddingNewDaylyDiet(context);
-          },
-        ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.restaurant),
+        onPressed: () {
+          _startAddingNewDaylyDiet(context);
+        },
       ),
       body: Container(
         height: availableSize,

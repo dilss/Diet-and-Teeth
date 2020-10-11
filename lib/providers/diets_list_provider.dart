@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'dayly_diet_data_provider.dart';
+import '../models/data_models/dayly_diet_data.dart';
 
-class DietsListProvider with ChangeNotifier {
-  final List<DaylyDietProvider> _dietsList = [
-    DaylyDietProvider(date: DateTime.now()),
-    DaylyDietProvider(date: DateTime.now()),
-  ];
+class DietsList with ChangeNotifier {
+  final List<DaylyDiet> _dietsList = [];
 
-  List<DaylyDietProvider> get items {
+  List<DaylyDiet> get items {
     return [..._dietsList];
   }
 
-  void addDaylyDiet(DaylyDietProvider diet) {
+  void addDaylyDiet(DaylyDiet diet) {
     _dietsList.add(diet);
+    notifyListeners();
+  }
+
+  void removeDaylyDiet(String uuid) {
+    _dietsList.removeWhere((element) => element.uuid == uuid);
     notifyListeners();
   }
 }

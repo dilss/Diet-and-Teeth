@@ -12,7 +12,7 @@ class DaylyDietListWidget extends StatefulWidget {
 class _DaylyDietListWidgetState extends State<DaylyDietListWidget> {
   @override
   Widget build(BuildContext context) {
-    final _dietListData = Provider.of<DietsListProvider>(context);
+    final _dietListData = Provider.of<DietsList>(context);
     return _dietListData != null && _dietListData.items.isNotEmpty
         ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -23,10 +23,7 @@ class _DaylyDietListWidgetState extends State<DaylyDietListWidget> {
               child: ListView(
                 children: [
                   ..._dietListData.items.map((e) {
-                    return DaylyDietListItemWidget(
-                      'test',
-                      e.date.toString(),
-                    );
+                    return DaylyDietListItemWidget(e);
                   }).toList(),
                 ],
               ),

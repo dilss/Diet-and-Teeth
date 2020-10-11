@@ -8,9 +8,11 @@ import 'screens/medicine_screen.dart';
 import 'screens/info_screen.dart';
 import 'screens/auth_screen.dart';
 import 'screens/tabs_screen.dart';
+import 'screens/succesfully_saved_screen.dart';
+
+import 'models/data_models/dayly_diet_data.dart';
 
 import 'providers/diets_list_provider.dart';
-import 'providers/dayly_diet_data_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,10 +26,10 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (ctx) => DietsListProvider(),
+          create: (ctx) => DietsList(),
         ),
-        ListenableProvider(
-          create: (ctx) => DaylyDietProvider(),
+        Provider(
+          create: (context) => DaylyDiet(),
         ),
       ],
       child: MaterialApp(
@@ -64,7 +66,7 @@ class MyApp extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (ctx, userSnapshot) {
             if (userSnapshot.hasData) {
-              return HomePage();
+              return HomeScreen();
             }
             return AuthScreen();
           },
@@ -73,6 +75,9 @@ class MyApp extends StatelessWidget {
           MedicineScreen.routeName: (context) => MedicineScreen(),
           InfoScreen.routeName: (context) => InfoScreen(),
           TabsScreen.routeName: (context) => TabsScreen(),
+          HomeScreen.routeName: (context) => HomeScreen(),
+          SuccessfullySavedScreen.routeName: (context) =>
+              SuccessfullySavedScreen(),
         },
       ),
     );
