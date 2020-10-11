@@ -1,4 +1,3 @@
-import 'package:diet_and_teeth_app/models/data_models/dayly_diet_data.dart';
 import 'package:flutter/material.dart';
 
 import 'package:uuid/uuid.dart';
@@ -6,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../utils/utils.dart';
 import '../providers/diets_list_provider.dart';
+import '../models/data_models/dayly_diet_data.dart';
 
 class DaylyDietListItemWidget extends StatelessWidget {
   final DaylyDiet _daylyDiet;

@@ -18,6 +18,7 @@ class ModalBottomSheetWidget extends StatefulWidget {
 class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
   DateTime _selectedDate;
   String _weekDayFollowedByDate;
+  DaylyDiet itemFound;
   @override
   Widget build(BuildContext context) {
     final _daylyDiet = Provider.of<DaylyDiet>(context, listen: false);
@@ -72,19 +73,6 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                       if (value == null) {
                         return;
                       }
-                      _daylyDietList.items.forEach((element) {
-                        if (element.date == _selectedDate) {
-                          final response = showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: Text(
-                                'Já exite uma dieta salva para o dia selecionado! Deseja sobrescrever-la?',
-                              ),
-                              actions: [],
-                            ),
-                          );
-                        }
-                      });
                       setState(() {
                         _selectedDate = value;
                       });
@@ -105,6 +93,17 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
               ),
             ),
             onPressed: () {
+              if (_selectedDate != null) {
+                itemFound = _daylyDietList.items.firstWhere(
+                  (element) {
+                    return DevUtils.getFormatedDate(element.date) ==
+                        DevUtils.getFormatedDate(_selectedDate);
+                  },
+                  orElse: () {
+                    return null;
+                  },
+                );
+              }
               if (_selectedDate == null) {
                 showDialog(
                   context: context,
@@ -124,6 +123,35 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
+                    );
+                  },
+                );
+              } else if (itemFound != null) {
+                showDialog(
+                  context: context,
+                  builder: (ctx) {
+                    return AlertDialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      title: Text(
+                        'Já existe uma dieta para o dia escolhido! Deseja apagar e criar outra?',
+                      ),
+                      actions: [
+                        FlatButton(
+                          child: Text('NÃO'),
+                          onPressed: () {
+                            Navigator.of(ctx).pop(false);
+                          },
+                        ),
+                        FlatButton(
+                          child: Text('SIM'),
+                          onPressed: () {
+                            Navigator.of(ctx).pop(true);
+                            _daylyDietList.removeDaylyDiet(itemFound.uuid);
+                          },
+                        ),
+                      ],
                     );
                   },
                 );
