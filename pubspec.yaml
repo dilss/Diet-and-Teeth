@@ -107,6 +107,11 @@ flutter:
     - assets/svg/icecream.svg
     - assets/svg/candy.svg
     - assets/svg/lunch.svg
+    - assets/svg/healthyFood.svg
+    - assets/svg/toothbrushAndToothPaste.svg
+    - assets/svg/syrup.svg
+    - assets/svg/information.svg
+    - assets/svg/toothbrush.svg
     - assets/animations/successCheck.flr
 
   # An image asset can refer to one or more resolution-specific "variants", see

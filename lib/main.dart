@@ -61,6 +61,12 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            backgroundColor: Colors.cyan[100],
+            selectedLabelStyle:
+                TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            type: BottomNavigationBarType.fixed,
+          ),
         ),
         home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),

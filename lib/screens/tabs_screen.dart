@@ -145,12 +145,8 @@ class _TabsScreenState extends State<TabsScreen> {
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Theme.of(context).primaryColorLight,
         fixedColor: Colors.black,
-        selectedLabelStyle:
-            TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         currentIndex: _bottomSelectedPageIndex,
-        type: BottomNavigationBarType.fixed,
         onTap: (value) {
           _bottomTaped(value);
         },
