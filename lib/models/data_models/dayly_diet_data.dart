@@ -39,6 +39,16 @@ class DaylyDiet {
     return _harmfulPotential;
   }
 
+  int howManyItemsForMeal(MealCategoryEnum category) {
+    int itemsCounter = 0;
+    _foodList.forEach((element) {
+      if (element.mealCategory == category) {
+        itemsCounter++;
+      }
+    });
+    return itemsCounter;
+  }
+
   void clearData() {
     date = null;
     _foodList.clear();

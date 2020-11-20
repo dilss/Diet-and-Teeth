@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../models/widgets_models/food_item_widget_model.dart';
 import '../models/data_models/food_item_data_model.dart';
 import '../models/data_models/dayly_diet_data.dart';
-import '../providers/diets_list_provider.dart';
 
 class FoodItemWidget extends StatefulWidget {
   final FoodItemWidgetModel _foodItem;
