@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_svg/svg.dart';
 import '../models/data_models/dayly_diet_data.dart';
 import '../providers/diets_list_provider.dart';
 
@@ -94,8 +94,8 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     final routeArgs = ModalRoute.of(context).settings.arguments;
-    DietsList _list = Provider.of<DietsList>(context);
-    DaylyDiet diet = Provider.of<DaylyDiet>(context);
+    var _list = Provider.of<DietsList>(context, listen: false);
+    var diet = Provider.of<DaylyDiet>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -127,7 +127,7 @@ class _TabsScreenState extends State<TabsScreen> {
                   });
                   print(daylyDiet.date);
                   _list.addDaylyDiet(daylyDiet);
-                  diet.clearData();
+                  diet = null;
                   _showCheckSuccessAndReturnToInicialScreen(context);
                 },
               ),

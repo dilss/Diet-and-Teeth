@@ -9,9 +9,6 @@ import 'screens/info_screen.dart';
 import 'screens/auth_screen.dart';
 import 'screens/tabs_screen.dart';
 import 'screens/succesfully_saved_screen.dart';
-
-import 'models/data_models/dayly_diet_data.dart';
-
 import 'providers/diets_list_provider.dart';
 
 Future<void> main() async {
@@ -27,9 +24,6 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (ctx) => DietsList(),
-        ),
-        Provider(
-          create: (context) => DaylyDiet(),
         ),
       ],
       child: MaterialApp(

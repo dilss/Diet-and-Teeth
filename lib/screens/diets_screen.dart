@@ -1,4 +1,6 @@
+import 'package:diet_and_teeth_app/models/data_models/dayly_diet_data.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/modal_bottom_sheet_widget.dart';
 import '../widgets/cario_chart_widget.dart';
@@ -9,17 +11,16 @@ class DietsScreen extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       builder: (ctx) {
-        return ModalBottomSheetWidget();
+        return Provider(
+          create: (ctx) => DaylyDiet(),
+          child: ModalBottomSheetWidget(),
+        );
       },
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    // final availableSize = MediaQuery.of(context).size.height -
-    //     MediaQuery.of(context).padding.top -
-    //     myAppBar.preferredSize.height -
-    //     kBottomNavigationBarHeight;
     return LayoutBuilder(builder: (context, constraints) {
       final availableSize = constraints.maxHeight;
       return Scaffold(

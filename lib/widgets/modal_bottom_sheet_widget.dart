@@ -21,8 +21,8 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
   DaylyDiet itemFound;
   @override
   Widget build(BuildContext context) {
-    final _daylyDiet = Provider.of<DaylyDiet>(context, listen: false);
     final _daylyDietList = Provider.of<DietsList>(context, listen: false);
+    final _daylyDiet = Provider.of<DaylyDiet>(context, listen: false);
     return Container(
       height: 150,
       child: Column(
@@ -159,8 +159,15 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                 Navigator.pop(context); //Dismiss bottom sheet
                 _weekDayFollowedByDate =
                     DevUtils.getFormatedDate(_selectedDate);
-                Navigator.pushNamed(context, TabsScreen.routeName,
-                    arguments: _weekDayFollowedByDate);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Provider.value(
+                      value: _daylyDiet,
+                      child: TabsScreen(),
+                    ),
+                  ),
+                );
               }
             },
           ),

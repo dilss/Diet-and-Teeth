@@ -18,8 +18,6 @@ class DaylyDiet {
     return [..._foodList];
   }
 
-  var _harmfulPotential = 0;
-
   void addItem(FoodItemDataModel item) {
     _foodList.add(item);
   }
@@ -33,6 +31,7 @@ class DaylyDiet {
   }
 
   int get harmfulPotential {
+    var _harmfulPotential = 0;
     _foodList.forEach((element) {
       _harmfulPotential += element.howMuchHarmful;
     });
