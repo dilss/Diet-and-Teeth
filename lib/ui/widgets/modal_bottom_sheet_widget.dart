@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_rounded_date_picker/rounded_picker.dart';
 
-import '../models/data_models/dayly_diet_data.dart';
+import '../../core/models/dayly_diet_data.dart';
 
-import '../providers/diets_list_provider.dart';
+import '../../core/providers/diets_list_provider.dart';
 
 import '../screens/tabs_screen.dart';
 
-import '../utils/utils.dart';
+import '../../utils/utils.dart';
 
 class ModalBottomSheetWidget extends StatefulWidget {
   @override
@@ -17,7 +17,6 @@ class ModalBottomSheetWidget extends StatefulWidget {
 
 class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
   DateTime _selectedDate;
-  String _weekDayFollowedByDate;
   DaylyDiet itemFound;
   @override
   Widget build(BuildContext context) {
@@ -76,7 +75,7 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                       setState(() {
                         _selectedDate = value;
                       });
-                      _daylyDiet.date = _selectedDate;
+                      _daylyDiet.date = DevUtils.getFormatedDate(_selectedDate);
                     });
                   },
                 ),
@@ -96,7 +95,7 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
               if (_selectedDate != null) {
                 itemFound = _daylyDietList.items.firstWhere(
                   (element) {
-                    return DevUtils.getFormatedDate(element.date) ==
+                    return element.date ==
                         DevUtils.getFormatedDate(_selectedDate);
                   },
                   orElse: () {
@@ -148,7 +147,7 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                           child: Text('SIM'),
                           onPressed: () {
                             Navigator.of(ctx).pop(true);
-                            _daylyDietList.removeDaylyDiet(itemFound.uuid);
+                            _daylyDietList.removeDaylyDiet(itemFound.id);
                           },
                         ),
                       ],
@@ -157,8 +156,6 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                 );
               } else {
                 Navigator.pop(context); //Dismiss bottom sheet
-                _weekDayFollowedByDate =
-                    DevUtils.getFormatedDate(_selectedDate);
                 Navigator.push(
                   context,
                   MaterialPageRoute(

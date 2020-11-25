@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:provider/provider.dart';
 
-import '../providers/diets_list_provider.dart';
-import '../utils/utils.dart';
+import '../../core/providers/diets_list_provider.dart';
+import '../../utils/utils.dart';
 
 class CarioChartWidget extends StatelessWidget {
   void setChartWeekDays(List<CarioData> _data) {
     for (int index = 0; index < 7; index++) {
-      _data[6 - index].weekDay = DevUtils.getDay(
+      _data[6 - index].weekDay = DevUtils.getWeekDay(
           date: DateTime.now().subtract(Duration(days: index)), short: true);
     }
   }
@@ -27,7 +27,7 @@ class CarioChartWidget extends StatelessWidget {
     for (int index = 0; index < 7; index++) {
       var daylyDiet = dietsList.items.firstWhere(
         (element) {
-          return DevUtils.getFormatedDate(element.date) == list[index];
+          return element.date == list[index];
         },
         orElse: () {
           return null;

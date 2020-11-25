@@ -1,6 +1,6 @@
-import '../models/widgets_models/food_item_widget_model.dart';
-import '../models/types/meal_category_enum.dart';
-import '../models/types/food_item_category_enum.dart';
+import '../core/viewmodels/food_item_widget_model.dart';
+import '../core/models/meal_category_enum.dart';
+import '../core/models/food_item_category_enum.dart';
 
 class IconsPath {
   static const beans = 'assets/icons/beans.png';

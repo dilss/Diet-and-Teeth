@@ -1,18 +1,16 @@
-import 'package:uuid/uuid.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../types/food_item_category_enum.dart';
-import '../types/meal_category_enum.dart';
+import 'food_item_category_enum.dart';
+import 'meal_category_enum.dart';
 
 import 'food_item_data_model.dart';
 
 class DaylyDiet {
-  DateTime date;
+  String date;
   List<FoodItemDataModel> _foodList = [];
-  String uuid;
+  String id;
 
-  DaylyDiet({this.date}) {
-    uuid = Uuid().v1();
-  }
+  DaylyDiet({this.date});
 
   List<FoodItemDataModel> get items {
     return [..._foodList];
@@ -51,5 +49,33 @@ class DaylyDiet {
   void clearData() {
     date = null;
     _foodList.clear();
+  }
+
+  static DaylyDiet fromMap(Map snapshot, String id) {
+    var daylyDiet = DaylyDiet(date: snapshot['date']);
+    daylyDiet.id = id;
+    var daylyDietDocuments =
+        FirebaseFirestore.instance.collection(id).doc().snapshots();
+    daylyDietDocuments.forEach(
+      (element) {
+        daylyDiet.addItem(
+          FoodItemDataModel.fromMap(element.data(), element.id),
+        );
+      },
+    );
+    return daylyDiet;
+  }
+
+  Map<dynamic, dynamic> toJson() {
+    Map json;
+    json['id'] = this.id;
+    json['date'] = this.date;
+
+    this.items.forEach(
+      (element) {
+        json[element.id] = element.toJson();
+      },
+    );
+    return json;
   }
 }

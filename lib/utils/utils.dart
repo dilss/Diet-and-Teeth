@@ -5,7 +5,15 @@ class DevUtils {
     return DateFormat('dd/MM/yyyy').format(date);
   }
 
-  static String getDay({DateTime date, bool short = true}) {
+  static String getWeekDayFromString({String date, bool short = true}) {
+    int day = int.parse(date.substring(0, 2));
+    int month = int.parse(date.substring(3, 5));
+    int year = int.parse(date.substring(6));
+    final newDate = DateTime(year, month, day);
+    return getWeekDay(date: newDate, short: short);
+  }
+
+  static String getWeekDay({DateTime date, bool short = true}) {
     String weekDay;
     switch (DateFormat(DateFormat.WEEKDAY).format(date)) {
       case 'Sunday':

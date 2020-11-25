@@ -3,13 +3,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
-import 'screens/home_screen.dart';
-import 'screens/medicine_screen.dart';
-import 'screens/info_screen.dart';
-import 'screens/auth_screen.dart';
-import 'screens/tabs_screen.dart';
-import 'screens/succesfully_saved_screen.dart';
-import 'providers/diets_list_provider.dart';
+import 'ui/screens/home_screen.dart';
+import 'ui/screens/medicine_screen.dart';
+import 'ui/screens/info_screen.dart';
+import 'ui/screens/auth_screen.dart';
+import 'ui/screens/tabs_screen.dart';
+import 'ui/screens/succesfully_saved_screen.dart';
+import 'core/providers/diets_list_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

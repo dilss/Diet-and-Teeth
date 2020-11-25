@@ -1,5 +1,5 @@
-import '../types/food_item_category_enum.dart';
-import '../types/meal_category_enum.dart';
+import '../models/food_item_category_enum.dart';
+import '../models/meal_category_enum.dart';
 
 class FoodItemWidgetModel {
   String title;

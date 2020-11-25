@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/diets_list_provider.dart';
-import './dayly_diet_list_item_widget.dart';
+import '../../core/providers/diets_list_provider.dart';
+import 'dayly_diet_list_item_widget.dart';
 
-class DaylyDietListWidget extends StatefulWidget {
-  @override
-  _DaylyDietListWidgetState createState() => _DaylyDietListWidgetState();
-}
-
-class _DaylyDietListWidgetState extends State<DaylyDietListWidget> {
+class DaylyDietListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _dietListData = Provider.of<DietsList>(context);

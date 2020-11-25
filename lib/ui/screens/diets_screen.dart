@@ -1,4 +1,4 @@
-import 'package:diet_and_teeth_app/models/data_models/dayly_diet_data.dart';
+import 'package:diet_and_teeth_app/core/models/dayly_diet_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

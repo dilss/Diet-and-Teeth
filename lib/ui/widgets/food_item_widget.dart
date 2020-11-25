@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/widgets_models/food_item_widget_model.dart';
-import '../models/data_models/food_item_data_model.dart';
-import '../models/data_models/dayly_diet_data.dart';
+import '../../core/viewmodels/food_item_widget_model.dart';
+import '../../core/models/food_item_data_model.dart';
+import '../../core/models/dayly_diet_data.dart';
 
 class FoodItemWidget extends StatefulWidget {
   final FoodItemWidgetModel _foodItem;

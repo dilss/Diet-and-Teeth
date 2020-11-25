@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/widgets_models/food_item_widget_model.dart';
-import '../models/types/meal_category_enum.dart';
+import '../../core/viewmodels/food_item_widget_model.dart';
+import '../../core/models/meal_category_enum.dart';
 
 import 'food_item_widget.dart';
 

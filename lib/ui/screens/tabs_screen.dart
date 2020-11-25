@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_svg/svg.dart';
-import '../models/data_models/dayly_diet_data.dart';
-import '../providers/diets_list_provider.dart';
+import '../../core/models/dayly_diet_data.dart';
+import '../../core/providers/diets_list_provider.dart';
 
 import '../widgets/item_selection_grid.dart';
 
-import '../models/types/meal_category_enum.dart';
+import '../../core/models/meal_category_enum.dart';
 import '../widgets/success_check.dart';
-import '../utils/const_data.dart';
+import '../../utils/const_data.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
@@ -93,13 +93,12 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final routeArgs = ModalRoute.of(context).settings.arguments;
     var _list = Provider.of<DietsList>(context, listen: false);
     var diet = Provider.of<DaylyDiet>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          routeArgs.toString(),
+          diet.date,
         ),
         bottom: PreferredSize(
           child: Text(
@@ -127,6 +126,8 @@ class _TabsScreenState extends State<TabsScreen> {
                   });
                   print(daylyDiet.date);
                   _list.addDaylyDiet(daylyDiet);
+                  //adiciona remotamente usando CRUDoperations;
+                  // somente depois de adicionar remoto é que deve aparecer na lista;
                   diet = null;
                   _showCheckSuccessAndReturnToInicialScreen(context);
                 },

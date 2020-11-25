@@ -1,12 +1,12 @@
-import '../types/food_item_category_enum.dart';
-import '../types/meal_category_enum.dart';
+import 'food_item_category_enum.dart';
+import 'meal_category_enum.dart';
 
 class FoodItemDataModel {
-  final String id;
-  final String description;
-  final String title;
-  final FoodItemCategoryEnum foodItemCategory;
-  final MealCategoryEnum mealCategory;
+  String id;
+  String description;
+  String title;
+  FoodItemCategoryEnum foodItemCategory;
+  MealCategoryEnum mealCategory;
 
   var _harmfullPotential = 0;
 
@@ -43,5 +43,25 @@ class FoodItemDataModel {
         break;
     }
     return _harmfullPotential;
+  }
+
+  static FoodItemDataModel fromMap(Map snapshot, String id) {
+    return FoodItemDataModel(
+      id: id,
+      description: snapshot['description'],
+      title: snapshot['title'],
+      mealCategory: snapshot['mealCategory'],
+      foodItemCategory: snapshot['foodItemCategory'],
+    );
+  }
+
+  Map<dynamic, dynamic> toJson() {
+    return {
+      "id": this.id,
+      "description": this.description,
+      "title": this.title,
+      "mealCategory": this.mealCategory,
+      "foodItemCategory": this.foodItemCategory,
+    };
   }
 }
