@@ -117,7 +117,7 @@ class DaylyDietListItemWidget extends StatelessWidget {
                                 builder: (ctx) => ConfirmDeletionDialog(),
                               );
                               if (deletionConfirmed == true) {
-                                _dietListData.removeDaylyDiet(_daylyDiet.id);
+                                _dietListData.removeDaylyDiet(_daylyDiet.date);
                               }
                             },
                           ),
@@ -135,7 +135,7 @@ class DaylyDietListItemWidget extends StatelessWidget {
               ),
             ),
             onDismissed: (direction) {
-              _dietListData.removeDaylyDiet(_daylyDiet.id);
+              _dietListData.removeDaylyDiet(_daylyDiet.date);
             },
             confirmDismiss: (direction) {
               return showDialog(

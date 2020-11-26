@@ -1,3 +1,4 @@
+import 'package:diet_and_teeth_app/core/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -91,6 +92,11 @@ class _TabsScreenState extends State<TabsScreen> {
     );
   }
 
+  Future<void> _saveDietInDatabase(DaylyDiet diet) async {
+    final database = Provider.of<Database>(context, listen: false);
+    await database.createDiet(diet);
+  }
+
   @override
   Widget build(BuildContext context) {
     var _list = Provider.of<DietsList>(context, listen: false);
@@ -125,9 +131,11 @@ class _TabsScreenState extends State<TabsScreen> {
                     daylyDiet.addItem(element);
                   });
                   print(daylyDiet.date);
+                  print(
+                    daylyDiet.toJson(),
+                  );
                   _list.addDaylyDiet(daylyDiet);
-                  //adiciona remotamente usando CRUDoperations;
-                  // somente depois de adicionar remoto é que deve aparecer na lista;
+                  _saveDietInDatabase(daylyDiet);
                   diet = null;
                   _showCheckSuccessAndReturnToInicialScreen(context);
                 },

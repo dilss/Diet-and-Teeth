@@ -45,23 +45,13 @@ class FoodItemDataModel {
     return _harmfullPotential;
   }
 
-  static FoodItemDataModel fromMap(Map snapshot, String id) {
-    return FoodItemDataModel(
-      id: id,
-      description: snapshot['description'],
-      title: snapshot['title'],
-      mealCategory: snapshot['mealCategory'],
-      foodItemCategory: snapshot['foodItemCategory'],
-    );
-  }
-
-  Map<dynamic, dynamic> toJson() {
+  Map<String, dynamic> toJson() {
     return {
       "id": this.id,
       "description": this.description,
       "title": this.title,
-      "mealCategory": this.mealCategory,
-      "foodItemCategory": this.foodItemCategory,
+      "mealCategory": this.mealCategory.index,
+      "foodItemCategory": this.foodItemCategory.index,
     };
   }
 }

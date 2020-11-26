@@ -1,15 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:diet_and_teeth_app/core/models/dayly_diet_data.dart';
+import 'package:diet_and_teeth_app/core/services/api_path.dart';
 import 'package:flutter/foundation.dart';
 
-abstract class Database {}
+abstract class Database {
+  Future<void> createDiet(DaylyDiet dietData);
+}
 
 class FirestoreDatabase implements Database {
   FirestoreDatabase({@required this.uid}) : assert(uid != null);
   final String uid;
 
-  void createDiet(Map<String, dynamic> dietData) {
-    final path = 'users/$uid/diets/diet_001 ';
+  Future<void> createDiet(DaylyDiet dietData) async {
+    final path = APIPath.diet(uid, dietData.dateAsId);
     final documentReference = FirebaseFirestore.instance.doc(path);
-    documentReference.set(dietData);
+    await documentReference.set(
+      dietData.toJson(),
+    );
   }
 }

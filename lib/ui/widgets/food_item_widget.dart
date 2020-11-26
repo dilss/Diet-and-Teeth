@@ -19,6 +19,7 @@ class _FoodItemWidgetState extends State<FoodItemWidget> {
 
   FoodItemDataModel mapFoodItemWidgetToModel(FoodItemWidgetModel item) {
     FoodItemDataModel data = FoodItemDataModel(
+      id: item.id,
       title: item.title,
       foodItemCategory: item.foodItemCategory,
       mealCategory: item.mealCategory,
@@ -41,13 +42,7 @@ class _FoodItemWidgetState extends State<FoodItemWidget> {
             });
             FoodItemDataModel foodItem;
             if (widget._foodItem.isSelected) {
-              foodItem = FoodItemDataModel(
-                description: 'someDescription',
-                id: 'someId',
-                foodItemCategory: widget._foodItem.foodItemCategory,
-                mealCategory: widget._foodItem.mealCategory,
-                title: widget._foodItem.title,
-              );
+              foodItem = mapFoodItemWidgetToModel(widget._foodItem);
               diet.addItem(foodItem);
               print(diet.items.length);
             } else {

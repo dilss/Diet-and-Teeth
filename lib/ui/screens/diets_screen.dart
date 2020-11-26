@@ -1,4 +1,6 @@
 import 'package:diet_and_teeth_app/core/models/dayly_diet_data.dart';
+import 'package:diet_and_teeth_app/core/services/database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,8 +13,16 @@ class DietsScreen extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       builder: (ctx) {
-        return Provider(
-          create: (ctx) => DaylyDiet(),
+        return MultiProvider(
+          providers: [
+            Provider<DaylyDiet>(
+              create: (ctx) => DaylyDiet(),
+            ),
+            Provider<Database>(
+              create: (_) =>
+                  FirestoreDatabase(uid: FirebaseAuth.instance.currentUser.uid),
+            ),
+          ],
           child: ModalBottomSheetWidget(),
         );
       },

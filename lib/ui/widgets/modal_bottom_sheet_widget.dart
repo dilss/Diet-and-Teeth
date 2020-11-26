@@ -1,3 +1,4 @@
+import 'package:diet_and_teeth_app/core/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_rounded_date_picker/rounded_picker.dart';
@@ -22,6 +23,7 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
   Widget build(BuildContext context) {
     final _daylyDietList = Provider.of<DietsList>(context, listen: false);
     final _daylyDiet = Provider.of<DaylyDiet>(context, listen: false);
+    final _database = Provider.of<Database>(context, listen: false);
     return Container(
       height: 150,
       child: Column(
@@ -147,7 +149,7 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                           child: Text('SIM'),
                           onPressed: () {
                             Navigator.of(ctx).pop(true);
-                            _daylyDietList.removeDaylyDiet(itemFound.id);
+                            _daylyDietList.removeDaylyDiet(itemFound.date);
                           },
                         ),
                       ],
@@ -159,8 +161,11 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Provider.value(
-                      value: _daylyDiet,
+                    builder: (context) => MultiProvider(
+                      providers: [
+                        Provider<DaylyDiet>.value(value: _daylyDiet),
+                        Provider<Database>.value(value: _database),
+                      ],
                       child: TabsScreen(),
                     ),
                   ),
