@@ -51,7 +51,7 @@ class _AuthScreenState extends State<AuthScreen> {
             .putFile(
               File(pickedImage.path),
             )
-            .onComplete;
+            .whenComplete(() => null);
 
         final url = await storageRef.getDownloadURL();
 

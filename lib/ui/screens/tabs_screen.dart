@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_svg/svg.dart';
-import '../../core/models/dayly_diet_data.dart';
-import '../../core/providers/diets_list_provider.dart';
+import '../../core/models/daily_diet_data.dart';
 
 import '../widgets/item_selection_grid.dart';
 
@@ -92,15 +91,14 @@ class _TabsScreenState extends State<TabsScreen> {
     );
   }
 
-  Future<void> _saveDietInDatabase(DaylyDiet diet) async {
+  Future<void> _saveDietInDatabase(DailyDiet diet) async {
     final database = Provider.of<Database>(context, listen: false);
-    await database.createDiet(diet);
+    await database.setDiet(diet);
   }
 
   @override
   Widget build(BuildContext context) {
-    var _list = Provider.of<DietsList>(context, listen: false);
-    var diet = Provider.of<DaylyDiet>(context, listen: false);
+    var diet = Provider.of<DailyDiet>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -126,18 +124,22 @@ class _TabsScreenState extends State<TabsScreen> {
                 icon: Icon(Icons.save),
                 tooltip: 'Salvar',
                 onPressed: () {
-                  DaylyDiet daylyDiet = DaylyDiet(date: diet.date);
+                  DailyDiet daylyDiet = DailyDiet(date: diet.date);
                   diet.items.forEach((element) {
                     daylyDiet.addItem(element);
                   });
                   print(daylyDiet.date);
                   print(
-                    daylyDiet.toJson(),
+                    daylyDiet.toMap(),
                   );
-                  _list.addDaylyDiet(daylyDiet);
                   _saveDietInDatabase(daylyDiet);
                   diet = null;
                   _showCheckSuccessAndReturnToInicialScreen(context);
+                  final database =
+                      Provider.of<Database>(context, listen: false);
+                  print(
+                      '----------------------READ DIETS---------------------------');
+                  database.dietsStream();
                 },
               ),
               Text('Salvar'),
@@ -163,35 +165,50 @@ class _TabsScreenState extends State<TabsScreen> {
           BottomNavigationBarItem(
             icon: Container(
               height: 40,
-              child: SvgPicture.asset('assets/svg/coffee.svg'),
+              child: SvgPicture.asset(
+                'assets/svg/coffee.svg',
+                height: 40,
+              ),
             ),
             label: 'Café',
           ),
           BottomNavigationBarItem(
             icon: Container(
               height: 40,
-              child: SvgPicture.asset('assets/svg/lunch.svg'),
+              child: SvgPicture.asset(
+                'assets/svg/lunch.svg',
+                height: 40,
+              ),
             ),
             label: 'Almoço',
           ),
           BottomNavigationBarItem(
             icon: Container(
               height: 40,
-              child: SvgPicture.asset('assets/svg/afternoonSnack.svg'),
+              child: SvgPicture.asset(
+                'assets/svg/afternoonSnack.svg',
+                height: 40,
+              ),
             ),
             label: 'Lanche',
           ),
           BottomNavigationBarItem(
             icon: Container(
               height: 40,
-              child: SvgPicture.asset('assets/svg/dinner.svg'),
+              child: SvgPicture.asset(
+                'assets/svg/dinner.svg',
+                height: 40,
+              ),
             ),
             label: 'Jantar',
           ),
           BottomNavigationBarItem(
             icon: Container(
               height: 40,
-              child: SvgPicture.asset('assets/svg/candy.svg'),
+              child: SvgPicture.asset(
+                'assets/svg/candy.svg',
+                height: 40,
+              ),
             ),
             label: 'Extras',
           ),

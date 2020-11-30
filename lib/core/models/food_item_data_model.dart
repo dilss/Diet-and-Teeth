@@ -45,13 +45,29 @@ class FoodItemDataModel {
     return _harmfullPotential;
   }
 
-  Map<String, dynamic> toJson() {
+  factory FoodItemDataModel.fromMap(Map<String, dynamic> data) {
+    final id = data['id'] as String;
+    final description = data['description'] as String;
+    final title = data['title'] as String;
+    final mealCategory = MealCategoryEnum.values[data['mealCategory'] as int];
+    final foodItemCategory =
+        FoodItemCategoryEnum.values[data['foodItemCategory'] as int];
+    return FoodItemDataModel(
+      id: id,
+      title: title,
+      foodItemCategory: foodItemCategory,
+      mealCategory: mealCategory,
+      description: description,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
     return {
-      "id": this.id,
-      "description": this.description,
-      "title": this.title,
-      "mealCategory": this.mealCategory.index,
-      "foodItemCategory": this.foodItemCategory.index,
+      "id": id,
+      "description": description,
+      "title": title,
+      "mealCategory": mealCategory.index,
+      "foodItemCategory": foodItemCategory.index,
     };
   }
 }

@@ -3,14 +3,14 @@ import 'meal_category_enum.dart';
 
 import 'food_item_data_model.dart';
 
-class DaylyDiet {
+class DailyDiet {
   String date;
   String dateAsId;
-  List<FoodItemDataModel> _foodList = [];
+  List<FoodItemDataModel> foodList = [];
 
-  DaylyDiet({this.date});
+  DailyDiet({this.date});
   List<FoodItemDataModel> get items {
-    return [..._foodList];
+    return [...foodList];
   }
 
   void setId() {
@@ -18,12 +18,12 @@ class DaylyDiet {
   }
 
   void addItem(FoodItemDataModel item) {
-    _foodList.add(item);
+    foodList.add(item);
   }
 
   void removeItem(
       MealCategoryEnum mealCategory, FoodItemCategoryEnum foodCategory) {
-    return _foodList.removeWhere(
+    return foodList.removeWhere(
       (element) => (element.mealCategory == mealCategory &&
           element.foodItemCategory == foodCategory),
     );
@@ -31,7 +31,7 @@ class DaylyDiet {
 
   int get harmfulPotential {
     var _harmfulPotential = 0;
-    _foodList.forEach((element) {
+    foodList.forEach((element) {
       _harmfulPotential += element.howMuchHarmful;
     });
     return _harmfulPotential;
@@ -39,7 +39,7 @@ class DaylyDiet {
 
   int howManyItemsForMeal(MealCategoryEnum category) {
     int itemsCounter = 0;
-    _foodList.forEach((element) {
+    foodList.forEach((element) {
       if (element.mealCategory == category) {
         itemsCounter++;
       }
@@ -49,18 +49,39 @@ class DaylyDiet {
 
   void clearData() {
     date = null;
-    _foodList.clear();
+    foodList.clear();
   }
 
-  Map<String, dynamic> toJson() {
+  factory DailyDiet.fromMap(Map<String, dynamic> data) {
+    if (data == null) {
+      return null;
+    }
+    final date = data['date'] as String;
+    final dateAsId = data['dateAsId'] as String;
+    DailyDiet diet = DailyDiet(date: date);
+
+    if (data['food_list'] != null) {
+      var foodItemsJson = data['food_list'] as List;
+      var foodList = foodItemsJson
+          .map((foodItemJson) => FoodItemDataModel.fromMap(foodItemJson))
+          .toList();
+      diet.foodList = foodList;
+    }
+
+    diet.dateAsId = dateAsId;
+    return diet;
+  }
+
+  Map<String, dynamic> toMap() {
     Map<String, dynamic> json = {};
     setId();
-    json['date'] = this.dateAsId;
+    json['date'] = date;
+    json['dateAsId'] = dateAsId;
     var temp = [];
     this.items.forEach(
       (element) {
         temp.add(
-          element.toJson(),
+          element.toMap(),
         );
       },
     );

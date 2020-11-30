@@ -1,3 +1,4 @@
+import 'package:diet_and_teeth_app/core/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,7 +10,6 @@ import 'ui/screens/info_screen.dart';
 import 'ui/screens/auth_screen.dart';
 import 'ui/screens/tabs_screen.dart';
 import 'ui/screens/succesfully_saved_screen.dart';
-import 'core/providers/diets_list_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,8 +22,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (ctx) => DietsList(),
+        Provider<Database>(
+          create: (_) =>
+              FirestoreDatabase(uid: FirebaseAuth.instance.currentUser.uid),
         ),
       ],
       child: MaterialApp(

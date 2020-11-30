@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../../core/models/dayly_diet_data.dart';
+import '../../core/models/daily_diet_data.dart';
 import '../../core/models/meal_category_enum.dart';
 
-class DaylyDietItemTable extends StatelessWidget {
-  const DaylyDietItemTable({
+class DailyDietItemTable extends StatelessWidget {
+  const DailyDietItemTable({
     Key key,
-    @required DaylyDiet daylyDiet,
+    @required DailyDiet daylyDiet,
   })  : _daylyDiet = daylyDiet,
         super(key: key);
 
-  final DaylyDiet _daylyDiet;
+  final DailyDiet _daylyDiet;
 
   @override
   Widget build(BuildContext context) {

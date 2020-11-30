@@ -1,8 +1,9 @@
+import 'package:diet_and_teeth_app/core/models/daily_diet_data.dart';
+import 'package:diet_and_teeth_app/core/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:provider/provider.dart';
 
-import '../../core/providers/diets_list_provider.dart';
 import '../../utils/utils.dart';
 
 class CarioChartWidget extends StatelessWidget {
@@ -13,7 +14,7 @@ class CarioChartWidget extends StatelessWidget {
     }
   }
 
-  void setCarioLevel(DietsList dietsList, List<CarioData> _data) {
+  void setCarioLevel(List<DailyDiet> diets, List<CarioData> _data) {
     List<String> list = [];
     for (int index = 0; index < 7; index++) {
       list.add(
@@ -25,7 +26,7 @@ class CarioChartWidget extends StatelessWidget {
       );
     }
     for (int index = 0; index < 7; index++) {
-      var daylyDiet = dietsList.items.firstWhere(
+      var daylyDiet = diets.firstWhere(
         (element) {
           return element.date == list[index];
         },
@@ -43,7 +44,6 @@ class CarioChartWidget extends StatelessWidget {
   }
 
   Widget build(BuildContext context) {
-    final _daylyDietList = Provider.of<DietsList>(context);
     var _data = [
       CarioData(weekDay: 'Dom', carioLevel: 10),
       CarioData(weekDay: 'Seg', carioLevel: 25),
@@ -54,22 +54,34 @@ class CarioChartWidget extends StatelessWidget {
       CarioData(weekDay: 'Hoje', carioLevel: 54),
     ];
 
-    var seriesList = [
-      charts.Series(
-        id: 'Potencial Cariogênico',
-        domainFn: (CarioData carioData, _) => carioData.weekDay,
-        measureFn: (CarioData carioData, _) => carioData.carioLevel,
-        colorFn: (CarioData carioData, _) => carioData.color,
-        data: _data,
-      ),
-    ];
+    Widget _buildContent(BuildContext context) {
+      final _database = Provider.of<Database>(context, listen: false);
+      return StreamBuilder(
+          stream: _database.dietsStream(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              setChartWeekDays(_data);
+              setCarioLevel(snapshot.data, _data);
+              final seriesList = [
+                charts.Series(
+                  id: 'Potencial Cariogênico',
+                  domainFn: (CarioData carioData, _) => carioData.weekDay,
+                  measureFn: (CarioData carioData, _) => carioData.carioLevel,
+                  colorFn: (CarioData carioData, _) => carioData.color,
+                  data: _data,
+                ),
+              ];
+              return charts.BarChart(
+                seriesList,
+                animate: true,
+              );
+            }
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          });
+    }
 
-    var chart = charts.BarChart(
-      seriesList,
-      animate: true,
-    );
-    setChartWeekDays(_data);
-    setCarioLevel(_daylyDietList, _data);
     return Card(
       margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
       child: Container(
@@ -82,7 +94,7 @@ class CarioChartWidget extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: chart,
+          child: _buildContent(context),
         ),
       ),
       elevation: 5,

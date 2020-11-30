@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../core/viewmodels/food_item_widget_model.dart';
 import '../../core/models/food_item_data_model.dart';
-import '../../core/models/dayly_diet_data.dart';
+import '../../core/models/daily_diet_data.dart';
 
 class FoodItemWidget extends StatefulWidget {
   final FoodItemWidgetModel _foodItem;
@@ -32,7 +32,7 @@ class _FoodItemWidgetState extends State<FoodItemWidget> {
     final mainTheme = Theme.of(context);
     final colorTheme = mainTheme.primaryColor;
     final backgroundColor = mainTheme.backgroundColor;
-    DaylyDiet diet = Provider.of<DaylyDiet>(context, listen: false);
+    DailyDiet diet = Provider.of<DailyDiet>(context, listen: false);
     return LayoutBuilder(
       builder: (ctx, constraint) {
         return GestureDetector(
