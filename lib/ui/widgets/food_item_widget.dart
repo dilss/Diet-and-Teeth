@@ -9,7 +9,6 @@ class FoodItemWidget extends StatefulWidget {
   final FoodItemWidgetModel _foodItem;
 
   FoodItemWidget(this._foodItem);
-
   @override
   _FoodItemWidgetState createState() => _FoodItemWidgetState();
 }
@@ -44,11 +43,9 @@ class _FoodItemWidgetState extends State<FoodItemWidget> {
             if (widget._foodItem.isSelected) {
               foodItem = mapFoodItemWidgetToModel(widget._foodItem);
               diet.addItem(foodItem);
-              print(diet.items.length);
             } else {
               diet.removeItem(widget._foodItem.mealCategory,
                   widget._foodItem.foodItemCategory);
-              print(diet.items.length);
             }
           },
           child: Container(

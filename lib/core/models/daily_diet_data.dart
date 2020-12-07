@@ -5,16 +5,16 @@ import 'food_item_data_model.dart';
 
 class DailyDiet {
   String date;
-  String dateAsId;
   List<FoodItemDataModel> foodList = [];
 
   DailyDiet({this.date});
+
   List<FoodItemDataModel> get items {
     return [...foodList];
   }
 
-  void setId() {
-    dateAsId = date.replaceAll(RegExp(r'/'), '-');
+  String get dateAsId {
+    return date.replaceAll(RegExp(r'/'), '-');
   }
 
   void addItem(FoodItemDataModel item) {
@@ -57,7 +57,6 @@ class DailyDiet {
       return null;
     }
     final date = data['date'] as String;
-    final dateAsId = data['dateAsId'] as String;
     DailyDiet diet = DailyDiet(date: date);
 
     if (data['food_list'] != null) {
@@ -67,16 +66,12 @@ class DailyDiet {
           .toList();
       diet.foodList = foodList;
     }
-
-    diet.dateAsId = dateAsId;
     return diet;
   }
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> json = {};
-    setId();
     json['date'] = date;
-    json['dateAsId'] = dateAsId;
     var temp = [];
     this.items.forEach(
       (element) {

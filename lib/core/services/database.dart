@@ -18,6 +18,13 @@ class FirestoreDatabase implements Database {
         path: APIPath.diet(uid, dietData.dateAsId),
       );
 
+  Future<DailyDiet> getDiet(DailyDiet dietData) async {
+    final map = await getData(
+      path: APIPath.diet(uid, dietData.dateAsId),
+    );
+    return DailyDiet.fromMap(map);
+  }
+
   Future<void> deleteDiet(DailyDiet dietData) async => await deleteData(
         path: APIPath.diet(uid, dietData.dateAsId),
       );
@@ -25,6 +32,13 @@ class FirestoreDatabase implements Database {
   Future<void> setData({String path, Map<String, dynamic> data}) async {
     final reference = FirebaseFirestore.instance.doc(path);
     await reference.set(data);
+  }
+
+  Future<Map<String, dynamic>> getData({String path}) async {
+    final map = await FirebaseFirestore.instance.doc(path).get().then(
+          (value) => value.data(),
+        );
+    return map;
   }
 
   Future<void> deleteData({String path}) async {

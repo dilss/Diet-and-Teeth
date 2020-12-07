@@ -1,18 +1,24 @@
 import 'package:diet_and_teeth_app/core/services/database.dart';
+import 'package:diet_and_teeth_app/core/models/daily_diet_data.dart';
+import 'package:diet_and_teeth_app/core/models/meal_category_enum.dart';
+import 'package:diet_and_teeth_app/ui/widgets/success_check.dart';
+import 'package:diet_and_teeth_app/ui/widgets/item_selection_grid.dart';
+import 'package:diet_and_teeth_app/utils/const_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_svg/svg.dart';
-import '../../core/models/daily_diet_data.dart';
-
-import '../widgets/item_selection_grid.dart';
-
-import '../../core/models/meal_category_enum.dart';
-import '../widgets/success_check.dart';
-import '../../utils/const_data.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
+  final bool isEditMode;
+  final DailyDiet diet;
+
+  TabsScreen({this.isEditMode = false, this.diet}) {
+    if (isEditMode) {
+      ConstData.setSelectedItems(diet);
+    }
+  }
 
   @override
   _TabsScreenState createState() => _TabsScreenState();
@@ -27,13 +33,12 @@ class _TabsScreenState extends State<TabsScreen> {
   );
 
   final _pages = [
+    ItemSelectionGrid(MealCategoryEnum.breakfast, ConstData.foodItemsBreakfast),
+    ItemSelectionGrid(MealCategoryEnum.lunch, ConstData.foodItemsLunch),
     ItemSelectionGrid(
-        MealCategoryEnum.breakfast, ConstData().foodItemsBreakfast),
-    ItemSelectionGrid(MealCategoryEnum.lunch, ConstData().foodItemsLunch),
-    ItemSelectionGrid(
-        MealCategoryEnum.afternoonSnack, ConstData().foodItemsAfternoonSnack),
-    ItemSelectionGrid(MealCategoryEnum.dinner, ConstData().foodItemsDinner),
-    ItemSelectionGrid(MealCategoryEnum.extras, ConstData().foodItemsExtras),
+        MealCategoryEnum.afternoonSnack, ConstData.foodItemsAfternoonSnack),
+    ItemSelectionGrid(MealCategoryEnum.dinner, ConstData.foodItemsDinner),
+    ItemSelectionGrid(MealCategoryEnum.extras, ConstData.foodItemsExtras),
   ];
 
   void _pageChanged(int index) {
@@ -71,9 +76,9 @@ class _TabsScreenState extends State<TabsScreen> {
     });
   }
 
-  void _showCheckSuccessAndReturnToInicialScreen(BuildContext ctx) {
+  void _showCheckSuccessAndReturnToInicialScreen() {
     showDialog(
-      context: ctx,
+      context: context,
       barrierDismissible: false,
       builder: (context) => SimpleDialog(
         children: [
@@ -96,123 +101,134 @@ class _TabsScreenState extends State<TabsScreen> {
     await database.setDiet(diet);
   }
 
+  Future<bool> _onWillPopCallback() async {
+    ConstData.resetSelectedItems();
+    var diet = Provider.of<DailyDiet>(context, listen: false);
+    diet.clearData();
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     var diet = Provider.of<DailyDiet>(context, listen: false);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          diet.date,
+    if (widget.isEditMode) {
+      diet.date = widget.diet.date;
+    }
+    return WillPopScope(
+      onWillPop: _onWillPopCallback,
+      child: Scaffold(
+        appBar: AppBar(
+          title: widget.isEditMode
+              ? Text(
+                  widget.diet.date + ' Edição',
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
+              : Text(
+                  diet.date,
+                ),
+          bottom: PreferredSize(
+            child: Text(
+              label,
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            preferredSize: Size.fromHeight(16),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(10),
+              bottomRight: Radius.circular(10),
+            ),
+          ),
+          actions: [
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.save),
+                  tooltip: 'Salvar',
+                  onPressed: () {
+                    if (widget.isEditMode) {
+                      diet.foodList.addAll(widget.diet.items);
+                    }
+                    _saveDietInDatabase(diet);
+                    ConstData.resetSelectedItems();
+                    _showCheckSuccessAndReturnToInicialScreen();
+                  },
+                ),
+                Text('Salvar'),
+              ],
+            ),
+          ],
         ),
-        bottom: PreferredSize(
-          child: Text(
-            label,
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-          preferredSize: Size.fromHeight(16),
+        body: PageView(
+          controller: _pageController,
+          children: [..._pages],
+          onPageChanged: (value) {
+            _pageChanged(value);
+            _setTitle();
+          },
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(10),
-            bottomRight: Radius.circular(10),
-          ),
+        bottomNavigationBar: BottomNavigationBar(
+          fixedColor: Colors.black,
+          currentIndex: _bottomSelectedPageIndex,
+          onTap: (value) {
+            _bottomTaped(value);
+          },
+          items: [
+            BottomNavigationBarItem(
+              icon: Container(
+                height: 40,
+                child: SvgPicture.asset(
+                  'assets/svg/coffee.svg',
+                  height: 40,
+                ),
+              ),
+              label: 'Café',
+            ),
+            BottomNavigationBarItem(
+              icon: Container(
+                height: 40,
+                child: SvgPicture.asset(
+                  'assets/svg/lunch.svg',
+                  height: 40,
+                ),
+              ),
+              label: 'Almoço',
+            ),
+            BottomNavigationBarItem(
+              icon: Container(
+                height: 40,
+                child: SvgPicture.asset(
+                  'assets/svg/afternoonSnack.svg',
+                  height: 40,
+                ),
+              ),
+              label: 'Lanche',
+            ),
+            BottomNavigationBarItem(
+              icon: Container(
+                height: 40,
+                child: SvgPicture.asset(
+                  'assets/svg/dinner.svg',
+                  height: 40,
+                ),
+              ),
+              label: 'Jantar',
+            ),
+            BottomNavigationBarItem(
+              icon: Container(
+                height: 40,
+                child: SvgPicture.asset(
+                  'assets/svg/candy.svg',
+                  height: 40,
+                ),
+              ),
+              label: 'Extras',
+            ),
+          ],
         ),
-        actions: [
-          Row(
-            children: [
-              IconButton(
-                icon: Icon(Icons.save),
-                tooltip: 'Salvar',
-                onPressed: () {
-                  DailyDiet daylyDiet = DailyDiet(date: diet.date);
-                  diet.items.forEach((element) {
-                    daylyDiet.addItem(element);
-                  });
-                  print(daylyDiet.date);
-                  print(
-                    daylyDiet.toMap(),
-                  );
-                  _saveDietInDatabase(daylyDiet);
-                  diet = null;
-                  _showCheckSuccessAndReturnToInicialScreen(context);
-                  final database =
-                      Provider.of<Database>(context, listen: false);
-                  print(
-                      '----------------------READ DIETS---------------------------');
-                  database.dietsStream();
-                },
-              ),
-              Text('Salvar'),
-            ],
-          ),
-        ],
-      ),
-      body: PageView(
-        controller: _pageController,
-        children: [..._pages],
-        onPageChanged: (value) {
-          _pageChanged(value);
-          _setTitle();
-        },
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        fixedColor: Colors.black,
-        currentIndex: _bottomSelectedPageIndex,
-        onTap: (value) {
-          _bottomTaped(value);
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: Container(
-              height: 40,
-              child: SvgPicture.asset(
-                'assets/svg/coffee.svg',
-                height: 40,
-              ),
-            ),
-            label: 'Café',
-          ),
-          BottomNavigationBarItem(
-            icon: Container(
-              height: 40,
-              child: SvgPicture.asset(
-                'assets/svg/lunch.svg',
-                height: 40,
-              ),
-            ),
-            label: 'Almoço',
-          ),
-          BottomNavigationBarItem(
-            icon: Container(
-              height: 40,
-              child: SvgPicture.asset(
-                'assets/svg/afternoonSnack.svg',
-                height: 40,
-              ),
-            ),
-            label: 'Lanche',
-          ),
-          BottomNavigationBarItem(
-            icon: Container(
-              height: 40,
-              child: SvgPicture.asset(
-                'assets/svg/dinner.svg',
-                height: 40,
-              ),
-            ),
-            label: 'Jantar',
-          ),
-          BottomNavigationBarItem(
-            icon: Container(
-              height: 40,
-              child: SvgPicture.asset(
-                'assets/svg/candy.svg',
-                height: 40,
-              ),
-            ),
-            label: 'Extras',
-          ),
-        ],
       ),
     );
   }

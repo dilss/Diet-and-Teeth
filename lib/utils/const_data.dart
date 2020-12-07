@@ -1,3 +1,5 @@
+import 'package:diet_and_teeth_app/core/models/daily_diet_data.dart';
+
 import '../core/viewmodels/food_item_widget_model.dart';
 import '../core/models/meal_category_enum.dart';
 import '../core/models/food_item_category_enum.dart';
@@ -41,7 +43,7 @@ class IconsPath {
 }
 
 class ConstData {
-  List<FoodItemWidgetModel> foodItemsBreakfast = [
+  static List<FoodItemWidgetModel> foodItemsBreakfast = [
     FoodItemWidgetModel(
       id: FoodItemId.breakfastCoffee,
       mealCategory: MealCategoryEnum.breakfast,
@@ -141,7 +143,7 @@ class ConstData {
       title: 'Frutas',
     ),
   ];
-  List<FoodItemWidgetModel> foodItemsLunch = [
+  static List<FoodItemWidgetModel> foodItemsLunch = [
     FoodItemWidgetModel(
       id: FoodItemId.lunchJuice,
       mealCategory: MealCategoryEnum.lunch,
@@ -269,7 +271,7 @@ class ConstData {
       title: 'Sobremesa Frutas',
     ),
   ];
-  List<FoodItemWidgetModel> foodItemsAfternoonSnack = [
+  static List<FoodItemWidgetModel> foodItemsAfternoonSnack = [
     FoodItemWidgetModel(
       id: FoodItemId.afternoonSnackCoffee,
       mealCategory: MealCategoryEnum.afternoonSnack,
@@ -369,7 +371,7 @@ class ConstData {
       title: 'Frutas',
     ),
   ];
-  List<FoodItemWidgetModel> foodItemsDinner = [
+  static List<FoodItemWidgetModel> foodItemsDinner = [
     FoodItemWidgetModel(
       id: FoodItemId.dinnerJuice,
       mealCategory: MealCategoryEnum.dinner,
@@ -497,7 +499,7 @@ class ConstData {
       title: 'Sobremesa Frutas',
     ),
   ];
-  List<FoodItemWidgetModel> foodItemsExtras = [
+  static List<FoodItemWidgetModel> foodItemsExtras = [
     FoodItemWidgetModel(
       id: FoodItemId.extrasBurguer,
       mealCategory: MealCategoryEnum.extras,
@@ -583,4 +585,40 @@ class ConstData {
       title: 'Frutas',
     ),
   ];
+
+  static void _setSelected(List<FoodItemWidgetModel> list, DailyDiet diet) {
+    diet.items.forEach(
+      (dataElement) {
+        final index = list
+            .indexWhere((widgetElement) => dataElement.id == widgetElement.id);
+        if (index != -1) {
+          list[index].isSelected = true;
+        }
+      },
+    );
+  }
+
+  static void setSelectedItems(DailyDiet diet) {
+    _setSelected(foodItemsBreakfast, diet);
+    _setSelected(foodItemsLunch, diet);
+    _setSelected(foodItemsAfternoonSnack, diet);
+    _setSelected(foodItemsDinner, diet);
+    _setSelected(foodItemsExtras, diet);
+  }
+
+  static void _resetSelected(List<FoodItemWidgetModel> list) {
+    list.forEach(
+      (element) {
+        element.isSelected = false;
+      },
+    );
+  }
+
+  static void resetSelectedItems() {
+    _resetSelected(foodItemsBreakfast);
+    _resetSelected(foodItemsLunch);
+    _resetSelected(foodItemsAfternoonSnack);
+    _resetSelected(foodItemsDinner);
+    _resetSelected(foodItemsExtras);
+  }
 }

@@ -19,8 +19,8 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
   DailyDiet itemFound;
   @override
   Widget build(BuildContext context) {
-    final _dailyDiet = Provider.of<DailyDiet>(context, listen: false);
     final _database = Provider.of<Database>(context, listen: false);
+    final diet = Provider.of<DailyDiet>(context, listen: false);
     return StreamBuilder<List<DailyDiet>>(
         stream: _database.dietsStream(),
         builder: (context, snapshot) {
@@ -80,8 +80,7 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                             setState(() {
                               _selectedDate = value;
                             });
-                            _dailyDiet.date =
-                                DevUtils.getFormatedDate(_selectedDate);
+                            diet.date = DevUtils.getFormatedDate(_selectedDate);
                           });
                         },
                       ),
@@ -167,8 +166,7 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                         MaterialPageRoute(
                           builder: (context) => MultiProvider(
                             providers: [
-                              Provider<DailyDiet>.value(value: _dailyDiet),
-                              Provider<Database>.value(value: _database),
+                              Provider<DailyDiet>.value(value: diet),
                             ],
                             child: TabsScreen(),
                           ),

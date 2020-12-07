@@ -1,4 +1,5 @@
 import 'package:diet_and_teeth_app/core/services/database.dart';
+import 'package:diet_and_teeth_app/ui/screens/tabs_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -15,6 +16,22 @@ class DailyDietListItemWidget extends StatelessWidget {
 
   DailyDietListItemWidget(this._daylyDiet);
 
+  void _editButtonPressed(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MultiProvider(
+          providers: [
+            Provider<DailyDiet>(
+              create: (_) => DailyDiet(),
+            ),
+          ],
+          child: TabsScreen(isEditMode: true, diet: _daylyDiet),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final _database = Provider.of<Database>(context, listen: false);
@@ -22,7 +39,6 @@ class DailyDietListItemWidget extends StatelessWidget {
     return StreamBuilder<List<DailyDiet>>(
         stream: _database.dietsStream(),
         builder: (context, snapshot) {
-          final _diets = snapshot.data;
           return Container(
             margin: EdgeInsets.symmetric(
               vertical: 1,
@@ -107,7 +123,7 @@ class DailyDietListItemWidget extends StatelessWidget {
                                     size: 30,
                                   ),
                                   color: Colors.green,
-                                  onPressed: () {},
+                                  onPressed: () => _editButtonPressed(context),
                                 ),
                                 IconButton(
                                   icon: Icon(

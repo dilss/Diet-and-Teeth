@@ -11,12 +11,8 @@ class DietsScreen extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       builder: (ctx) {
-        return MultiProvider(
-          providers: [
-            Provider<DailyDiet>(
-              create: (ctx) => DailyDiet(),
-            ),
-          ],
+        return Provider(
+          create: (ctx) => DailyDiet(),
           child: ModalBottomSheetWidget(),
         );
       },
