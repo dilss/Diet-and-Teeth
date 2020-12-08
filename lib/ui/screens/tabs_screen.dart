@@ -102,10 +102,49 @@ class _TabsScreenState extends State<TabsScreen> {
   }
 
   Future<bool> _onWillPopCallback() async {
-    ConstData.resetSelectedItems();
     var diet = Provider.of<DailyDiet>(context, listen: false);
-    diet.clearData();
-    return true;
+    if (widget.isEditMode) {
+      return _onWillPopDialog(diet: diet);
+    }
+
+    if (!widget.isEditMode && diet.items.isEmpty) {
+      return true;
+    }
+    return await _onWillPopDialog(
+        diet: diet, title: 'Descartar Dieta em andamento?');
+  }
+
+  Future<bool> _onWillPopDialog({
+    DailyDiet diet,
+    String title = 'Abandonar edição de dieta?',
+  }) async {
+    return await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          title: Text(title),
+          actions: [
+            FlatButton(
+              child: Text('Sim'),
+              onPressed: () {
+                ConstData.resetSelectedItems();
+                diet.clearData();
+                Navigator.of(context).pop(true);
+              },
+            ),
+            FlatButton(
+              child: Text('Não'),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
