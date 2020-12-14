@@ -1,7 +1,9 @@
+import 'package:diet_and_teeth_app/core/services/database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 import 'diets_screen.dart';
 import 'hygiene_screen.dart';
@@ -18,7 +20,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedPageIndex = 0;
   final List<Map<String, Object>> _pages = [
-    {'page': DietsScreen(), 'title': 'Suas Dietas'},
+    {
+      'page': Provider<Database>(
+        create: (_) =>
+            FirestoreDatabase(uid: FirebaseAuth.instance.currentUser.uid),
+        child: DietsScreen(),
+      ),
+      'title': 'Suas Dietas'
+    },
     {'page': HygieneScreen(), 'title': 'Higiene Bucal'},
     {'page': MedicineScreen(), 'title': 'Seus Remédios'},
     {'page': InfoScreen(), 'title': 'Informações'},
@@ -91,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Container(
               height: 40,
-              child: SvgPicture.asset('assets/svg/toothbrushAndToothPaste.svg'),
+              child: SvgPicture.asset('assets/svg/toothbrushAndToothpaste.svg'),
             ),
             label: 'Higiene',
           ),

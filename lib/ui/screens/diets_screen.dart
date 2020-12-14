@@ -1,4 +1,5 @@
 import 'package:diet_and_teeth_app/core/models/daily_diet_data.dart';
+import 'package:diet_and_teeth_app/core/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,11 +9,17 @@ import '../widgets/daily_diet_list_widget.dart';
 
 class DietsScreen extends StatelessWidget {
   void _startAddingNewDaylyDiet(BuildContext context) {
+    var _database = Provider.of<Database>(context, listen: false);
     showModalBottomSheet(
       context: context,
       builder: (ctx) {
-        return Provider(
-          create: (ctx) => DailyDiet(),
+        return MultiProvider(
+          providers: [
+            Provider(
+              create: (ctx) => DailyDiet(),
+            ),
+            Provider<Database>.value(value: _database),
+          ],
           child: ModalBottomSheetWidget(),
         );
       },

@@ -167,6 +167,7 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                           builder: (context) => MultiProvider(
                             providers: [
                               Provider<DailyDiet>.value(value: diet),
+                              Provider<Database>.value(value: _database),
                             ],
                             child: TabsScreen(),
                           ),

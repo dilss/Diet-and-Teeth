@@ -16,7 +16,7 @@ class DailyDietListItemWidget extends StatelessWidget {
 
   DailyDietListItemWidget(this._daylyDiet);
 
-  void _editButtonPressed(BuildContext context) {
+  void _editButtonPressed(BuildContext context, Database database) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -25,6 +25,7 @@ class DailyDietListItemWidget extends StatelessWidget {
             Provider<DailyDiet>(
               create: (_) => DailyDiet(),
             ),
+            Provider<Database>.value(value: database),
           ],
           child: TabsScreen(isEditMode: true, diet: _daylyDiet),
         ),
@@ -123,7 +124,8 @@ class DailyDietListItemWidget extends StatelessWidget {
                                     size: 30,
                                   ),
                                   color: Colors.green,
-                                  onPressed: () => _editButtonPressed(context),
+                                  onPressed: () =>
+                                      _editButtonPressed(context, _database),
                                 ),
                                 IconButton(
                                   icon: Icon(

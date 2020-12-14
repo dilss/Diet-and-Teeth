@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:image_picker/image_picker.dart';
-import '../pickers/user_image_picker.dart';
 
 class AuthForm extends StatefulWidget {
   AuthForm(this.submitFn, this.isLoading);
@@ -12,7 +10,6 @@ class AuthForm extends StatefulWidget {
     String email,
     String password,
     String username,
-    PickedFile image,
     bool isLogin,
     BuildContext ctx,
   ) submitFn;
@@ -27,10 +24,6 @@ class _AuthFormState extends State<AuthForm> {
   var _userEmail = '';
   var _userName = '';
   var _userPassword = '';
-  PickedFile _userImageFile;
-  void _pickedImage(PickedFile image) {
-    _userImageFile = image;
-  }
 
   var _isLogin = true;
 
@@ -39,22 +32,12 @@ class _AuthFormState extends State<AuthForm> {
 
     FocusScope.of(context).unfocus();
 
-    if (_userImageFile == null && !_isLogin) {
-      Scaffold.of(context).showSnackBar(
-        SnackBar(
-          content: Text('É preciso selecionar uma foto.'),
-        ),
-      );
-      return;
-    }
-
     if (isValid) {
       _formKey.currentState.save();
       widget.submitFn(
         _userEmail.trim(),
         _userPassword,
         _userName.trim(),
-        _userImageFile,
         _isLogin,
         context,
       );
@@ -73,16 +56,11 @@ class _AuthFormState extends State<AuthForm> {
             child: Image.asset('assets/images/odontoPediatria.png'),
             height: constraints.maxHeight * 0.05,
           ),
-          _isLogin
-              ? Container(
-                  child: Image.asset('assets/images/children.png'),
-                  height: constraints.maxHeight * 0.25,
-                  margin: EdgeInsets.only(bottom: 30),
-                )
-              : Container(
-                  child: UserImagePicker(_pickedImage),
-                  margin: EdgeInsets.only(bottom: 30),
-                ),
+          Container(
+            child: Image.asset('assets/images/bigMouth.png'),
+            height: constraints.maxHeight * 0.25,
+            margin: EdgeInsets.only(bottom: 30),
+          ),
           Text(
             'Dieta E Dentes',
             textAlign: TextAlign.center,

@@ -13,20 +13,17 @@ class IconsPath {
   static const candy = 'assets/icons/candy.png';
   static const cereals = 'assets/icons/cereals.png';
   static const cheese = 'assets/icons/cheese.png';
-  static const cheeseSandwich = 'assets/icons/cheeseSandwich.png';
   static const chicken = 'assets/icons/chicken.png';
   static const chickenLeg = 'assets/icons/chickenLeg.png';
   static const chocolateMilk = 'assets/icons/chocolateMilk.png';
   static const coffeeCup = 'assets/icons/coffeeCup.png';
   static const coffeeMilk = 'assets/icons/coffeeMilk.png';
   static const cookie = 'assets/icons/cookie.png';
-  static const donut = 'assets/icons/donut.png';
   static const eggs = 'assets/icons/eggs.png';
   static const fish = 'assets/icons/fish.png';
   static const fries = 'assets/icons/fries.png';
   static const fruit = 'assets/icons/fruit.png';
   static const icecream = 'assets/icons/icecream.png';
-  static const jam = 'assets/icons/jam.png';
   static const juice = 'assets/icons/juice.png';
   static const juiceBox = 'assets/icons/juiceBox.png';
   static const lasagna = 'assets/icons/lasagna.png';
@@ -94,25 +91,11 @@ class ConstData {
       title: 'Bolo',
     ),
     FoodItemWidgetModel(
-      id: FoodItemId.breakfastDonut,
-      mealCategory: MealCategoryEnum.breakfast,
-      foodItemCategory: FoodItemCategoryEnum.drinksWithSugar,
-      iconPath: IconsPath.donut,
-      title: 'Rosquinha',
-    ),
-    FoodItemWidgetModel(
       id: FoodItemId.breakfastCereal,
       mealCategory: MealCategoryEnum.breakfast,
       foodItemCategory: FoodItemCategoryEnum.cakeCookieWithSugar,
       iconPath: IconsPath.cereals,
       title: 'Cereal',
-    ),
-    FoodItemWidgetModel(
-      id: FoodItemId.breakfastCheeseSandwich,
-      mealCategory: MealCategoryEnum.breakfast,
-      foodItemCategory: FoodItemCategoryEnum.breadCookieWithoutSugar,
-      iconPath: IconsPath.cheeseSandwich,
-      title: 'Misto',
     ),
     FoodItemWidgetModel(
       id: FoodItemId.breakfastCheese,
@@ -127,13 +110,6 @@ class ConstData {
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.eggs,
       title: 'Ovos',
-    ),
-    FoodItemWidgetModel(
-      id: FoodItemId.breakfastJam,
-      mealCategory: MealCategoryEnum.breakfast,
-      foodItemCategory: FoodItemCategoryEnum.stickyCandies,
-      iconPath: IconsPath.jam,
-      title: 'Geléia',
     ),
     FoodItemWidgetModel(
       id: FoodItemId.breakfastFruit,
@@ -322,25 +298,11 @@ class ConstData {
       title: 'Bolo',
     ),
     FoodItemWidgetModel(
-      id: FoodItemId.afternoonSnackDonut,
-      mealCategory: MealCategoryEnum.afternoonSnack,
-      foodItemCategory: FoodItemCategoryEnum.drinksWithSugar,
-      iconPath: IconsPath.donut,
-      title: 'Rosquinha',
-    ),
-    FoodItemWidgetModel(
       id: FoodItemId.afternoonSnackCereal,
       mealCategory: MealCategoryEnum.afternoonSnack,
       foodItemCategory: FoodItemCategoryEnum.cakeCookieWithSugar,
       iconPath: IconsPath.cereals,
       title: 'Cereal',
-    ),
-    FoodItemWidgetModel(
-      id: FoodItemId.afternoonSnackCheeseSandwich,
-      mealCategory: MealCategoryEnum.afternoonSnack,
-      foodItemCategory: FoodItemCategoryEnum.breadCookieWithoutSugar,
-      iconPath: IconsPath.cheeseSandwich,
-      title: 'Misto',
     ),
     FoodItemWidgetModel(
       id: FoodItemId.afternoonSnackCheese,
@@ -355,13 +317,6 @@ class ConstData {
       foodItemCategory: FoodItemCategoryEnum.harmlessFood,
       iconPath: IconsPath.eggs,
       title: 'Ovos',
-    ),
-    FoodItemWidgetModel(
-      id: FoodItemId.afternoonSnackJam,
-      mealCategory: MealCategoryEnum.afternoonSnack,
-      foodItemCategory: FoodItemCategoryEnum.stickyCandies,
-      iconPath: IconsPath.jam,
-      title: 'Geléia',
     ),
     FoodItemWidgetModel(
       id: FoodItemId.afternoonSnackFruit,
@@ -550,13 +505,6 @@ class ConstData {
       title: 'Pudim',
     ),
     FoodItemWidgetModel(
-      id: FoodItemId.extrasDonut,
-      mealCategory: MealCategoryEnum.extras,
-      foodItemCategory: FoodItemCategoryEnum.cakeCookieWithSugar,
-      iconPath: IconsPath.donut,
-      title: 'Rosquinha',
-    ),
-    FoodItemWidgetModel(
       id: FoodItemId.extrasCookie,
       mealCategory: MealCategoryEnum.extras,
       foodItemCategory: FoodItemCategoryEnum.cakeCookieWithSugar,
@@ -569,13 +517,6 @@ class ConstData {
       foodItemCategory: FoodItemCategoryEnum.cakeCookieWithSugar,
       iconPath: IconsPath.biscuits,
       title: 'Biscoito recheado',
-    ),
-    FoodItemWidgetModel(
-      id: FoodItemId.extrasCandy,
-      mealCategory: MealCategoryEnum.extras,
-      foodItemCategory: FoodItemCategoryEnum.stickyCandies,
-      iconPath: IconsPath.candy,
-      title: 'Balas e doces',
     ),
     FoodItemWidgetModel(
       id: FoodItemId.extrasFruit,
