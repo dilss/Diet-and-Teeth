@@ -1,8 +1,8 @@
+import 'package:diet_and_teeth_app/core/models/user.dart' as customUser;
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../widgets/auth/auth_form.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -38,16 +38,18 @@ class _AuthScreenState extends State<AuthScreen> {
           password: password,
         );
 
+        final newUser = customUser.User(
+          name: username,
+          email: email,
+          userId: userCredential.user.uid,
+          userRoleEnum: customUser.UserRoleEnum.regular,
+        );
         await FirebaseFirestore.instance
             .collection('users')
             .doc(userCredential.user.uid)
             .set(
-          {
-            'email': email,
-            'userId': userCredential.user.uid,
-            'username': username,
-          },
-        );
+              newUser.toMap(),
+            );
       }
     } on PlatformException catch (err) {
       setState(() {
