@@ -19,7 +19,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedPageIndex = 0;
-  static String name = FirebaseAuth.instance.currentUser.displayName;
   final List<Map<String, Object>> _pages = [
     {
       'page': Provider<Database>(
@@ -27,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
             FirestoreDatabase(uid: FirebaseAuth.instance.currentUser.uid),
         child: DietsScreen(),
       ),
-      'title': 'Dietas de ' + name,
+      'title': 'Suas Dietas',
     },
     {'page': HygieneScreen(), 'title': 'Higiene Bucal'},
     {'page': MedicineScreen(), 'title': 'Medicamentos'},
