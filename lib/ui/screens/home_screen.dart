@@ -19,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedPageIndex = 0;
+  static String name = FirebaseAuth.instance.currentUser.displayName;
   final List<Map<String, Object>> _pages = [
     {
       'page': Provider<Database>(
@@ -26,10 +27,10 @@ class _HomeScreenState extends State<HomeScreen> {
             FirestoreDatabase(uid: FirebaseAuth.instance.currentUser.uid),
         child: DietsScreen(),
       ),
-      'title': 'Suas Dietas'
+      'title': 'Dietas de ' + name,
     },
     {'page': HygieneScreen(), 'title': 'Higiene Bucal'},
-    {'page': MedicineScreen(), 'title': 'Seus Remédios'},
+    {'page': MedicineScreen(), 'title': 'Medicamentos'},
     {'page': InfoScreen(), 'title': 'Informações'},
   ];
 
@@ -109,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 40,
               child: SvgPicture.asset('assets/svg/syrup.svg'),
             ),
-            label: 'Remédios',
+            label: 'Medicamentos',
           ),
           BottomNavigationBarItem(
             icon: Container(
