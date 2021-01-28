@@ -2,10 +2,14 @@ class FoodItemId {
   static String breakfastCoffee = 'breakfast_coffee';
   static String breakfastTea = 'breakfast_tea';
   static String breakfastChocolate = 'breakfast_chocolate';
+  static String breakfastGuarana = 'breakfast_guarana';
+  static String breakfastYogurt = 'breakfast_yogurt';
   static String breakfastJuice = 'breakfast_juice';
   static String breakfastBread = 'breakfast_bread';
   static String breakfastCookie = 'breakfast_cookie';
   static String breakfastCake = 'breakfast_cake';
+  static String breakfastPastry = 'breakfast_pastry';
+  static String breakfastHoneyJar = 'breakfast_honey_jar';
   static String breakfastDonut = 'breakfast_donut';
   static String breakfastCereal = 'breakfast_cereal';
   static String breakfastCheeseSandwich = 'breakfast_cheese_sandwich';
@@ -26,6 +30,7 @@ class FoodItemId {
   static String lunchLasagna = 'lunch_lasagna';
   static String lunchSpaghetti = 'lunch_spaghetti';
   static String lunchSalad = 'lunch_salad';
+  static String lunchBurguer = 'lunch_burguer';
   static String lunchCake = 'lunch_cake';
   static String lunchPudding = 'lunch_pudding';
   static String lunchIceCream = 'lunch_ice_cream';
@@ -35,9 +40,13 @@ class FoodItemId {
   static String afternoonSnackTea = 'afternoon_snack_tea';
   static String afternoonSnackChocolate = 'afternoon_snack_chocolate';
   static String afternoonSnackJuice = 'afternoon_snack_juice';
+  static String afternoonSanckGuarana = 'afternoon_snack_guarana';
+  static String afternoonSanckYogurt = 'afternoon_snack_yogurt';
   static String afternoonSnackBread = 'afternoon_snack_bread';
   static String afternoonSnackCookie = 'afternoon_snack_cookie';
+  static String afternoonSnackPastry = 'afternoon_snack_pastry';
   static String afternoonSnackCake = 'afternoon_snack_cake';
+  static String afternoonSnackHoneyJar = 'afternoon_honey_jar';
   static String afternoonSnackDonut = 'afternoon_snack_donut';
   static String afternoonSnackCereal = 'afternoon_snack_cereal';
   static String afternoonSnackCheeseSandwich =
@@ -46,6 +55,8 @@ class FoodItemId {
   static String afternoonSnackEggs = 'afternoon_snack_eggs';
   static String afternoonSnackJam = 'afternoon_snack_jam';
   static String afternoonSnackFruit = 'afternoon_snack_fruit';
+  static String afternoonSnackGuarana = 'afternoon_snack_guarana';
+  static String afternoonSnackYogurt = 'afternoon_snack_yogurt';
   static String dinnerJuice = 'dinner_juice';
   static String dinnerSoda = 'dinner_soda';
   static String dinnerRice = 'dinner_Rice';
@@ -59,15 +70,20 @@ class FoodItemId {
   static String dinnerLasagna = 'dinner_lasagna';
   static String dinnerSpaghetti = 'dinner_spaghetti';
   static String dinnerSalad = 'dinner_salad';
+  static String dinnerBurguer = 'dinner_burguer';
   static String dinnerCake = 'dinner_cake';
+  static String dinnerHoneyJar = 'dinner_honey_jar';
   static String dinnerPudding = 'dinner_pudding';
   static String dinnerIceCream = 'dinner_ice_cream';
   static String dinnerStuffedCookie = 'dinner_stuffed_cookie';
   static String dinnerFruit = 'dinner_fruit';
   static String extrasBurguer = 'extras_burguer';
+  static String extrasPastry = 'extras_pastry';
   static String extrasFries = 'extras_fries';
   static String extrasSoda = 'extras_soda';
   static String extrasJuice = 'extras_juice';
+  static String extrasYogurt = 'extras_juice';
+  static String extrasGuarana = 'extras_guarana';
   static String extrasCandy = 'extras_candy';
   static String extrasCake = 'extras_cake';
   static String extrasPudding = 'extras_pudding';
@@ -75,4 +91,6 @@ class FoodItemId {
   static String extrasCookie = 'extras_cookie';
   static String extrasStuffedCookie = 'extras_stuffed_cookie';
   static String extrasFruit = 'extras_fruit';
+  static String extrasHoneyJar = 'extras_honey_jar';
+  static String extrasChocolate = 'extras_chocolate';
 }

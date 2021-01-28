@@ -26,10 +26,10 @@ class _HomeScreenState extends State<HomeScreen> {
             FirestoreDatabase(uid: FirebaseAuth.instance.currentUser.uid),
         child: DietsScreen(),
       ),
-      'title': 'Suas Dietas'
+      'title': 'Suas Dietas',
     },
     {'page': HygieneScreen(), 'title': 'Higiene Bucal'},
-    {'page': MedicineScreen(), 'title': 'Seus Remédios'},
+    {'page': MedicineScreen(), 'title': 'Medicamentos'},
     {'page': InfoScreen(), 'title': 'Informações'},
   ];
 
@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 40,
               child: SvgPicture.asset('assets/svg/syrup.svg'),
             ),
-            label: 'Remédios',
+            label: 'Medicamentos',
           ),
           BottomNavigationBarItem(
             icon: Container(
