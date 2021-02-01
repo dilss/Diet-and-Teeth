@@ -1,7 +1,6 @@
-import 'food_item_category_enum.dart';
-import 'meal_category_enum.dart';
-
-import 'food_item_data_model.dart';
+import 'package:diet_and_teeth_app/core/models/food_item_category_enum.dart';
+import 'package:diet_and_teeth_app/core/models/food_item_data_model.dart';
+import 'package:diet_and_teeth_app/core/models/meal_category_enum.dart';
 
 class DailyDiet {
   String date;

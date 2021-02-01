@@ -1,5 +1,5 @@
+import 'package:diet_and_teeth_app/ui/widgets/success_check.dart';
 import 'package:flutter/material.dart';
-import '../widgets/success_check.dart';
 
 class SuccessfullySavedScreen extends StatelessWidget {
   static const routeName = '/successfully-saved-screen';

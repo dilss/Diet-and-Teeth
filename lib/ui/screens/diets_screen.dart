@@ -1,11 +1,10 @@
 import 'package:diet_and_teeth_app/core/models/daily_diet_data.dart';
 import 'package:diet_and_teeth_app/core/services/database.dart';
+import 'package:diet_and_teeth_app/ui/widgets/cario_chart_widget.dart';
+import 'package:diet_and_teeth_app/ui/widgets/daily_diet_list_widget.dart';
+import 'package:diet_and_teeth_app/ui/widgets/modal_bottom_sheet_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../widgets/modal_bottom_sheet_widget.dart';
-import '../widgets/cario_chart_widget.dart';
-import '../widgets/daily_diet_list_widget.dart';
 
 class DietsScreen extends StatelessWidget {
   void _startAddingNewDaylyDiet(BuildContext context) {

@@ -1,10 +1,9 @@
 import 'package:diet_and_teeth_app/core/models/daily_diet_data.dart';
 import 'package:diet_and_teeth_app/core/services/database.dart';
+import 'package:diet_and_teeth_app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:provider/provider.dart';
-
-import '../../utils/utils.dart';
 
 class CarioChartWidget extends StatelessWidget {
   void setChartWeekDays(List<CarioData> _data) {

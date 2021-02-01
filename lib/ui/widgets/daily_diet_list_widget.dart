@@ -1,9 +1,8 @@
 import 'package:diet_and_teeth_app/core/models/daily_diet_data.dart';
 import 'package:diet_and_teeth_app/core/services/database.dart';
+import 'package:diet_and_teeth_app/ui/widgets/daily_diet_list_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'daily_diet_list_item_widget.dart';
 
 class DailyDietListWidget extends StatelessWidget {
   Widget _buildContent(BuildContext context) {

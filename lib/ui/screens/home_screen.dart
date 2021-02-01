@@ -1,14 +1,13 @@
+import 'package:diet_and_teeth_app/core/services/auth.dart';
 import 'package:diet_and_teeth_app/core/services/database.dart';
+import 'package:diet_and_teeth_app/ui/screens/diets_screen.dart';
+import 'package:diet_and_teeth_app/ui/screens/hygiene_screen.dart';
+import 'package:diet_and_teeth_app/ui/screens/info_screen.dart';
+import 'package:diet_and_teeth_app/ui/screens/medicine_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-
-import 'diets_screen.dart';
-import 'hygiene_screen.dart';
-import 'medicine_screen.dart';
-import 'info_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home-screen';
@@ -19,19 +18,21 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedPageIndex = 0;
-  final List<Map<String, Object>> _pages = [
-    {
-      'page': Provider<Database>(
-        create: (_) =>
-            FirestoreDatabase(uid: FirebaseAuth.instance.currentUser.uid),
-        child: DietsScreen(),
-      ),
-      'title': 'Suas Dietas',
-    },
-    {'page': HygieneScreen(), 'title': 'Higiene Bucal'},
-    {'page': MedicineScreen(), 'title': 'Medicamentos'},
-    {'page': InfoScreen(), 'title': 'Informações'},
-  ];
+
+  List<Map<String, Object>> _buildPages(AuthBase auth) {
+    return [
+      {
+        'page': Provider<Database>(
+          create: (_) => FirestoreDatabase(uid: auth.currentUser.uid),
+          child: DietsScreen(),
+        ),
+        'title': 'Suas Dietas',
+      },
+      {'page': HygieneScreen(), 'title': 'Higiene Bucal'},
+      {'page': MedicineScreen(), 'title': 'Medicamentos'},
+      {'page': InfoScreen(), 'title': 'Informações'},
+    ];
+  }
 
   void _bottomTaped(int index) {
     setState(() {
@@ -41,6 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _auth = Provider.of<AuthBase>(context, listen: false);
+    final _pages = _buildPages(_auth);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -78,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 onChanged: (itemIdentifier) {
                   if (itemIdentifier == 'logout') {
-                    FirebaseAuth.instance.signOut();
+                    _auth.signOut();
                   }
                 }),
           )

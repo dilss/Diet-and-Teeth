@@ -1,13 +1,10 @@
+import 'package:diet_and_teeth_app/core/models/daily_diet_data.dart';
 import 'package:diet_and_teeth_app/core/services/database.dart';
+import 'package:diet_and_teeth_app/ui/screens/tabs_screen.dart';
+import 'package:diet_and_teeth_app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_rounded_date_picker/rounded_picker.dart';
-
-import '../../core/models/daily_diet_data.dart';
-
-import '../screens/tabs_screen.dart';
-
-import '../../utils/utils.dart';
 
 class ModalBottomSheetWidget extends StatefulWidget {
   @override

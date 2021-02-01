@@ -1,6 +1,5 @@
+import 'package:diet_and_teeth_app/ui/widgets/food-pyramid.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/food-pyramid.dart';
 
 class InfoScreen extends StatelessWidget {
   static const routeName = '/info-screen';

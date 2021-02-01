@@ -1,6 +1,6 @@
+import 'package:diet_and_teeth_app/core/models/meal_category_enum.dart';
+import 'package:diet_and_teeth_app/core/viewmodels/food_item_widget_model.dart';
 import 'package:flutter/material.dart';
-import '../../core/viewmodels/food_item_widget_model.dart';
-import '../../core/models/meal_category_enum.dart';
 
 import 'food_item_widget.dart';
 

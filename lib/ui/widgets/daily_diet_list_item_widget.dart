@@ -1,15 +1,14 @@
+import 'package:diet_and_teeth_app/core/models/daily_diet_data.dart';
 import 'package:diet_and_teeth_app/core/services/database.dart';
 import 'package:diet_and_teeth_app/ui/screens/tabs_screen.dart';
+import 'package:diet_and_teeth_app/ui/widgets/confirm_deletion_dialog.dart';
+import 'package:diet_and_teeth_app/ui/widgets/daily_diet_item_table.dart';
+import 'package:diet_and_teeth_app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:uuid/uuid.dart';
 import 'package:provider/provider.dart';
-
-import '../../utils/utils.dart';
-import '../../core/models/daily_diet_data.dart';
-import 'confirm_deletion_dialog.dart';
-import 'daily_diet_item_table.dart';
 
 class DailyDietListItemWidget extends StatelessWidget {
   final DailyDiet _daylyDiet;

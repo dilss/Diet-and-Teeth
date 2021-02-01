@@ -1,9 +1,8 @@
+import 'package:diet_and_teeth_app/core/models/daily_diet_data.dart';
+import 'package:diet_and_teeth_app/core/models/food_item_data_model.dart';
+import 'package:diet_and_teeth_app/core/viewmodels/food_item_widget_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../core/viewmodels/food_item_widget_model.dart';
-import '../../core/models/food_item_data_model.dart';
-import '../../core/models/daily_diet_data.dart';
 
 class FoodItemWidget extends StatefulWidget {
   final FoodItemWidgetModel _foodItem;

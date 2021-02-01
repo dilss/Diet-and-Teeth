@@ -1,7 +1,6 @@
+import 'package:diet_and_teeth_app/core/models/daily_diet_data.dart';
+import 'package:diet_and_teeth_app/core/models/meal_category_enum.dart';
 import 'package:flutter/material.dart';
-
-import '../../core/models/daily_diet_data.dart';
-import '../../core/models/meal_category_enum.dart';
 
 class DailyDietItemTable extends StatelessWidget {
   const DailyDietItemTable({
