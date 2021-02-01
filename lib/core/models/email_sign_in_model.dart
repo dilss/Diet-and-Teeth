@@ -1,6 +1,8 @@
+import 'package:diet_and_teeth_app/utils/validators.dart';
+
 enum EmailSignInFormType { signIn, register }
 
-class EmailSignInModel {
+class EmailSignInModel with EmailValidator, PasswordValidator {
   final String email;
   final String password;
   final EmailSignInFormType formType;
@@ -14,6 +16,24 @@ class EmailSignInModel {
     this.isLoading = false,
     this.submitted = false,
   });
+
+  String get primaryButtonText {
+    return formType == EmailSignInFormType.signIn ? 'Entrar' : 'Registrar-se';
+  }
+
+  String get secondaryButtonText {
+    return formType == EmailSignInFormType.signIn
+        ? 'Criar uma nova conta'
+        : 'Já tenho uma conta';
+  }
+
+  bool get validEmail {
+    return isEmailValid(email);
+  }
+
+  bool get validPassword {
+    return isPasswordValid(password);
+  }
 
   EmailSignInModel copyWith({
     String email,

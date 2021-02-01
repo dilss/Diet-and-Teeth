@@ -58,7 +58,6 @@ class EmailSignInBloc {
     updateWith(submitted: true, isLoading: true);
     try {
       if (_model.formType == EmailSignInFormType.signIn) {
-        print('ENTREI AQUI!');
         await auth.signInWithEmailAndPassword(
           email: _model.email,
           password: _model.password,

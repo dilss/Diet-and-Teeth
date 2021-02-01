@@ -2,7 +2,6 @@ import 'package:diet_and_teeth_app/core/blocs/email_sign_in_bloc.dart';
 import 'package:diet_and_teeth_app/core/models/email_sign_in_model.dart';
 import 'package:diet_and_teeth_app/core/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
 class EmailSignInForm extends StatefulWidget {
@@ -31,24 +30,31 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
 
   Future<void> _trySubmit(EmailSignInModel model) async {
     try {
-      print('Email: ${model.email}, password: ${model.password}');
       await widget.bloc.submit();
-    } on Exception catch (e) {
+    } catch (e) {
       // showExceptionAlertDialog(
       //   context,
       //   title: 'Um erro ocorreu!',
       //   exception: e,
       // );
+      print(e.toString());
     }
   }
 
-  void toggleFormType() {
+  void _toggleFormType() {
     widget.bloc.toggleFormType();
     _emailController.clear();
     _passwordController.clear();
+  }
+
+  void _emailEditingComplete(bool changeFocus) {
+    final newFocus = changeFocus ? _passwordFocusNode : _emailFocusNode;
+    FocusScope.of(context).requestFocus(newFocus);
   }
 
   @override
@@ -58,12 +64,9 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
         initialData: EmailSignInModel(),
         builder: (context, snapshot) {
           final EmailSignInModel _model = snapshot.data;
-          final primaryText = _model.formType == EmailSignInFormType.signIn
-              ? 'Entrar'
-              : 'Registrar-se';
-          final secondaryText = _model.formType == EmailSignInFormType.signIn
-              ? 'Criar uma nova conta'
-              : 'Já tenho uma conta';
+          final submitEneabled =
+              _model.validEmail && _model.validPassword && !_model.isLoading;
+          final changeFocus = _model.validEmail;
           return LayoutBuilder(builder: (ctx, constraints) {
             return ListView(
               padding: EdgeInsets.only(top: 50),
@@ -79,14 +82,18 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                   height: constraints.maxHeight * 0.25,
                   margin: EdgeInsets.only(bottom: 30),
                 ),
-                Text(
-                  'Dieta E Dentes',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: 'KidsHandwriting',
-                      fontSize: constraints.maxHeight * 0.06,
-                      color: Theme.of(context).primaryColor),
-                ),
+                !_model.isLoading
+                    ? Text(
+                        'Dieta E Dentes',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: 'KidsHandwriting',
+                            fontSize: constraints.maxHeight * 0.06,
+                            color: Theme.of(context).primaryColor),
+                      )
+                    : Center(
+                        child: CircularProgressIndicator(),
+                      ),
                 Card(
                   elevation: 8,
                   shape: RoundedRectangleBorder(
@@ -111,53 +118,60 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                           children: [
                             TextFormField(
                               keyboardType: TextInputType.emailAddress,
-                              decoration: InputDecoration(labelText: 'E-mail'),
+                              textInputAction: TextInputAction.next,
+                              enabled: !_model.isLoading,
+                              decoration: InputDecoration(
+                                labelText: 'E-mail',
+                                errorText:
+                                    !_model.validEmail && _model.submitted
+                                        ? _model.emailErrorMesssage
+                                        : null,
+                              ),
+                              focusNode: _emailFocusNode,
                               controller: _emailController,
-                              validator: (value) {
-                                if (value.isEmpty || !value.contains('@')) {
-                                  return 'Entre com um endereço de email válido!';
-                                }
-                                return null;
-                              },
                               onChanged: widget.bloc.updateEmail,
+                              onEditingComplete: () =>
+                                  _emailEditingComplete(changeFocus),
                             ),
                             TextFormField(
+                              textInputAction: TextInputAction.done,
+                              enabled: !_model.isLoading,
+                              focusNode: _passwordFocusNode,
                               key: ValueKey('password'),
                               controller: _passwordController,
-                              decoration: InputDecoration(labelText: 'Senha'),
+                              decoration: InputDecoration(
+                                labelText: 'Senha',
+                                errorText:
+                                    !_model.validPassword && _model.submitted
+                                        ? _model.passwordErrorMessage
+                                        : null,
+                              ),
                               obscureText: true,
-                              // validator: (value) {
-                              //   if (value.isEmpty || value.length < 6) {
-                              //     return 'A senha deve conter no mínimo seis caracteres.';
-                              //   }
-                              //   return null;
-                              // },
                               onChanged: widget.bloc.updatePassword,
                             ),
                             SizedBox(
                               height: 12,
                             ),
-                            if (_model.isLoading) CircularProgressIndicator(),
-                            if (!_model.isLoading)
-                              RaisedButton(
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 12),
-                                  child: Text(
-                                    primaryText,
-                                    style: TextStyle(fontSize: 16),
-                                  ),
+                            RaisedButton(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 12),
+                                child: Text(
+                                  _model.primaryButtonText,
+                                  style: TextStyle(fontSize: 16),
                                 ),
-                                onPressed: () => _trySubmit(_model),
                               ),
-                            if (!_model.isLoading)
-                              FlatButton(
-                                onPressed: !_model.isLoading
-                                    ? () => toggleFormType()
-                                    : null,
-                                child: Text(secondaryText),
-                                textColor: Theme.of(context).primaryColor,
-                              ),
+                              onPressed: submitEneabled
+                                  ? () => _trySubmit(_model)
+                                  : null,
+                            ),
+                            FlatButton(
+                              onPressed: !_model.isLoading
+                                  ? () => _toggleFormType()
+                                  : null,
+                              child: Text(_model.secondaryButtonText),
+                              textColor: Theme.of(context).primaryColor,
+                            ),
                           ],
                         ),
                       ),
