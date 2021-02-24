@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:connectivity/connectivity.dart';
 import 'package:diet_and_teeth_app/core/services/database.dart';
 import 'package:diet_and_teeth_app/core/models/meal_category_enum.dart';
 import 'package:diet_and_teeth_app/diet_configuration/daily_diet_data.dart';
@@ -99,8 +98,26 @@ class _TabsScreenState extends State<TabsScreen> {
   }
 
   Future<void> _saveDietInDatabase(DailyDiet diet) async {
+    final connectivity = Provider.of<Connectivity>(context, listen: false);
     final database = Provider.of<Database>(context, listen: false);
-    await database.setDiet(diet);
+
+    final status = await connectivity.checkConnectivity();
+    switch (status) {
+      case ConnectivityResult.mobile:
+      case ConnectivityResult.wifi:
+        try {
+          await database.setDiet(diet);
+          _showCheckSuccessAndReturnToInicialScreen();
+        } catch (e) {
+          rethrow;
+        }
+        break;
+      case ConnectivityResult.none:
+        _showErrorDialog("Erro: Sem conexão com a internet!");
+        break;
+      default:
+        _showErrorDialog("Um erro ocorreu.");
+    }
   }
 
   Future<bool> _onWillPopCallback() async {
@@ -222,7 +239,6 @@ class _TabsScreenState extends State<TabsScreen> {
                       }
                       try {
                         await _saveDietInDatabase(diet);
-                        _showCheckSuccessAndReturnToInicialScreen();
                       } catch (e) {
                         _showErrorDialog(e.toString());
                       }
