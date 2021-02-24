@@ -1,6 +1,6 @@
 import 'package:diet_and_teeth_app/core/models/food_item_data_model.dart';
 import 'package:diet_and_teeth_app/core/viewmodels/food_item_widget_model.dart';
-import 'package:diet_and_teeth_app/diet_configuration/daily_diet_data.dart';
+import 'package:diet_and_teeth_app/diet_configuration/daily_diet_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -42,9 +42,13 @@ class _FoodItemWidgetState extends State<FoodItemWidget> {
             if (widget._foodItem.isSelected) {
               foodItem = mapFoodItemWidgetToModel(widget._foodItem);
               diet.addItem(foodItem);
+              print(diet.items);
             } else {
+              print(diet.items);
               diet.removeItem(widget._foodItem.mealCategory,
                   widget._foodItem.foodItemCategory);
+              print("Removed ${widget._foodItem.title}");
+              print(diet.items);
             }
           },
           child: Container(

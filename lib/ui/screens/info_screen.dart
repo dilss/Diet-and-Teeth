@@ -7,11 +7,44 @@ class InfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       final availableSize = constraints.maxHeight;
-      return Scaffold(
-        body: Container(
-          alignment: Alignment.topCenter,
-          height: availableSize,
-          child: FoodPyramid(),
+      return DefaultTabController(
+        initialIndex: 1,
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              'Informações',
+              style: TextStyle(
+                fontSize: 35,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'KidsHandwriting',
+              ),
+            ),
+            bottom: TabBar(
+              tabs: [
+                Tab(
+                    icon: Icon(
+                  Icons.fastfood_rounded,
+                  size: 35,
+                )),
+                Tab(
+                    icon: Icon(
+                  Icons.admin_panel_settings_rounded,
+                  size: 35,
+                )),
+                Tab(
+                    icon: Icon(
+                  Icons.settings_rounded,
+                  size: 35,
+                )),
+              ],
+            ),
+          ),
+          body: Container(
+            alignment: Alignment.topCenter,
+            height: availableSize,
+            child: FoodPyramid(),
+          ),
         ),
       );
     });

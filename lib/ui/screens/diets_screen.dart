@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:diet_and_teeth_app/core/services/database.dart';
-import 'package:diet_and_teeth_app/diet_configuration/daily_diet_data.dart';
+import 'package:diet_and_teeth_app/diet_configuration/daily_diet_model.dart';
 import 'package:diet_and_teeth_app/ui/widgets/cario_chart_widget.dart';
 import 'package:diet_and_teeth_app/ui/widgets/daily_diet_list_widget.dart';
 import 'package:diet_and_teeth_app/ui/widgets/modal_bottom_sheet_widget.dart';
@@ -52,18 +52,30 @@ class _DietsScreenState extends State<DietsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final availableSize = constraints.maxHeight;
-        return Scaffold(
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: _buildFloatingActionButton(context),
-          body: HomePageBody(
-            availableSize: availableSize,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Suas Dietas',
+          style: TextStyle(
+            fontSize: 35,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'KidsHandwriting',
           ),
-        );
-      },
+        ),
+      ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final availableSize = constraints.maxHeight;
+          return Scaffold(
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: _buildFloatingActionButton(context),
+            body: HomePageBody(
+              availableSize: availableSize,
+            ),
+          );
+        },
+      ),
     );
   }
 
@@ -178,7 +190,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                   Padding(
                     padding: const EdgeInsets.all(20),
                     child: Text(
-                      'Connecte-se para poder criar, editar ou visualizar suas dietas.',
+                      'Conecte-se para poder criar, editar ou visualizar suas dietas.',
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,

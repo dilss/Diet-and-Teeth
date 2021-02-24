@@ -1,5 +1,5 @@
 import 'package:diet_and_teeth_app/core/services/database.dart';
-import 'package:diet_and_teeth_app/diet_configuration/daily_diet_data.dart';
+import 'package:diet_and_teeth_app/diet_configuration/daily_diet_model.dart';
 import 'package:diet_and_teeth_app/ui/screens/tabs_screen.dart';
 import 'package:diet_and_teeth_app/ui/widgets/confirm_deletion_dialog.dart';
 import 'package:diet_and_teeth_app/ui/widgets/daily_diet_item_table.dart';
@@ -11,9 +11,9 @@ import 'package:uuid/uuid.dart';
 import 'package:provider/provider.dart';
 
 class DailyDietListItemWidget extends StatelessWidget {
-  final DailyDiet _daylyDiet;
+  final DailyDiet _dailyDiet;
 
-  DailyDietListItemWidget(this._daylyDiet);
+  DailyDietListItemWidget(this._dailyDiet);
 
   void _editButtonPressed(BuildContext context, Database database) {
     Navigator.push(
@@ -21,12 +21,10 @@ class DailyDietListItemWidget extends StatelessWidget {
       MaterialPageRoute(
         builder: (context) => MultiProvider(
           providers: [
-            Provider<DailyDiet>(
-              create: (_) => DailyDiet(),
-            ),
+            Provider<DailyDiet>.value(value: _dailyDiet),
             Provider<Database>.value(value: database),
           ],
-          child: TabsScreen(isEditMode: true, diet: _daylyDiet),
+          child: TabsScreen(isEditMode: true, diet: _dailyDiet),
         ),
       ),
     );
@@ -81,7 +79,7 @@ class DailyDietListItemWidget extends StatelessWidget {
                           backgroundColor: Colors.cyan[80],
                           child: FittedBox(
                             child: Text(
-                              _daylyDiet.harmfulPotential.toString(),
+                              _dailyDiet.harmfulPotential.toString(),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
@@ -91,14 +89,14 @@ class DailyDietListItemWidget extends StatelessWidget {
                         ),
                         title: Text(
                           DevUtils.getWeekDayFromString(
-                              date: _daylyDiet.date, short: false),
+                              date: _dailyDiet.date, short: false),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
                           ),
                         ),
                         subtitle: Text(
-                          _daylyDiet.date,
+                          _dailyDiet.date,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
@@ -111,7 +109,7 @@ class DailyDietListItemWidget extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.cyan[50],
                             ),
-                            child: DailyDietItemTable(daylyDiet: _daylyDiet),
+                            child: DailyDietItemTable(daylyDiet: _dailyDiet),
                           ),
                           ListTile(
                             trailing: Wrap(
@@ -137,7 +135,7 @@ class DailyDietListItemWidget extends StatelessWidget {
                                       context: context,
                                       builder: (ctx) => ConfirmDeletionDialog(),
                                     ).then((value) => value
-                                        ? _database.deleteDiet(_daylyDiet)
+                                        ? _database.deleteDiet(_dailyDiet)
                                         : null);
                                   },
                                 ),
@@ -155,7 +153,7 @@ class DailyDietListItemWidget extends StatelessWidget {
                     ),
                   ),
                   onDismissed: (direction) {
-                    _database.deleteDiet(_daylyDiet);
+                    _database.deleteDiet(_dailyDiet);
                   },
                   confirmDismiss: (direction) {
                     return showDialog(

@@ -1,7 +1,7 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:diet_and_teeth_app/core/services/database.dart';
 import 'package:diet_and_teeth_app/core/models/meal_category_enum.dart';
-import 'package:diet_and_teeth_app/diet_configuration/daily_diet_data.dart';
+import 'package:diet_and_teeth_app/diet_configuration/daily_diet_model.dart';
 import 'package:diet_and_teeth_app/ui/widgets/success_check.dart';
 import 'package:diet_and_teeth_app/ui/widgets/item_selection_grid.dart';
 import 'package:diet_and_teeth_app/utils/const_data.dart';
@@ -107,6 +107,7 @@ class _TabsScreenState extends State<TabsScreen> {
       case ConnectivityResult.wifi:
         try {
           await database.setDiet(diet);
+          ConstData.resetSelectedItems();
           _showCheckSuccessAndReturnToInicialScreen();
         } catch (e) {
           rethrow;
@@ -196,9 +197,6 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     var diet = Provider.of<DailyDiet>(context, listen: false);
-    if (widget.isEditMode) {
-      diet.date = widget.diet.date;
-    }
     return WillPopScope(
       onWillPop: _onWillPopCallback,
       child: Scaffold(
@@ -234,13 +232,10 @@ class _TabsScreenState extends State<TabsScreen> {
                     icon: Icon(Icons.save),
                     tooltip: 'Salvar',
                     onPressed: () async {
-                      if (widget.isEditMode) {
-                        diet.foodList.addAll(widget.diet.items);
-                      }
                       try {
                         await _saveDietInDatabase(diet);
                       } catch (e) {
-                        _showErrorDialog(e.toString());
+                        _showErrorDialog("Erro desconehcido.");
                       }
                     }),
                 Text('Salvar'),
