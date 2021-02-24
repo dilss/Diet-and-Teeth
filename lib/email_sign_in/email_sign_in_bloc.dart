@@ -1,7 +1,6 @@
 import 'dart:async';
-
-import 'package:diet_and_teeth_app/core/models/email_sign_in_model.dart';
 import 'package:diet_and_teeth_app/core/services/auth.dart';
+import 'package:diet_and_teeth_app/email_sign_in/email_sign_in_model.dart';
 import 'package:flutter/foundation.dart';
 
 class EmailSignInBloc {

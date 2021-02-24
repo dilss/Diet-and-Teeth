@@ -1,12 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:diet_and_teeth_app/core/models/daily_diet_data.dart';
+import 'package:diet_and_teeth_app/core/models/user_data.dart';
 import 'package:diet_and_teeth_app/core/services/api_path.dart';
+import 'package:diet_and_teeth_app/diet_configuration/daily_diet_data.dart';
 import 'package:flutter/foundation.dart';
 
 abstract class Database {
   Future<void> setDiet(DailyDiet dietData);
   Future<void> deleteDiet(DailyDiet dietData);
   Stream<List<DailyDiet>> dietsStream();
+  Stream<String> usernameStream();
+  Stream<UserRoleEnum> userRoleStream();
 }
 
 class FirestoreDatabase implements Database {
@@ -34,6 +37,11 @@ class FirestoreDatabase implements Database {
     await reference.set(data);
   }
 
+  Future<void> updateData({String path, Map<String, dynamic> data}) async {
+    final reference = FirebaseFirestore.instance.doc(path);
+    await reference.update(data);
+  }
+
   Future<Map<String, dynamic>> getData({String path}) async {
     final map = await FirebaseFirestore.instance.doc(path).get().then(
           (value) => value.data(),
@@ -57,5 +65,30 @@ class FirestoreDatabase implements Database {
           )
           .toList(),
     );
+  }
+
+  Stream<String> usernameStream() {
+    final reference = FirebaseFirestore.instance.doc(APIPath.user(uid));
+    final snapshots = reference.snapshots();
+
+    return snapshots
+        .map((snapshot) => UserData.fromMap(snapshot.data()).username);
+  }
+
+  Stream<UserRoleEnum> userRoleStream() {
+    final reference = FirebaseFirestore.instance.doc(APIPath.user(uid));
+    final snapshots = reference.snapshots();
+
+    return snapshots
+        .map((snapshot) => UserData.fromMap(snapshot.data()).userRoleEnum);
+  }
+
+  Future<void> setUserName(String firstName) async {
+    await updateData(path: APIPath.user(uid), data: {"username": firstName});
+  }
+
+  Future<void> setUserRole(UserRoleEnum userRoleEnum) async {
+    await updateData(
+        path: APIPath.user(uid), data: {"userRole": userRoleEnum.index});
   }
 }

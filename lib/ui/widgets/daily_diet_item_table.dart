@@ -1,5 +1,5 @@
-import 'package:diet_and_teeth_app/core/models/daily_diet_data.dart';
 import 'package:diet_and_teeth_app/core/models/meal_category_enum.dart';
+import 'package:diet_and_teeth_app/diet_configuration/daily_diet_data.dart';
 import 'package:flutter/material.dart';
 
 class DailyDietItemTable extends StatelessWidget {

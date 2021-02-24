@@ -1,6 +1,8 @@
-import 'package:diet_and_teeth_app/core/blocs/email_sign_in_bloc.dart';
-import 'package:diet_and_teeth_app/core/models/email_sign_in_model.dart';
 import 'package:diet_and_teeth_app/core/services/auth.dart';
+import 'package:diet_and_teeth_app/email_sign_in/email_sign_in_bloc.dart';
+import 'package:diet_and_teeth_app/email_sign_in/email_sign_in_model.dart';
+import 'package:diet_and_teeth_app/utils/custom_exceptions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -36,13 +38,21 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   Future<void> _trySubmit(EmailSignInModel model) async {
     try {
       await widget.bloc.submit();
-    } catch (e) {
-      // showExceptionAlertDialog(
-      //   context,
-      //   title: 'Um erro ocorreu!',
-      //   exception: e,
-      // );
-      print(e.toString());
+    } on FirebaseAuthException catch (e) {
+      final status = AuthExceptionHandler.handleException(e);
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            AuthExceptionHandler.generateExceptionMessage(status),
+          ),
+        ),
+      );
+    } catch (_) {
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Erro desconhecido"),
+        ),
+      );
     }
   }
 

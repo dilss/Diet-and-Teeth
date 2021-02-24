@@ -18,16 +18,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedPageIndex = 0;
-
-  List<Map<String, Object>> _buildPages(AuthBase auth) {
+  String title = 'Suas Dietas';
+  List<Map<String, Object>> _buildPages() {
     return [
-      {
-        'page': Provider<Database>(
-          create: (_) => FirestoreDatabase(uid: auth.currentUser.uid),
-          child: DietsScreen(),
-        ),
-        'title': 'Suas Dietas',
-      },
+      {'page': DietsScreen(), 'title': title},
       {'page': HygieneScreen(), 'title': 'Higiene Bucal'},
       {'page': MedicineScreen(), 'title': 'Medicamentos'},
       {'page': InfoScreen(), 'title': 'Informações'},
@@ -43,17 +37,26 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final _auth = Provider.of<AuthBase>(context, listen: false);
-    final _pages = _buildPages(_auth);
+    final _database = Provider.of<Database>(context, listen: false);
+    final _pages = _buildPages();
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          _pages[_selectedPageIndex]['title'],
-          style: TextStyle(
-            fontSize: 35,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'KidsHandwriting',
-          ),
-        ),
+        title: StreamBuilder<String>(
+            stream: _database.usernameStream(),
+            initialData: "Suas Dietas",
+            builder: (context, snapshot) {
+              return Text(
+                _selectedPageIndex == 0
+                    ? "Dietas de ${snapshot.data}"
+                    : _pages[_selectedPageIndex]['title'],
+                style: TextStyle(
+                  fontSize: 35,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'KidsHandwriting',
+                ),
+              );
+            }),
         actions: [
           DropdownButtonHideUnderline(
             child: DropdownButton(

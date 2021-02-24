@@ -1,4 +1,4 @@
-import 'package:diet_and_teeth_app/ui/widgets/auth/email_sign_in_form.dart';
+import 'package:diet_and_teeth_app/email_sign_in/email_sign_in_form.dart';
 import 'package:flutter/material.dart';
 
 class EmailSignInPage extends StatefulWidget {

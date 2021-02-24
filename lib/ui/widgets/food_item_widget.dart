@@ -1,6 +1,6 @@
-import 'package:diet_and_teeth_app/core/models/daily_diet_data.dart';
 import 'package:diet_and_teeth_app/core/models/food_item_data_model.dart';
 import 'package:diet_and_teeth_app/core/viewmodels/food_item_widget_model.dart';
+import 'package:diet_and_teeth_app/diet_configuration/daily_diet_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

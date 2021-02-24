@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:diet_and_teeth_app/core/services/database.dart';
-import 'package:diet_and_teeth_app/core/models/daily_diet_data.dart';
 import 'package:diet_and_teeth_app/core/models/meal_category_enum.dart';
+import 'package:diet_and_teeth_app/diet_configuration/daily_diet_data.dart';
 import 'package:diet_and_teeth_app/ui/widgets/success_check.dart';
 import 'package:diet_and_teeth_app/ui/widgets/item_selection_grid.dart';
 import 'package:diet_and_teeth_app/utils/const_data.dart';
@@ -147,6 +149,33 @@ class _TabsScreenState extends State<TabsScreen> {
     );
   }
 
+  void _showErrorDialog(String errorMessage) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) => SimpleDialog(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: SizedBox(
+              child: Image.asset("assets/images/error.png"),
+              height: 100,
+              width: 100,
+            ),
+          ),
+        ],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        title: Text(
+          errorMessage,
+          style: TextStyle(fontSize: 22),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var diet = Provider.of<DailyDiet>(context, listen: false);
@@ -185,17 +214,19 @@ class _TabsScreenState extends State<TabsScreen> {
             Row(
               children: [
                 IconButton(
-                  icon: Icon(Icons.save),
-                  tooltip: 'Salvar',
-                  onPressed: () {
-                    if (widget.isEditMode) {
-                      diet.foodList.addAll(widget.diet.items);
-                    }
-                    _saveDietInDatabase(diet);
-                    ConstData.resetSelectedItems();
-                    _showCheckSuccessAndReturnToInicialScreen();
-                  },
-                ),
+                    icon: Icon(Icons.save),
+                    tooltip: 'Salvar',
+                    onPressed: () async {
+                      if (widget.isEditMode) {
+                        diet.foodList.addAll(widget.diet.items);
+                      }
+                      try {
+                        await _saveDietInDatabase(diet);
+                        _showCheckSuccessAndReturnToInicialScreen();
+                      } catch (e) {
+                        _showErrorDialog(e.toString());
+                      }
+                    }),
                 Text('Salvar'),
               ],
             ),

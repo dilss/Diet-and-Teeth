@@ -1,5 +1,5 @@
-import 'package:diet_and_teeth_app/core/models/daily_diet_data.dart';
 import 'package:diet_and_teeth_app/core/services/database.dart';
+import 'package:diet_and_teeth_app/diet_configuration/daily_diet_data.dart';
 import 'package:diet_and_teeth_app/ui/screens/tabs_screen.dart';
 import 'package:diet_and_teeth_app/ui/widgets/confirm_deletion_dialog.dart';
 import 'package:diet_and_teeth_app/ui/widgets/daily_diet_item_table.dart';

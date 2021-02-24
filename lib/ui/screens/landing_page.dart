@@ -1,5 +1,6 @@
 import 'package:diet_and_teeth_app/core/services/auth.dart';
-import 'package:diet_and_teeth_app/ui/screens/email_sign_in_page.dart';
+import 'package:diet_and_teeth_app/core/services/database.dart';
+import 'package:diet_and_teeth_app/email_sign_in/email_sign_in_page.dart';
 import 'package:diet_and_teeth_app/ui/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,10 @@ class LandingPage extends StatelessWidget {
             if (user == null) {
               return EmailSignInPage();
             }
-            return HomeScreen();
+            return Provider<Database>(
+              create: (_) => FirestoreDatabase(uid: auth.currentUser.uid),
+              child: HomeScreen(),
+            );
           }
           return Scaffold(
             body: Center(
