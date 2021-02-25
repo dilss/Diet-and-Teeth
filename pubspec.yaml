@@ -73,10 +73,13 @@ flutter:
     - assets/animations/
     - assets/fonts/
     - assets/icons/
+    - assets/flat_icon/
     - assets/images/
     - assets/svg/
     - assets/svg_food_items/
     - assets/videos/
+    - assets/cario_food_imgs/
+    - assets/not_cario_food_imgs/
 
   
 
