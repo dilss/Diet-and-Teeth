@@ -10,6 +10,7 @@ abstract class Database {
   Future<void> deleteDiet(DailyDiet dietData);
   Future<void> setUserProfile(UserProfileModel profileModel);
   Future<void> updateUserProfile(UserProfileModel profileModel);
+  Future<UserProfileModel> getUserProfile();
   Stream<List<DailyDiet>> dietsStream();
   Stream<String> usernameStream();
   Stream<UserRoleEnum> userRoleStream();
@@ -101,5 +102,10 @@ class FirestoreDatabase implements Database {
 
   Future<void> updateUserProfile(UserProfileModel profileModel) async {
     await updateData(data: profileModel.toJson());
+  }
+
+  Future<UserProfileModel> getUserProfile() async {
+    final map = await getData(path: APIPath.userProfile(uid));
+    return UserProfileModel.fromJson(map);
   }
 }

@@ -30,6 +30,7 @@ class UserProfileBloc {
     String country,
     bool isLoading,
     bool submitted,
+    ProfileFormType formType,
   }) {
     //update model
     _model = _model.copyWith(
@@ -45,6 +46,7 @@ class UserProfileBloc {
       country: country,
       isLoading: isLoading,
       submitted: submitted,
+      formType: formType,
     );
     //add updated model to controller
     _controller.add(_model);
@@ -80,5 +82,16 @@ class UserProfileBloc {
       updateWith(isLoading: false);
       rethrow;
     }
+  }
+
+  void toggleFormType() {
+    final formType = _model.formType == ProfileFormType.showInfo
+        ? ProfileFormType.editInfo
+        : ProfileFormType.showInfo;
+    updateWith(
+      formType: formType,
+      isLoading: false,
+      submitted: false,
+    );
   }
 }

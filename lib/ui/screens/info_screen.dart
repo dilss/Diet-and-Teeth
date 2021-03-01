@@ -1,8 +1,6 @@
-import 'package:diet_and_teeth_app/ui/screens/food_info_pages/grid_item.dart';
-import 'package:diet_and_teeth_app/ui/screens/food_info_pages/no_cario_food_info.dart';
+import 'package:diet_and_teeth_app/ui/screens/food_info_pages/food_info_grid_view.dart';
+import 'package:diet_and_teeth_app/ui/screens/settings_pages/settings_grid_view.dart';
 import 'package:flutter/material.dart';
-
-import 'food_info_pages/cario_food_info.dart';
 
 class InfoScreen extends StatelessWidget {
   static const routeName = '/info-screen';
@@ -44,34 +42,9 @@ class InfoScreen extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              GridView(
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200,
-                  childAspectRatio: 1,
-                ),
-                children: [
-                  GridItem(
-                    color: Colors.green,
-                    text: "Alimentos não cariogênicos",
-                    callBack: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => NoCarioFoodPage()));
-                    },
-                    imgPath: 'assets/flat_icon/healthy_diet.svg',
-                  ),
-                  GridItem(
-                    color: Colors.red,
-                    text: "Alimentos cariogênicos",
-                    callBack: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => CarioFoodPage()));
-                    },
-                    imgPath: 'assets/flat_icon/unhealthy_food.svg',
-                  )
-                ],
-              ),
+              FoodInfoGridView(),
               Container(),
-              Container(),
+              SettingsGridView(),
             ],
           ),
         ),

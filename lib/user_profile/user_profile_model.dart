@@ -1,3 +1,5 @@
+enum ProfileFormType { showInfo, editInfo }
+
 class UserProfileModel {
   final String name;
   final String surname;
@@ -11,6 +13,7 @@ class UserProfileModel {
   final String country;
   final bool isLoading;
   final bool submitted;
+  final ProfileFormType formType;
 
   UserProfileModel({
     this.name = '',
@@ -25,6 +28,7 @@ class UserProfileModel {
     this.country = '',
     this.isLoading = false,
     this.submitted = false,
+    this.formType = ProfileFormType.showInfo,
   });
 
   UserProfileModel copyWith({
@@ -40,6 +44,7 @@ class UserProfileModel {
     String country,
     bool isLoading,
     bool submitted,
+    ProfileFormType formType,
   }) {
     return UserProfileModel(
       name: name ?? this.name,
@@ -54,6 +59,7 @@ class UserProfileModel {
       country: country ?? this.country,
       isLoading: isLoading ?? this.isLoading,
       submitted: submitted ?? this.submitted,
+      formType: formType ?? this.formType,
     );
   }
 
@@ -71,6 +77,7 @@ class UserProfileModel {
       'country': country,
       'isLoading': isLoading,
       'submitted': submitted,
+      'formType': formType,
     };
   }
 
@@ -88,6 +95,10 @@ class UserProfileModel {
       country: json['country'],
       isLoading: json['isLoading'],
       submitted: json['submitted'],
+      formType: json['formType'],
     );
+  }
+  String get buttonText {
+    return formType == ProfileFormType.showInfo ? 'Editar' : 'Salvar';
   }
 }
