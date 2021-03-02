@@ -1,8 +1,8 @@
-import 'package:diet_and_teeth_app/core/models/food_item_category_enum.dart';
-import 'package:diet_and_teeth_app/core/models/food_item_id_enum.dart';
-import 'package:diet_and_teeth_app/core/models/meal_category_enum.dart';
-import 'package:diet_and_teeth_app/core/viewmodels/food_item_widget_model.dart';
-import 'package:diet_and_teeth_app/diet_configuration/daily_diet_model.dart';
+import 'package:diet_and_teeth_app/diets_dash_board.dart/models/daily_diet_model.dart';
+import 'package:diet_and_teeth_app/diets_dash_board.dart/models/food_item_category_enum.dart';
+import 'package:diet_and_teeth_app/diets_dash_board.dart/models/food_item_id_enum.dart';
+import 'package:diet_and_teeth_app/diets_dash_board.dart/models/food_item_widget_model.dart';
+import 'package:diet_and_teeth_app/diets_dash_board.dart/models/meal_category_enum.dart';
 
 class IconsPath {
   static const beans = 'assets/icons/beans.png';

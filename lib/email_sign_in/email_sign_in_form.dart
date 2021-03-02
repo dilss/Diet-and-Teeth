@@ -1,6 +1,6 @@
-import 'package:diet_and_teeth_app/core/services/auth.dart';
 import 'package:diet_and_teeth_app/email_sign_in/email_sign_in_bloc.dart';
 import 'package:diet_and_teeth_app/email_sign_in/email_sign_in_model.dart';
+import 'package:diet_and_teeth_app/services/auth.dart';
 import 'package:diet_and_teeth_app/utils/custom_exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

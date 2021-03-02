@@ -1,10 +1,10 @@
-import 'package:diet_and_teeth_app/core/services/auth.dart';
-import 'package:diet_and_teeth_app/ui/screens/home_screen.dart';
-import 'package:diet_and_teeth_app/ui/screens/info_screen.dart';
-import 'package:diet_and_teeth_app/ui/screens/landing_page.dart';
-import 'package:diet_and_teeth_app/ui/screens/medicine_screen.dart';
-import 'package:diet_and_teeth_app/ui/screens/succesfully_saved_screen.dart';
-import 'package:diet_and_teeth_app/ui/screens/tabs_screen.dart';
+import 'package:diet_and_teeth_app/diets_dash_board.dart/ui/succesfully_saved_screen.dart';
+import 'package:diet_and_teeth_app/diets_dash_board.dart/ui/tabs_screen.dart';
+import 'package:diet_and_teeth_app/home_screen.dart';
+import 'package:diet_and_teeth_app/info_screen.dart';
+import 'package:diet_and_teeth_app/landing_page.dart';
+import 'package:diet_and_teeth_app/medicines_dash_board/medicine_screen.dart';
+import 'package:diet_and_teeth_app/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';

@@ -45,6 +45,7 @@ dependencies:
   get_it: ^5.0.1
   video_player: ^1.0.1
   connectivity: ^2.0.2
+  firebase_messaging: ^7.0.3
 
 dev_dependencies:
   flutter_test:

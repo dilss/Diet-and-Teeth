@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:diet_and_teeth_app/core/services/database.dart';
+import 'package:diet_and_teeth_app/services/database.dart';
 import 'package:diet_and_teeth_app/user_profile/user_profile_model.dart';
 
 class UserProfileBloc {
