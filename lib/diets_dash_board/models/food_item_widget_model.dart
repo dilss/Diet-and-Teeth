@@ -1,5 +1,5 @@
-import 'package:diet_and_teeth_app/diets_dash_board.dart/models/food_item_category_enum.dart';
-import 'package:diet_and_teeth_app/diets_dash_board.dart/models/meal_category_enum.dart';
+import 'package:diet_and_teeth_app/diets_dash_board/models/food_item_category_enum.dart';
+import 'package:diet_and_teeth_app/diets_dash_board/models/meal_category_enum.dart';
 import 'package:flutter/foundation.dart';
 
 class FoodItemWidgetModel {

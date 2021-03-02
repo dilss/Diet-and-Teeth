@@ -1,5 +1,5 @@
-import 'package:diet_and_teeth_app/diets_dash_board.dart/ui/succesfully_saved_screen.dart';
-import 'package:diet_and_teeth_app/diets_dash_board.dart/ui/tabs_screen.dart';
+import 'package:diet_and_teeth_app/diets_dash_board/ui/succesfully_saved_screen.dart';
+import 'package:diet_and_teeth_app/diets_dash_board/ui/tabs_screen.dart';
 import 'package:diet_and_teeth_app/home_screen.dart';
 import 'package:diet_and_teeth_app/info_screen.dart';
 import 'package:diet_and_teeth_app/landing_page.dart';

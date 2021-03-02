@@ -1,4 +1,4 @@
-import 'package:diet_and_teeth_app/diets_dash_board.dart/ui/success_check.dart';
+import 'package:diet_and_teeth_app/diets_dash_board/ui/success_check.dart';
 import 'package:flutter/material.dart';
 
 class SuccessfullySavedScreen extends StatelessWidget {

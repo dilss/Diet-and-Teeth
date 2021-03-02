@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:diet_and_teeth_app/diets_dash_board.dart/models/daily_diet_model.dart';
-import 'package:diet_and_teeth_app/diets_dash_board.dart/models/user_data.dart';
+import 'package:diet_and_teeth_app/diets_dash_board/models/daily_diet_model.dart';
+import 'package:diet_and_teeth_app/diets_dash_board/models/user_data.dart';
 import 'package:diet_and_teeth_app/services/api_path.dart';
 import 'package:diet_and_teeth_app/user_profile/user_profile_model.dart';
 import 'package:flutter/foundation.dart';
