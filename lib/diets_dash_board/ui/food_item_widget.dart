@@ -42,13 +42,8 @@ class _FoodItemWidgetState extends State<FoodItemWidget> {
             if (widget._foodItem.isSelected) {
               foodItem = mapFoodItemWidgetToModel(widget._foodItem);
               diet.addItem(foodItem);
-              print(diet.items);
             } else {
-              print(diet.items);
-              diet.removeItem(widget._foodItem.mealCategory,
-                  widget._foodItem.foodItemCategory);
-              print("Removed ${widget._foodItem.title}");
-              print(diet.items);
+              diet.removeItem(widget._foodItem.id);
             }
           },
           child: Container(

@@ -20,11 +20,9 @@ class DailyDiet {
     foodList.add(item);
   }
 
-  void removeItem(
-      MealCategoryEnum mealCategory, FoodItemCategoryEnum foodCategory) {
+  void removeItem(String id) {
     return foodList.removeWhere(
-      (element) => (element.mealCategory == mealCategory &&
-          element.foodItemCategory == foodCategory),
+      (element) => (element.id == id),
     );
   }
 
