@@ -1,4 +1,5 @@
 import 'package:diet_and_teeth_app/food_info_pages/food_info_grid_view.dart';
+import 'package:diet_and_teeth_app/general_use_widgets/logout_confirmation_dialog.dart';
 import 'package:diet_and_teeth_app/settings_pages/settings_grid_view.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,40 @@ class InfoScreen extends StatelessWidget {
                 fontFamily: 'KidsHandwriting',
               ),
             ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: FlatButton(
+                  splashColor: Theme.of(context).primaryColor,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Sair',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 6,
+                      ),
+                      Icon(
+                        Icons.logout,
+                        color: Colors.black,
+                      ),
+                    ],
+                  ),
+                  onPressed: () => showDialog(
+                    context: context,
+                    child: LogoutConfirmationDialog(
+                      title: 'Deseja mesmo sair?',
+                    ),
+                  ),
+                ),
+              ),
+            ],
             bottom: TabBar(
               tabs: [
                 Tab(
