@@ -8,7 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 AppBar getTabsPageAppBar(
-    {BuildContext context, String title, String appBarBottomText}) {
+    {BuildContext context,
+    String title,
+    String appBarBottomText,
+    bool isEditMode = false}) {
   return AppBar(
       actions: [
         Padding(
@@ -28,9 +31,10 @@ AppBar getTabsPageAppBar(
                 Text(
                   'Salvar',
                   style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
               ],
             ),
@@ -38,7 +42,15 @@ AppBar getTabsPageAppBar(
           ),
         ),
       ],
-      title: Text(title),
+      title: isEditMode
+          ? Text(
+              "$title Edição",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
+            )
+          : Text(title),
       bottom: PreferredSize(
         child: Text(
           appBarBottomText,

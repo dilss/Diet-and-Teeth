@@ -100,7 +100,11 @@ class _TabsScreenState extends State<TabsScreen> {
       onWillPop: _onWillPopCallback,
       child: Scaffold(
           appBar: getTabsPageAppBar(
-              context: context, title: date, appBarBottomText: label),
+            context: context,
+            title: date,
+            appBarBottomText: label,
+            isEditMode: widget.isEditMode,
+          ),
           body: PageView(
             controller: _pageController,
             children: [..._pages],
