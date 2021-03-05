@@ -4,62 +4,50 @@ class UserProfileModel {
   final String name;
   final String surname;
   final String cellPhone;
-  final String zipCode;
-  final String address;
-  final int number;
+  final String email;
+  final String dateOfBirth;
   final String district;
   final String city;
   final String state;
   final String country;
-  final bool isLoading;
-  final bool submitted;
-  final ProfileFormType formType;
+  final String pictureUrl;
 
   UserProfileModel({
-    this.name = '',
-    this.surname = '',
-    this.cellPhone = '',
-    this.zipCode = '',
-    this.address = '',
-    this.number = 0,
-    this.district = '',
-    this.city = '',
-    this.state = '',
-    this.country = '',
-    this.isLoading = false,
-    this.submitted = false,
-    this.formType = ProfileFormType.showInfo,
+    this.name = 'Nome',
+    this.surname = 'Sobrenome',
+    this.cellPhone = '+99 99 99999 9999',
+    this.email = ' ',
+    this.dateOfBirth = '00/00/0000',
+    this.district = 'Seu bairro',
+    this.city = 'Sua cidade',
+    this.state = 'Estado',
+    this.country = 'País',
+    this.pictureUrl = ' ',
   });
 
   UserProfileModel copyWith({
     String name,
     String surname,
     String cellPhone,
-    String zipCode,
-    String address,
-    int number,
+    String email,
+    String dateOfBirth,
     String district,
     String city,
     String state,
     String country,
-    bool isLoading,
-    bool submitted,
-    ProfileFormType formType,
+    String pictureUrl,
   }) {
     return UserProfileModel(
       name: name ?? this.name,
       surname: surname ?? this.surname,
       cellPhone: cellPhone ?? this.cellPhone,
-      zipCode: zipCode ?? this.zipCode,
-      address: address ?? this.address,
-      number: number ?? this.number,
+      email: email ?? this.email,
+      dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       district: district ?? this.district,
       city: city ?? this.city,
       state: state ?? this.state,
       country: country ?? this.country,
-      isLoading: isLoading ?? this.isLoading,
-      submitted: submitted ?? this.submitted,
-      formType: formType ?? this.formType,
+      pictureUrl: pictureUrl ?? this.pictureUrl,
     );
   }
 
@@ -68,16 +56,13 @@ class UserProfileModel {
       'name': name,
       'surname': surname,
       'cellPhone': cellPhone,
-      'zipCode': zipCode,
-      'address': address,
-      'number': number,
-      'distric': district,
+      'email': email,
+      'dateOfBirth': dateOfBirth,
+      'district': district,
       'city': city,
       'state': state,
       'country': country,
-      'isLoading': isLoading,
-      'submitted': submitted,
-      'formType': formType,
+      'pictureUrl': pictureUrl,
     };
   }
 
@@ -86,19 +71,13 @@ class UserProfileModel {
       name: json['name'],
       surname: json['surname'],
       cellPhone: json['cellPhone'],
-      zipCode: json['zipCode'],
-      address: json['address'],
-      number: json['number'],
+      email: json['email'],
+      dateOfBirth: json['dateOfBirth'],
       district: json['district'],
       city: json['city'],
       state: json['state'],
       country: json['country'],
-      isLoading: json['isLoading'],
-      submitted: json['submitted'],
-      formType: json['formType'],
+      pictureUrl: json['pictureUrl'],
     );
-  }
-  String get buttonText {
-    return formType == ProfileFormType.showInfo ? 'Editar' : 'Salvar';
   }
 }
