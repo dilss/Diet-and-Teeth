@@ -24,7 +24,7 @@ class ProfileInfoWidget extends StatelessWidget {
                   radius: 60,
                   backgroundColor: Colors.white,
                   child: Icon(
-                    Icons.camera_alt_rounded,
+                    Icons.image,
                     size: 40,
                   ),
                 ),

@@ -1,6 +1,7 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:diet_and_teeth_app/general_use_widgets/widgets_methods.dart';
 import 'package:diet_and_teeth_app/services/database.dart';
+import 'package:diet_and_teeth_app/user_profile/user_image_picker.dart';
 import 'package:diet_and_teeth_app/user_profile/user_profile_model.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
@@ -40,14 +41,7 @@ class UserProfileEditForm extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
-            child: CircleAvatar(
-              radius: 60,
-              backgroundColor: Colors.white,
-              child: Icon(
-                Icons.camera_alt_rounded,
-                size: 30,
-              ),
-            ),
+            child: UserImagePicker(),
           ),
           Container(
             padding: EdgeInsets.all(10),
