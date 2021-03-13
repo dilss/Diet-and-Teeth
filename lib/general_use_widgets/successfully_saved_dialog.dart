@@ -1,16 +1,20 @@
-import 'package:diet_and_teeth_app/diets_dash_board/ui/success_check.dart';
+import 'package:diet_and_teeth_app/general_use_widgets/success_check.dart';
 import 'package:flutter/material.dart';
 
 class SuccessfullySavedDialog extends StatelessWidget {
+  final Function callback;
   const SuccessfullySavedDialog({
     Key key,
+    this.callback,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
       children: [
-        SuccessCheckMark(),
+        SuccessCheckMark(
+          callback: callback,
+        ),
       ],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),

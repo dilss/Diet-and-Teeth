@@ -1,7 +1,7 @@
 import 'package:diet_and_teeth_app/food_info_pages/grid_item.dart';
 import 'package:diet_and_teeth_app/services/database.dart';
 import 'package:diet_and_teeth_app/settings_pages/colophon_page.dart';
-import 'package:diet_and_teeth_app/user_profile/edit_profile_page.dart';
+import 'package:diet_and_teeth_app/user_profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +26,7 @@ class SettingsGridView extends StatelessWidget {
                   providers: [
                     Provider<Database>.value(value: _database),
                   ],
-                  child: EditProfilePage(),
+                  child: ProfilePage(),
                 ),
               ),
             );

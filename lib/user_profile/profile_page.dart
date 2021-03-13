@@ -1,12 +1,19 @@
+import 'package:diet_and_teeth_app/general_use_widgets/waiting_connection_widget.dart';
 import 'package:diet_and_teeth_app/services/auth.dart';
 import 'package:diet_and_teeth_app/services/database.dart';
+import 'package:diet_and_teeth_app/user_profile/profile_edit_page.dart';
 import 'package:diet_and_teeth_app/user_profile/profile_info_widget.dart';
 import 'package:diet_and_teeth_app/user_profile/user_profile_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class EditProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   Future<void> settupUserProfile(BuildContext context,
       {Database database, User user}) async {
     try {
@@ -62,10 +69,21 @@ class EditProfilePage extends StatelessWidget {
                   ),
                 ],
               ),
-              onPressed: () => showDialog(
-                context: context,
-                child: Container(),
-              ),
+              onPressed: () => Navigator.of(context)
+                  .push(
+                    MaterialPageRoute(
+                      builder: (context) => Provider.value(
+                        value: _database,
+                        child: ProfileEditPage(),
+                      ),
+                    ),
+                  )
+                  .then(
+                    // When poping back to this page we need that it rebuilds itself, this is
+                    // the reason for this 'then' block. It executes after we pop back to this page,
+                    // and when we do, a simple call to setState gets the job done.
+                    (value) => setState(() {}),
+                  ),
             ),
           ),
         ],
@@ -94,17 +112,7 @@ class EditProfilePage extends StatelessWidget {
                 );
                 break;
               case ConnectionState.none:
-                return Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(Icons.sentiment_neutral),
-                      Text("Aguardando conexão..."),
-                    ],
-                  ),
-                );
+                return WaitingConnectionWidget();
                 break;
               default:
                 return Container();

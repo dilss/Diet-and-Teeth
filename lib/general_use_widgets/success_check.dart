@@ -2,6 +2,9 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class SuccessCheckMark extends StatelessWidget {
+  final Function callback;
+
+  const SuccessCheckMark({Key key, this.callback}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final availableSize = MediaQuery.of(context).size.height;
@@ -15,9 +18,7 @@ class SuccessCheckMark extends StatelessWidget {
         'assets/animations/successCheck.flr',
         animation: 'Untitled',
         //snapToEnd: true,
-        callback: (name) {
-          Navigator.of(context).popUntil((route) => route.isFirst);
-        },
+        callback: (_) => callback(),
       ),
     );
   }

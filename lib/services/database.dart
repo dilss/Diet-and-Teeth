@@ -10,7 +10,6 @@ abstract class Database {
   Future<void> setDiet(DailyDiet dietData);
   Future<DailyDiet> getDiet(DailyDiet dietData);
   Future<void> deleteDiet(DailyDiet dietData);
-  Future<void> setUserProfile(UserProfileModel profileModel);
   Future<void> updateUserProfile(UserProfileModel profileModel);
   Future<void> setUserRole(UserRoleEnum userRoleEnum);
   Future<UserProfileModel> getUserProfile();
@@ -95,13 +94,9 @@ class FirestoreDatabase implements Database {
   }
 
   @override
-  Future<void> setUserProfile(UserProfileModel profileModel) async {
-    await setData(data: profileModel.toJson());
-  }
-
-  @override
   Future<void> updateUserProfile(UserProfileModel profileModel) async {
-    await updateData(data: profileModel.toJson());
+    await updateData(
+        path: APIPath.user(uid), data: {'userProfile': profileModel.toJson()});
   }
 
   @override

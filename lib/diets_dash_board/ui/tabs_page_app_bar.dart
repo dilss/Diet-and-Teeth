@@ -1,7 +1,8 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:diet_and_teeth_app/diets_dash_board/models/daily_diet_model.dart';
 import 'package:diet_and_teeth_app/diets_dash_board/ui/error_dialog.dart';
-import 'package:diet_and_teeth_app/diets_dash_board/ui/successfully_saved_dialog.dart';
+import 'package:diet_and_teeth_app/general_use_widgets/successfully_saved_dialog.dart';
+import 'package:diet_and_teeth_app/general_use_widgets/widgets_methods.dart';
 import 'package:diet_and_teeth_app/services/database.dart';
 import 'package:diet_and_teeth_app/utils/const_data.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +73,7 @@ Future<void> _saveDietInDatabase({BuildContext context}) async {
       try {
         await database.setDiet(diet);
         ConstData.resetSelectedItems();
-        _showCheckSuccessAndReturnToInicialScreen(context);
+        showCheckSuccessAndPopScreen(context, popToTheBegining: true);
       } catch (e) {
         rethrow;
       }
@@ -90,13 +91,5 @@ void _showErrorDialog(BuildContext context, String errorMessage) {
     context: context,
     barrierDismissible: true,
     builder: (context) => ErrorDialog(),
-  );
-}
-
-void _showCheckSuccessAndReturnToInicialScreen(BuildContext context) {
-  showDialog(
-    context: context,
-    barrierDismissible: false,
-    builder: (context) => SuccessfullySavedDialog(),
   );
 }

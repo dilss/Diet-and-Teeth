@@ -46,11 +46,15 @@ dependencies:
   video_player: ^1.0.1
   connectivity: ^2.0.2
   firebase_messaging: ^7.0.3
+  mask_text_input_formatter: ^1.2.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.8.1
+
+dependency_overrides:
+  intl: ^0.16.0
 
 flutter_icons:
   android: true

@@ -48,7 +48,7 @@ class InfoScreen extends StatelessWidget {
                   ),
                   onPressed: () => showDialog(
                     context: context,
-                    child: LogoutConfirmationDialog(
+                    builder: (context) => LogoutConfirmationDialog(
                       title: 'Deseja mesmo sair?',
                     ),
                   ),

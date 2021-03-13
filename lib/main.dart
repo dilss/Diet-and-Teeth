@@ -1,4 +1,3 @@
-import 'package:diet_and_teeth_app/diets_dash_board/ui/succesfully_saved_screen.dart';
 import 'package:diet_and_teeth_app/diets_dash_board/ui/tabs_screen.dart';
 import 'package:diet_and_teeth_app/home_screen.dart';
 import 'package:diet_and_teeth_app/info_screen.dart';
@@ -70,8 +69,6 @@ class MyApp extends StatelessWidget {
           InfoScreen.routeName: (context) => InfoScreen(),
           TabsScreen.routeName: (context) => TabsScreen(),
           HomeScreen.routeName: (context) => HomeScreen(),
-          SuccessfullySavedScreen.routeName: (context) =>
-              SuccessfullySavedScreen(),
         },
       ),
     );
