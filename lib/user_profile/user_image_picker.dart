@@ -4,6 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UserImagePicker extends StatefulWidget {
+  final void Function(File imageFile) imagePickCallback;
+  final String currentPictureUrl;
+
+  const UserImagePicker(
+      {Key key, this.imagePickCallback, this.currentPictureUrl})
+      : super(key: key);
   @override
   _UserImagePickerState createState() => _UserImagePickerState();
 }
@@ -16,6 +22,8 @@ class _UserImagePickerState extends State<UserImagePicker> {
     setState(() {
       _pickedImage = _pickedImageFile;
     });
+    File file = File(_pickedImage.path);
+    widget.imagePickCallback(file);
   }
 
   Future<ImageSource> _chooseSourceDiaolog() async {
@@ -49,9 +57,16 @@ class _UserImagePickerState extends State<UserImagePicker> {
       children: [
         CircleAvatar(
           radius: 60,
-          backgroundImage: _pickedImage != null
+          backgroundImage: AssetImage('assets/images/profile.png'),
+          foregroundImage: _pickedImage != null
               ? FileImage(
                   File(_pickedImage.path),
+                )
+              : NetworkImage(widget.currentPictureUrl),
+          child: widget.currentPictureUrl == ''
+              ? Icon(
+                  Icons.image,
+                  size: 40,
                 )
               : null,
         ),

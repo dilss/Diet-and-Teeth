@@ -1,5 +1,6 @@
 import 'package:diet_and_teeth_app/food_info_pages/grid_item.dart';
 import 'package:diet_and_teeth_app/services/database.dart';
+import 'package:diet_and_teeth_app/services/storage.dart';
 import 'package:diet_and_teeth_app/settings_pages/colophon_page.dart';
 import 'package:diet_and_teeth_app/user_profile/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ class SettingsGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _database = Provider.of<Database>(context, listen: false);
+    final _storage = Provider.of<StorageBase>(context, listen: false);
     return GridView(
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 200,
@@ -18,13 +20,14 @@ class SettingsGridView extends StatelessWidget {
       children: [
         GridItem(
           color: Colors.blue.shade200,
-          text: "Editar perfil",
+          text: "Meu perfil",
           callBack: () {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => MultiProvider(
                   providers: [
                     Provider<Database>.value(value: _database),
+                    Provider<StorageBase>.value(value: _storage)
                   ],
                   child: ProfilePage(),
                 ),

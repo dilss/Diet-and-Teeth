@@ -23,10 +23,14 @@ class ProfileInfoWidget extends StatelessWidget {
                 CircleAvatar(
                   radius: 60,
                   backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.image,
-                    size: 40,
-                  ),
+                  backgroundImage: AssetImage('assets/images/profile.png'),
+                  foregroundImage: NetworkImage(model.pictureUrl),
+                  child: model.pictureUrl == ''
+                      ? Icon(
+                          Icons.image,
+                          size: 40,
+                        )
+                      : null,
                 ),
                 SizedBox(
                   height: 50,

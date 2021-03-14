@@ -1,6 +1,7 @@
 import 'package:diet_and_teeth_app/general_use_widgets/waiting_connection_widget.dart';
 import 'package:diet_and_teeth_app/services/auth.dart';
 import 'package:diet_and_teeth_app/services/database.dart';
+import 'package:diet_and_teeth_app/services/storage.dart';
 import 'package:diet_and_teeth_app/user_profile/profile_edit_page.dart';
 import 'package:diet_and_teeth_app/user_profile/profile_info_widget.dart';
 import 'package:diet_and_teeth_app/user_profile/user_profile_model.dart';
@@ -31,6 +32,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     final _database = Provider.of<Database>(context, listen: false);
+    final _storage = Provider.of<StorageBase>(context, listen: false);
     final _user = Provider.of<AuthBase>(context, listen: false).currentUser;
     settupUserProfile(context, database: _database, user: _user);
     return Scaffold(
@@ -72,8 +74,15 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: () => Navigator.of(context)
                   .push(
                     MaterialPageRoute(
-                      builder: (context) => Provider.value(
-                        value: _database,
+                      builder: (context) => MultiProvider(
+                        providers: [
+                          Provider<Database>.value(
+                            value: _database,
+                          ),
+                          Provider<StorageBase>.value(
+                            value: _storage,
+                          ),
+                        ],
                         child: ProfileEditPage(),
                       ),
                     ),

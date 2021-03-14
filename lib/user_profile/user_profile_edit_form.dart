@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:connectivity/connectivity.dart';
 import 'package:diet_and_teeth_app/general_use_widgets/widgets_methods.dart';
 import 'package:diet_and_teeth_app/services/database.dart';
+import 'package:diet_and_teeth_app/services/storage.dart';
 import 'package:diet_and_teeth_app/user_profile/user_image_picker.dart';
 import 'package:diet_and_teeth_app/user_profile/user_profile_model.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -8,9 +11,16 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class UserProfileEditForm extends StatelessWidget {
+class UserProfileEditForm extends StatefulWidget {
   final UserProfileModel userData;
-  const UserProfileEditForm({Key key, this.userData}) : super(key: key);
+  UserProfileEditForm({Key key, this.userData}) : super(key: key);
+
+  @override
+  _UserProfileEditFormState createState() => _UserProfileEditFormState();
+}
+
+class _UserProfileEditFormState extends State<UserProfileEditForm> {
+  File _userImageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -28,20 +38,39 @@ class UserProfileEditForm extends StatelessWidget {
     };
 
     final textControllers = {
-      'nameController': TextEditingController(text: userData.name),
-      'surnameController': TextEditingController(text: userData.surname),
-      'phoneController': TextEditingController(text: userData.cellPhone),
+      'nameController': TextEditingController(text: widget.userData.name),
+      'surnameController': TextEditingController(text: widget.userData.surname),
+      'phoneController': TextEditingController(text: widget.userData.cellPhone),
       'dateOfBirthController':
-          TextEditingController(text: userData.dateOfBirth),
-      'districtController': TextEditingController(text: userData.district),
-      'cityController': TextEditingController(text: userData.city),
+          TextEditingController(text: widget.userData.dateOfBirth),
+      'districtController':
+          TextEditingController(text: widget.userData.district),
+      'cityController': TextEditingController(text: widget.userData.city),
     };
+
+    void _getUserImageFile(File imageFile) {
+      _userImageFile = imageFile;
+    }
+
+    Future<String> _uploadImageToStorage({@required File imageFile}) async {
+      final _storage = Provider.of<StorageBase>(context, listen: false);
+      try {
+        final url = await _storage.uploadUserImage(imageFile: imageFile);
+        return url;
+      } catch (e) {
+        rethrow;
+      }
+    }
+
     return Form(
       child: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
-            child: UserImagePicker(),
+            child: UserImagePicker(
+              imagePickCallback: _getUserImageFile,
+              currentPictureUrl: widget.userData.pictureUrl,
+            ),
           ),
           Container(
             padding: EdgeInsets.all(10),
@@ -129,26 +158,48 @@ class UserProfileEditForm extends StatelessWidget {
                   switch (value) {
                     case ConnectivityResult.mobile:
                     case ConnectivityResult.wifi:
+                      if (_userImageFile == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Nenhuma foto selecionada.'),
+                            backgroundColor: Theme.of(context).errorColor,
+                          ),
+                        );
+                      }
                       try {
-                        _database
-                            .updateUserProfile(
-                              UserProfileModel(
-                                name: textControllers['nameController'].text,
-                                surname:
-                                    textControllers['surnameController'].text,
-                                cellPhone:
-                                    textControllers['phoneController'].text,
-                                dateOfBirth:
-                                    textControllers['dateOfBirthController']
-                                        .text,
-                                district:
-                                    textControllers['districtController'].text,
-                                city: textControllers['cityController'].text,
-                                email: userData.email,
-                              ),
-                            )
-                            .then((_) => showCheckSuccessAndPopScreen(context));
-                      } catch (e) {}
+                        _uploadImageToStorage(imageFile: _userImageFile).then(
+                            (url) => _database
+                                .updateUserProfile(
+                                  UserProfileModel(
+                                    name:
+                                        textControllers['nameController'].text,
+                                    surname:
+                                        textControllers['surnameController']
+                                            .text,
+                                    cellPhone:
+                                        textControllers['phoneController'].text,
+                                    dateOfBirth:
+                                        textControllers['dateOfBirthController']
+                                            .text,
+                                    district:
+                                        textControllers['districtController']
+                                            .text,
+                                    city:
+                                        textControllers['cityController'].text,
+                                    email: widget.userData.email,
+                                    pictureUrl: url,
+                                  ),
+                                )
+                                .then((_) =>
+                                    showCheckSuccessAndPopScreen(context)));
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Um Erro ocorreu.'),
+                            backgroundColor: Theme.of(context).errorColor,
+                          ),
+                        );
+                      }
                       break;
                     case ConnectivityResult.none:
                       break;
