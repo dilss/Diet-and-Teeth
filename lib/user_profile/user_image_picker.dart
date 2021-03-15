@@ -56,19 +56,19 @@ class _UserImagePickerState extends State<UserImagePicker> {
     return Column(
       children: [
         CircleAvatar(
-          radius: 60,
-          backgroundImage: AssetImage('assets/images/profile.png'),
-          foregroundImage: _pickedImage != null
-              ? FileImage(
-                  File(_pickedImage.path),
-                )
-              : NetworkImage(widget.currentPictureUrl),
-          child: widget.currentPictureUrl == ''
-              ? Icon(
-                  Icons.image,
-                  size: 40,
-                )
-              : null,
+          radius: 75,
+          backgroundColor: Theme.of(context).primaryColor,
+          child: CircleAvatar(
+            radius: 70,
+            backgroundImage: AssetImage('assets/images/profile.png'),
+            foregroundImage: _pickedImage != null
+                ? FileImage(
+                    File(_pickedImage.path),
+                  )
+                : widget.currentPictureUrl != ''
+                    ? NetworkImage(widget.currentPictureUrl)
+                    : null,
+          ),
         ),
         TextButton.icon(
           onPressed: _pickImage,

@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
+import 'package:diet_and_teeth_app/general_use_widgets/waiting_connection_widget.dart';
 import 'package:diet_and_teeth_app/general_use_widgets/widgets_methods.dart';
 import 'package:diet_and_teeth_app/services/database.dart';
 import 'package:diet_and_teeth_app/services/storage.dart';
 import 'package:diet_and_teeth_app/user_profile/user_image_picker.dart';
 import 'package:diet_and_teeth_app/user_profile/user_profile_model.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import 'package:flutter/material.dart';
@@ -28,7 +30,7 @@ class _UserProfileEditFormState extends State<UserProfileEditForm> {
     final _database = Provider.of<Database>(context, listen: false);
     final textInputFormatters = {
       'phoneFormatter':
-          MaskTextInputFormatter(mask: '+## (##) #####-####', filter: {
+          MaskTextInputFormatter(mask: '(##) #####-####', filter: {
         "#": RegExp(r'[0-9]'),
       }),
       'dateOfBirthFormatter':
@@ -62,6 +64,21 @@ class _UserProfileEditFormState extends State<UserProfileEditForm> {
       }
     }
 
+    Future<void> _updateUserProfile({String pictureUrl}) async {
+      return await _database.updateUserProfile(
+        UserProfileModel(
+          name: textControllers['nameController'].text,
+          surname: textControllers['surnameController'].text,
+          cellPhone: textControllers['phoneController'].text,
+          dateOfBirth: textControllers['dateOfBirthController'].text,
+          district: textControllers['districtController'].text,
+          city: textControllers['cityController'].text,
+          email: widget.userData.email,
+          pictureUrl: pictureUrl,
+        ),
+      );
+    }
+
     return Form(
       child: ListView(
         children: [
@@ -81,6 +98,7 @@ class _UserProfileEditFormState extends State<UserProfileEditForm> {
                 labelText: 'Nome',
               ),
               textInputAction: TextInputAction.next,
+              textCapitalization: TextCapitalization.words,
               controller: textControllers['nameController'],
             ),
           ),
@@ -93,6 +111,7 @@ class _UserProfileEditFormState extends State<UserProfileEditForm> {
                 labelText: 'Sobrenome',
               ),
               textInputAction: TextInputAction.next,
+              textCapitalization: TextCapitalization.words,
               controller: textControllers['surnameController'],
             ),
           ),
@@ -134,6 +153,7 @@ class _UserProfileEditFormState extends State<UserProfileEditForm> {
                 labelText: 'Bairro',
               ),
               textInputAction: TextInputAction.next,
+              textCapitalization: TextCapitalization.words,
               controller: textControllers['districtController'],
             ),
           ),
@@ -147,18 +167,20 @@ class _UserProfileEditFormState extends State<UserProfileEditForm> {
                 labelText: 'Cidade',
               ),
               textInputAction: TextInputAction.done,
+              textCapitalization: TextCapitalization.words,
               controller: textControllers['cityController'],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),
             child: ElevatedButton(
               onPressed: () {
                 _connectivity.checkConnectivity().then((value) {
                   switch (value) {
                     case ConnectivityResult.mobile:
                     case ConnectivityResult.wifi:
-                      if (_userImageFile == null) {
+                      if (_userImageFile == null &&
+                          widget.userData.pictureUrl == '') {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text('Nenhuma foto selecionada.'),
@@ -167,31 +189,59 @@ class _UserProfileEditFormState extends State<UserProfileEditForm> {
                         );
                       }
                       try {
-                        _uploadImageToStorage(imageFile: _userImageFile).then(
-                            (url) => _database
-                                .updateUserProfile(
-                                  UserProfileModel(
-                                    name:
-                                        textControllers['nameController'].text,
-                                    surname:
-                                        textControllers['surnameController']
-                                            .text,
-                                    cellPhone:
-                                        textControllers['phoneController'].text,
-                                    dateOfBirth:
-                                        textControllers['dateOfBirthController']
-                                            .text,
-                                    district:
-                                        textControllers['districtController']
-                                            .text,
-                                    city:
-                                        textControllers['cityController'].text,
-                                    email: widget.userData.email,
-                                    pictureUrl: url,
-                                  ),
-                                )
-                                .then((_) =>
-                                    showCheckSuccessAndPopScreen(context)));
+                        if (_userImageFile != null) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => SimpleDialog(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              children: [
+                                FutureBuilder<String>(
+                                  future: _uploadImageToStorage(
+                                      imageFile: _userImageFile),
+                                  builder: (context, snapshot) {
+                                    switch (snapshot.connectionState) {
+                                      case ConnectionState.active:
+                                      case ConnectionState.waiting:
+                                        return Center(
+                                            child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 40),
+                                          child: CircularProgressIndicator(),
+                                        ));
+                                        break;
+                                      case ConnectionState.none:
+                                        return WaitingConnectionWidget();
+                                        break;
+                                      case ConnectionState.done:
+                                        // Scheduling the navigation actions to be excecuted once this build method
+                                        // is finally finished
+                                        SchedulerBinding.instance
+                                            .addPostFrameCallback((_) {
+                                          Navigator.of(context).pop();
+                                          _updateUserProfile(
+                                                  pictureUrl: snapshot.data)
+                                              .then((_) =>
+                                                  showCheckSuccessAndPopScreen(
+                                                      context));
+                                        });
+
+                                        break;
+                                      default:
+                                        return Container();
+                                        break;
+                                    }
+                                    return Container();
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
+                        } else {
+                          _updateUserProfile(
+                            pictureUrl: widget.userData.pictureUrl,
+                          ).then((_) => showCheckSuccessAndPopScreen(context));
+                        }
                       } catch (e) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -202,6 +252,12 @@ class _UserProfileEditFormState extends State<UserProfileEditForm> {
                       }
                       break;
                     case ConnectivityResult.none:
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Sem conexão com a internet.'),
+                          backgroundColor: Theme.of(context).errorColor,
+                        ),
+                      );
                       break;
                     default:
                   }

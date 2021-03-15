@@ -40,7 +40,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
       await widget.bloc.submit();
     } on FirebaseAuthException catch (e) {
       final status = AuthExceptionHandler.handleException(e);
-      Scaffold.of(context).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
             AuthExceptionHandler.generateExceptionMessage(status),
@@ -48,7 +48,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
         ),
       );
     } catch (_) {
-      Scaffold.of(context).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Erro desconhecido"),
         ),
@@ -162,7 +162,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                             SizedBox(
                               height: 12,
                             ),
-                            RaisedButton(
+                            ElevatedButton(
                               child: Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 12),
@@ -175,12 +175,11 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                                   ? () => _trySubmit(_model)
                                   : null,
                             ),
-                            FlatButton(
+                            TextButton(
                               onPressed: !_model.isLoading
                                   ? () => _toggleFormType()
                                   : null,
                               child: Text(_model.secondaryButtonText),
-                              textColor: Theme.of(context).primaryColor,
                             ),
                           ],
                         ),

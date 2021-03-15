@@ -12,7 +12,10 @@ class ProfileEditPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Editar Perfil',
-          style: TextStyle(fontFamily: 'KidsHandwriting', fontSize: 35),
+          style: TextStyle(
+              fontFamily: 'KidsHandwriting',
+              fontSize: 35,
+              fontWeight: FontWeight.bold),
         ),
       ),
       body: FutureBuilder<UserProfileModel>(

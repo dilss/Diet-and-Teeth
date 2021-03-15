@@ -15,14 +15,14 @@ class UserProfileModel {
   UserProfileModel({
     this.name = 'Nome',
     this.surname = 'Sobrenome',
-    this.cellPhone = '+99 99 99999 9999',
-    this.email = ' ',
+    this.cellPhone = '(99) 99999-9999',
+    this.email = '',
     this.dateOfBirth = '00/00/0000',
     this.district = 'Seu bairro',
     this.city = 'Sua cidade',
     this.state = 'Estado',
     this.country = 'País',
-    this.pictureUrl = ' ',
+    this.pictureUrl = '',
   });
 
   UserProfileModel copyWith({
