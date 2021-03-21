@@ -1,7 +1,7 @@
 import 'package:diet_and_teeth_app/diets_dashboard/ui/diets_screen.dart';
 import 'package:diet_and_teeth_app/hygiene_dashboard/hygiene_screen.dart';
 import 'package:diet_and_teeth_app/info_screen.dart';
-import 'package:diet_and_teeth_app/medicines_dash_board/medicine_screen.dart';
+import 'package:diet_and_teeth_app/medicines_dashboard/medicine_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
