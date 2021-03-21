@@ -1,4 +1,4 @@
-import 'package:diet_and_teeth_app/hygiene_dash_board/hero_animation_widget.dart';
+import 'package:diet_and_teeth_app/hygiene_dashboard/hero_animation_widget.dart';
 import 'package:flutter/material.dart';
 
 class HygieneScreen extends StatelessWidget {

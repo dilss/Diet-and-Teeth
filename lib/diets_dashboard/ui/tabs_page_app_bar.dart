@@ -1,7 +1,6 @@
 import 'package:connectivity/connectivity.dart';
-import 'package:diet_and_teeth_app/diets_dash_board/models/daily_diet_model.dart';
-import 'package:diet_and_teeth_app/diets_dash_board/ui/error_dialog.dart';
-import 'package:diet_and_teeth_app/general_use_widgets/successfully_saved_dialog.dart';
+import 'package:diet_and_teeth_app/diets_dashboard/models/daily_diet_model.dart';
+import 'package:diet_and_teeth_app/diets_dashboard/ui/error_dialog.dart';
 import 'package:diet_and_teeth_app/general_use_widgets/widgets_methods.dart';
 import 'package:diet_and_teeth_app/services/database.dart';
 import 'package:diet_and_teeth_app/utils/const_data.dart';

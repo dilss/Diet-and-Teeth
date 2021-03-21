@@ -1,9 +1,9 @@
-import 'package:diet_and_teeth_app/diets_dash_board/models/daily_diet_model.dart';
-import 'package:diet_and_teeth_app/diets_dash_board/models/meal_category_enum.dart';
-import 'package:diet_and_teeth_app/diets_dash_board/ui/item_selection_grid.dart';
-import 'package:diet_and_teeth_app/diets_dash_board/ui/main_bottom_navigation.dart';
-import 'package:diet_and_teeth_app/diets_dash_board/ui/on_will_pop_dialog.dart';
-import 'package:diet_and_teeth_app/diets_dash_board/ui/tabs_page_app_bar.dart';
+import 'package:diet_and_teeth_app/diets_dashboard/models/daily_diet_model.dart';
+import 'package:diet_and_teeth_app/diets_dashboard/models/meal_category_enum.dart';
+import 'package:diet_and_teeth_app/diets_dashboard/ui/item_selection_grid.dart';
+import 'package:diet_and_teeth_app/diets_dashboard/ui/main_bottom_navigation.dart';
+import 'package:diet_and_teeth_app/diets_dashboard/ui/on_will_pop_dialog.dart';
+import 'package:diet_and_teeth_app/diets_dashboard/ui/tabs_page_app_bar.dart';
 import 'package:diet_and_teeth_app/utils/const_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

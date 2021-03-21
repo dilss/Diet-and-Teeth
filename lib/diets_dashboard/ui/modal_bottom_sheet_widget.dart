@@ -1,5 +1,5 @@
-import 'package:diet_and_teeth_app/diets_dash_board/models/daily_diet_model.dart';
-import 'package:diet_and_teeth_app/diets_dash_board/ui/tabs_screen.dart';
+import 'package:diet_and_teeth_app/diets_dashboard/models/daily_diet_model.dart';
+import 'package:diet_and_teeth_app/diets_dashboard/ui/tabs_screen.dart';
 import 'package:diet_and_teeth_app/services/database.dart';
 import 'package:diet_and_teeth_app/utils/utils.dart';
 import 'package:flutter/material.dart';
