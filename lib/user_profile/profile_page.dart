@@ -15,26 +15,11 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  Future<void> settupUserProfile(BuildContext context,
-      {Database database, User user}) async {
-    try {
-      final exits = await database.userAlreadyCreated();
-      if (!exits) {
-        await database.storeUserData(user: user);
-      }
-    } catch (e) {
-      print(
-          "==================Error setting up the user profile ============================");
-      print(e);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final _database = Provider.of<Database>(context, listen: false);
     final _storage = Provider.of<StorageBase>(context, listen: false);
     final _user = Provider.of<AuthBase>(context, listen: false).currentUser;
-    settupUserProfile(context, database: _database, user: _user);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -99,8 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: FutureBuilder<UserProfileModel>(
           // Here we'll wait for the two futures to resolve before building our widget
-          future: settupUserProfile(context, database: _database, user: _user)
-              .then((_) => _database.getUserProfile()),
+          future: _database.getUserProfile(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Center(

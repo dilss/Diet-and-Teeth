@@ -13,8 +13,10 @@ abstract class Database {
   Future<void> updateUserProfile(UserProfileModel profileModel);
   Future<void> setUserRole(UserRoleEnum userRoleEnum);
   Future<UserProfileModel> getUserProfile();
+  Future<UserProfileModel> getPatientProfile({@required String patientUid});
   Future<bool> userAlreadyCreated();
   Future<void> storeUserData({User user});
+  Future<List<UserProfileModel>> getAllUsersProfiles();
   Stream<List<DailyDiet>> dietsStream();
   Stream<UserRoleEnum> userRoleStream();
 }
@@ -90,13 +92,20 @@ class FirestoreDatabase implements Database {
   @override
   Future<void> setUserRole(UserRoleEnum userRoleEnum) async {
     await updateData(
-        path: APIPath.user(uid), data: {"userRole": userRoleEnum.index});
+        path: APIPath.user(uid), data: {'userRole': userRoleEnum.index});
   }
 
   @override
   Future<void> updateUserProfile(UserProfileModel profileModel) async {
-    await updateData(
-        path: APIPath.user(uid), data: {'userProfile': profileModel.toJson()});
+    await updateData(path: APIPath.user(uid), data: {
+      'userProfile.name': profileModel.name,
+      'userProfile.surname': profileModel.surname,
+      'userProfile.cellPhone': profileModel.cellPhone,
+      'userProfile.dateOfBirth': profileModel.dateOfBirth,
+      'userProfile.district': profileModel.district,
+      'userProfile.city': profileModel.city,
+      'userProfile.pictureUrl': profileModel.pictureUrl,
+    });
   }
 
   @override
@@ -109,7 +118,9 @@ class FirestoreDatabase implements Database {
   Future<void> storeUserData({User user}) async {
     await setData(path: APIPath.user(uid), data: {
       'email': user.email,
-      'userProfile': UserProfileModel(email: user.email).toJson(),
+      'uid': user.uid,
+      'userProfile':
+          UserProfileModel(email: user.email, uid: user.uid).toJson(),
     });
   }
 
@@ -117,5 +128,28 @@ class FirestoreDatabase implements Database {
   Future<bool> userAlreadyCreated() async {
     final map = await getData(path: APIPath.user(uid));
     return map != null;
+  }
+
+  @override
+  Future<List<UserProfileModel>> getAllUsersProfiles() async {
+    final reference = FirebaseFirestore.instance.collection('users');
+    List<UserProfileModel> profiles = [];
+    final users = await reference.get();
+    users.docs.forEach((element) {
+      final map = element.data();
+      final profile = UserProfileModel.fromJson(map['userProfile']);
+      profiles.add(profile);
+    });
+    return profiles;
+  }
+
+  @override
+  Future<UserProfileModel> getPatientProfile(
+      {@required String patientUid}) async {
+    final reference =
+        FirebaseFirestore.instance.collection('users').doc(patientUid);
+    final doc = await reference.get();
+    final map = doc.data();
+    return UserProfileModel.fromJson(map['userProfile']);
   }
 }

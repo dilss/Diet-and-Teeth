@@ -1,6 +1,7 @@
 enum ProfileFormType { showInfo, editInfo }
 
 class UserProfileModel {
+  final String uid;
   final String name;
   final String surname;
   final String cellPhone;
@@ -13,6 +14,7 @@ class UserProfileModel {
   final String pictureUrl;
 
   UserProfileModel({
+    this.uid,
     this.name = 'Nome',
     this.surname = 'Sobrenome',
     this.cellPhone = '(99) 99999-9999',
@@ -29,7 +31,6 @@ class UserProfileModel {
     String name,
     String surname,
     String cellPhone,
-    String email,
     String dateOfBirth,
     String district,
     String city,
@@ -41,7 +42,6 @@ class UserProfileModel {
       name: name ?? this.name,
       surname: surname ?? this.surname,
       cellPhone: cellPhone ?? this.cellPhone,
-      email: email ?? this.email,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       district: district ?? this.district,
       city: city ?? this.city,
@@ -68,6 +68,7 @@ class UserProfileModel {
 
   factory UserProfileModel.fromJson(Map<String, dynamic> json) {
     return UserProfileModel(
+      uid: json['uid'],
       name: json['name'],
       surname: json['surname'],
       cellPhone: json['cellPhone'],

@@ -70,7 +70,7 @@ class _DietsScreenState extends State<DietsScreen> {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
             floatingActionButton: _buildFloatingActionButton(context),
-            body: HomePageBody(
+            body: DietsPageBody(
               availableSize: availableSize,
             ),
           );
@@ -104,8 +104,8 @@ class _DietsScreenState extends State<DietsScreen> {
   }
 }
 
-class HomePageBody extends StatefulWidget {
-  HomePageBody({
+class DietsPageBody extends StatefulWidget {
+  DietsPageBody({
     Key key,
     @required this.availableSize,
   }) : super(key: key);
@@ -113,10 +113,10 @@ class HomePageBody extends StatefulWidget {
   final double availableSize;
 
   @override
-  _HomePageBodyState createState() => _HomePageBodyState();
+  _DietsPageBodyState createState() => _DietsPageBodyState();
 }
 
-class _HomePageBodyState extends State<HomePageBody> {
+class _DietsPageBodyState extends State<DietsPageBody> {
   StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override

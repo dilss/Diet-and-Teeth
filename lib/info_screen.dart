@@ -1,3 +1,4 @@
+import 'package:diet_and_teeth_app/admin_dashboard/search_patient_page.dart';
 import 'package:diet_and_teeth_app/food_info_pages/food_info_grid_view.dart';
 import 'package:diet_and_teeth_app/general_use_widgets/logout_confirmation_dialog.dart';
 import 'package:diet_and_teeth_app/settings_pages/settings_grid_view.dart';
@@ -78,7 +79,7 @@ class InfoScreen extends StatelessWidget {
           body: TabBarView(
             children: [
               FoodInfoGridView(),
-              Container(),
+              SearchPatient(),
               SettingsGridView(),
             ],
           ),
