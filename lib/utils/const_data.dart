@@ -613,3 +613,63 @@ class ConstData {
     _resetSelected(foodItemsExtras);
   }
 }
+
+class FoodInfo {
+  static String carioFoodText =
+      "São alimentos que permanecem aderidos na superfície dos dentes durante um período de tempo maior" +
+          ", mesmo após a escovação, devido às características destes " +
+          "alimentos. Devem ser evitados nos lanches e entre as refeições. " +
+          "Exemplos: Biscoitos, caramelos, docinhos e guloseimas.";
+
+  static String nonCarioFoodText = "São alimentos que não se aderem" +
+      " facilmente a superfície dos dentes. Podem auxiliar na " +
+      "limpeza da cavidade bucal por meio da mastigação e da estimulação da produção de saliva." +
+      "Exemplos: Carnes, frangos, peixes, ovos, legumes, verduras, frutas e gorduras.";
+
+  static String cerealsBreadPastaTubersText =
+      'São alimentos ricos em carboidratos que fornecem energia para o nosso corpo.' +
+          'Podem ser refinados, como o arroz branco, farinha de trigo, pão francês, macarrão ou podem ser integrais, que são mais' +
+          ' nutritivos, como o arroz integral, farinha de trigo integral, pão integral, macarrão integral, milho, além dos tubérculos' +
+          ' como as batatas, inhame e mandioca.';
+
+  static String vegetablesText =
+      'São alimentos que fornecem nutrientes como vitaminas e minerais. Além disso, são fontes de fibras,' +
+          ' fundamentais para o adequado funcionamento do intestino e fontes de compostos bioativos, substâncias que contribuem para' +
+          ' a prevenção de muitas doenças. Alguns exemplos: alface, agrião, abóbora, beterraba, brócolis, cenoura, chuchu,' +
+          ' couve-flor e espinafre.';
+
+  static String fruitsText =
+      'São alimentos que fornecem nutrientes como vitaminas e minerais. Além disso, são fontes de fibras,' +
+          ' fundamentais para o bom funcionamento do intestino e fontes de compostos bioativos, substâncias que contribuem ' +
+          'para a prevenção de muitas doenças. Alguns exemplos: abacate, banana, maçã, mamão, manga, laranja, tangerina e uva.';
+
+  static String legumesText =
+      'São alimentos fontes de proteína de origem vegetal, importante para a construção ' +
+          'de músculos, além de carboidratos, fibras e compostos bioativos. Alguns exemplos são os feijões, ervilha,' +
+          ' lentilha, grão-de-bico e soja.';
+
+  static String oilseedsText =
+      'São alimentos ricos em vitaminas, minerais, fibras, gorduras de origem vegetal ' +
+          '(que são mais saudáveis) e compostos bioativos. Alguns exemplos: castanhas, nozes, amêndoas e amendoim.';
+
+  static String meatAndEggsText =
+      'São alimentos ricos em proteína de origem animal, importantes para a construção' +
+          ' de músculos, além de alguns minerais como ferro e zinco, importantes para a formação das células do sangue' +
+          ' e para o bom funcionamento do sistema imunológico. Alguns exemplos do grupo das carnes e ovos: carne bovina,' +
+          ' carne suína, aves, peixes e ovos.';
+
+  static String milkAndDairyProductsText =
+      'são alimentos ricos em proteínas de origem animal e minerais como cálcio, ' +
+          'importante para a saúde dos ossos. Alguns exemplos: leites, iogurtes, coalhadas e queijos.';
+
+  static String oilsAndFatsText =
+      'São alimentos calóricos que fornecem energia para o nosso organismo. ' +
+          'Desde que utilizados com moderação para temperar e cozinhar os alimentos, contribuem' +
+          ' para diversificar e tornar mais saborosa a alimentação sem torná-la nutricionalmente' +
+          ' desbalanceada ou muito calórica. Alguns exemplos: óleos vegetais, azeite e manteiga.';
+
+  static String sugarAndCandyText =
+      'São alimentos ricos em "calorias vazias", pois fornecem energia para o nosso organismo, mas nenhum' +
+          ' tipo de nutriente, por isso, devem ser evitados. Alguns exemplos: balas, pirulitos, chocolates,' +
+          ' sorvetes e doces cremosos.';
+}

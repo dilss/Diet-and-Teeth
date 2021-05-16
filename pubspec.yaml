@@ -76,14 +76,20 @@ flutter:
     - assets/fonts/
     - assets/icons/
     - assets/flat_icon/
-    - assets/images/
     - assets/svg/
     - assets/svg_food_items/
     - assets/videos/
-    - assets/cario_food_imgs/
-    - assets/not_cario_food_imgs/
-
-  
+    - assets/food_images/cario_food_imgs/
+    - assets/food_images/not_cario_food_imgs/
+    - assets/food_images/cereals_and_bread/
+    - assets/food_images/fruits/
+    - assets/food_images/legumes/
+    - assets/food_images/meat_and_eggs/
+    - assets/food_images/milk_and_dairy_products/
+    - assets/food_images/oils_and_fats/
+    - assets/food_images/oilseeds/
+    - assets/food_images/sugar_and_candy/
+    - assets/food_images/vegetables/  
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

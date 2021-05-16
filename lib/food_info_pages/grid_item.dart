@@ -5,6 +5,7 @@ class GridItem extends StatefulWidget {
   final Color color;
   final String text;
   final String imgPath;
+  final double fontSize;
   final Function callBack;
 
   const GridItem({
@@ -13,6 +14,7 @@ class GridItem extends StatefulWidget {
     @required this.text,
     @required this.imgPath,
     @required this.callBack,
+    this.fontSize = 18,
   }) : super(key: key);
   @override
   _GridItemState createState() => _GridItemState();
@@ -67,7 +69,8 @@ class _GridItemState extends State<GridItem> {
                       child: Text(
                         widget.text,
                         style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                            fontSize: widget.fontSize,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
