@@ -43,7 +43,7 @@ dependencies:
   flutter_rounded_date_picker: ^1.0.5
   charts_flutter: ^0.10.0
   get_it: ^6.0.0
-  video_player: ^2.0.2
+  video_player: ^2.1.1
   connectivity: ^3.0.2
   firebase_messaging: ^9.0.0
   mask_text_input_formatter: ^1.2.1

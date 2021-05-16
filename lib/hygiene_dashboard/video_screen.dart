@@ -26,6 +26,12 @@ class _VideoScreenState extends State<VideoScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -39,10 +45,10 @@ class _VideoScreenState extends State<VideoScreen> {
         ),
       ),
       body: LayoutBuilder(
-        builder: (context, constraints) => Hero(
-          tag: widget.heroTag,
-          child: Container(
-            height: constraints.maxHeight,
+        builder: (context, constraints) => Container(
+          height: constraints.maxHeight,
+          child: Hero(
+            tag: widget.heroTag,
             child: VideoPlayer(_controller),
           ),
         ),
