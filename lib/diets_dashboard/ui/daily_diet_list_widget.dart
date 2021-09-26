@@ -38,17 +38,14 @@ class DailyDietListWidget extends StatelessWidget {
                 })
               : Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: ListView(
-                      children: [
-                        ...diets.map((e) {
-                          return DailyDietListItemWidget(e);
-                        }).toList(),
-                      ],
-                    ),
+                  child: ListView.separated(
+                    itemCount: snapshot.data.length,
+                    physics: BouncingScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (contex, index) =>
+                        DailyDietListItemWidget(diets.elementAt(index)),
+                    separatorBuilder: (context, index) => SizedBox(height: 5),
                   ),
                 );
         }

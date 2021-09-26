@@ -6,6 +6,8 @@ import 'package:diet_and_teeth_app/user_profile/user_profile_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
+import '../diets_dashboard/models/daily_diet_model.dart';
+
 abstract class Database {
   Future<void> setDiet(DailyDiet dietData);
   Future<DailyDiet> getDiet(DailyDiet dietData);
@@ -19,6 +21,7 @@ abstract class Database {
   Future<List<UserProfileModel>> getAllUsersProfiles();
   Stream<List<DailyDiet>> dietsStream();
   Stream<UserRoleEnum> userRoleStream();
+  Future<List<DailyDiet>> getAllPatientDiets({@required String patientUid});
 }
 
 class FirestoreDatabase implements Database {
@@ -151,5 +154,20 @@ class FirestoreDatabase implements Database {
     final doc = await reference.get();
     final map = doc.data();
     return UserProfileModel.fromJson(map['userProfile']);
+  }
+
+  @override
+  Future<List<DailyDiet>> getAllPatientDiets(
+      {@required String patientUid}) async {
+    List<DailyDiet> list = [];
+    final reference =
+        FirebaseFirestore.instance.collection('users/$patientUid/diets');
+    final snapshot = await reference.get();
+    final docs = snapshot.docs;
+    docs.forEach((element) {
+      list.add(DailyDiet.fromMap(element.data()));
+    });
+
+    return list;
   }
 }

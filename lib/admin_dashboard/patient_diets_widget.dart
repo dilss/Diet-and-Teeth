@@ -1,20 +1,21 @@
+import 'package:diet_and_teeth_app/diets_dashboard/models/daily_diet_model.dart';
 import 'package:diet_and_teeth_app/general_use_widgets/waiting_connection_widget.dart';
 import 'package:diet_and_teeth_app/services/database.dart';
-import 'package:diet_and_teeth_app/user_profile/user_profile_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'patient_diets_widget.dart';
-
-class PatientDetailsPage extends StatelessWidget {
+class PatientDietsWidget extends StatelessWidget {
   final String uid;
+  const PatientDietsWidget({
+    Key key,
+    @required this.uid,
+  }) : super(key: key);
 
-  const PatientDetailsPage({Key key, @required this.uid}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final _database = Provider.of<Database>(context, listen: false);
-    return FutureBuilder<UserProfileModel>(
-      future: _database.getPatientProfile(patientUid: uid),
+    return FutureBuilder<List<DailyDiet>>(
+      future: _database.getAllPatientDiets(patientUid: this.uid),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Center(
@@ -26,7 +27,11 @@ class PatientDetailsPage extends StatelessWidget {
         }
         switch (snapshot.connectionState) {
           case ConnectionState.done:
-            return PatientDietsWidget(uid: uid);
+            return Container(
+              child: Center(
+                child: Text('${snapshot.data}'),
+              ),
+            );
             break;
           case ConnectionState.active:
           case ConnectionState.waiting:
